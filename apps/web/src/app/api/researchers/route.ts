@@ -67,7 +67,7 @@ export async function GET(request: Request) {
 
     const jsonData = loadJsonData();
 
-    const formatted = researchers.map(r => {
+    const formatted = researchers.map((r: typeof researchers[number]) => {
       const email = r.user?.email?.toLowerCase();
       const enrichment = jsonData.find(j => j.email?.toLowerCase() === email);
 
