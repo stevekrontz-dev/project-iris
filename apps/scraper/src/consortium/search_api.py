@@ -9,6 +9,8 @@ import numpy as np
 from pathlib import Path
 from typing import List, Optional
 from datetime import datetime
+import urllib.request
+import os
 
 # Install dependencies
 import subprocess
@@ -20,10 +22,64 @@ def ensure_deps():
         try:
             __import__(dep.replace('-', '_').split('[')[0])
         except ImportError:
-            subprocess.check_call([sys.executable, '-m', 'pip', 'install', dep, 
+            subprocess.check_call([sys.executable, '-m', 'pip', 'install', dep,
                                   '--break-system-packages', '-q'])
 
 ensure_deps()
+
+# FAISS index download URL (GitHub Release)
+FAISS_INDEX_URL = "https://github.com/stevekrontz-dev/project-iris/releases/download/v1.0.0/southeast_researchers.index"
+
+
+def ensure_faiss_index(index_path: Path) -> bool:
+    """Download FAISS index if missing or invalid (LFS pointer)."""
+
+    # Check if file exists
+    if not index_path.exists():
+        print(f"  Index file not found at {index_path}, downloading...")
+        return download_faiss_index(index_path)
+
+    # Check if it's an LFS pointer (starts with "version" text, not binary)
+    with open(index_path, 'rb') as f:
+        header = f.read(20)
+
+    # LFS pointers start with "version https://git-lfs"
+    # Valid FAISS indexes start with binary data (often "IwFl" or similar magic bytes)
+    if header.startswith(b'version '):
+        print(f"  Index is LFS pointer, downloading actual file...")
+        return download_faiss_index(index_path)
+
+    print(f"  Index file exists and appears valid ({index_path.stat().st_size / 1e6:.1f} MB)")
+    return True
+
+
+def download_faiss_index(index_path: Path) -> bool:
+    """Download FAISS index from GitHub Releases."""
+    try:
+        print(f"  Downloading FAISS index from GitHub Releases...")
+        print(f"  URL: {FAISS_INDEX_URL}")
+
+        # Ensure directory exists
+        index_path.parent.mkdir(parents=True, exist_ok=True)
+
+        # Download with progress
+        def report_progress(block_num, block_size, total_size):
+            downloaded = block_num * block_size
+            if total_size > 0:
+                percent = min(100, downloaded * 100 / total_size)
+                mb_downloaded = downloaded / 1e6
+                mb_total = total_size / 1e6
+                print(f"\r  Progress: {percent:.1f}% ({mb_downloaded:.1f}/{mb_total:.1f} MB)", end='', flush=True)
+
+        urllib.request.urlretrieve(FAISS_INDEX_URL, str(index_path), report_progress)
+        print()  # Newline after progress
+
+        print(f"  Download complete: {index_path.stat().st_size / 1e6:.1f} MB")
+        return True
+
+    except Exception as e:
+        print(f"  ERROR downloading FAISS index: {e}")
+        return False
 
 from fastapi import FastAPI, Query
 from fastapi.middleware.cors import CORSMiddleware
@@ -70,13 +126,18 @@ class SearchResponse(BaseModel):
 
 def load_resources():
     global model, index, lookup, metadata
-    
+
     print('Loading resources...')
-    
+
     # Load model
     print('  Loading embedding model...')
     model = SentenceTransformer('all-MiniLM-L6-v2')
-    
+
+    # Ensure FAISS index exists (download if needed)
+    print('  Checking FAISS index...')
+    if not ensure_faiss_index(INDEX_PATH):
+        raise RuntimeError("Failed to load or download FAISS index")
+
     # Load FAISS index
     print('  Loading FAISS index...')
     index = faiss.read_index(str(INDEX_PATH))
@@ -126,6 +187,12 @@ async def root():
         "total_researchers": len(lookup) if lookup else 0,
         "status": "ready" if index else "loading"
     }
+
+
+@app.get("/health")
+async def health():
+    """Health check endpoint for Railway."""
+    return {"status": "healthy", "index_loaded": index is not None}
 
 
 @app.get("/search", response_model=SearchResponse)
