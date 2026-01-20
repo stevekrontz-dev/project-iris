@@ -3,4 +3,4 @@
 cmds = ["npm run build --workspace=@ksu-research/web"]
 
 [start]
-cmd = "npm run start --workspace=@ksu-research/web"
+cmd = "cd apps/web && node .next/standalone/server.js"
