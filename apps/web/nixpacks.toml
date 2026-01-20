@@ -1,0 +1,6 @@
+# Nixpacks configuration for Railway deployment
+[phases.build]
+cmds = ["npm run build --workspace=@ksu-research/web"]
+
+[start]
+cmd = "npm run start --workspace=@ksu-research/web"
