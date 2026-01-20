@@ -118,7 +118,9 @@ export async function GET(
         explanation: 'Shared research interests identified',
         factors: [{ factor: 'Shared Interests', weight: score, description: 'Research area overlap', icon: 'RO' }]
       };
-    }).filter(m => m.matchScore > 0.05).sort((a, b) => b.matchScore - a.matchScore).slice(0, limit);
+    }).filter((m: { matchScore: number }) => m.matchScore > 0.05)
+      .sort((a: { matchScore: number }, b: { matchScore: number }) => b.matchScore - a.matchScore)
+      .slice(0, limit);
 
     return NextResponse.json({ matches, total: matches.length });
   } catch (error) {
