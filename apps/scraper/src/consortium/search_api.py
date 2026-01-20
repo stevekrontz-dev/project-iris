@@ -27,96 +27,69 @@ def ensure_deps():
 
 ensure_deps()
 
-# FAISS index download URL (GitHub Release)
-FAISS_INDEX_URL = "https://github.com/stevekrontz-dev/project-iris/releases/download/v1.0.0/southeast_researchers.index"
+# GitHub Release download URLs for LFS files
+RELEASE_BASE_URL = "https://github.com/stevekrontz-dev/project-iris/releases/download/v1.0.0"
+FAISS_INDEX_URL = f"{RELEASE_BASE_URL}/southeast_researchers.index"
+LOOKUP_URL = f"{RELEASE_BASE_URL}/researcher_lookup.json"
+METADATA_URL = f"{RELEASE_BASE_URL}/metadata.json"
 
 
-def ensure_faiss_index(index_path: Path) -> bool:
-    """Download FAISS index if missing or invalid (LFS pointer)."""
-
-    # Check if file exists
-    if not index_path.exists():
-        print(f"  Index file not found at {index_path}, downloading...")
-        return download_faiss_index(index_path)
-
-    # Check if it's an LFS pointer (starts with "version" text, not binary)
-    with open(index_path, 'rb') as f:
+def is_lfs_pointer(file_path: Path) -> bool:
+    """Check if a file is a Git LFS pointer (not actual content)."""
+    if not file_path.exists():
+        return True  # Treat missing as needing download
+    with open(file_path, 'rb') as f:
         header = f.read(20)
+    return header.startswith(b'version ')
 
-    # LFS pointers start with "version https://git-lfs"
-    # Valid FAISS indexes start with binary data (often "IwFl" or similar magic bytes)
-    if header.startswith(b'version '):
-        print(f"  Index is LFS pointer, downloading actual file...")
-        return download_faiss_index(index_path)
 
-    print(f"  Index file exists and appears valid ({index_path.stat().st_size / 1e6:.1f} MB)")
+def ensure_file_downloaded(file_path: Path, url: str, name: str) -> bool:
+    """Download a file from GitHub Releases if missing or LFS pointer."""
+    if not file_path.exists():
+        print(f"  {name} not found, downloading...")
+        return download_file(file_path, url, name)
+
+    if is_lfs_pointer(file_path):
+        print(f"  {name} is LFS pointer, downloading actual file...")
+        return download_file(file_path, url, name)
+
+    print(f"  {name} exists and valid ({file_path.stat().st_size / 1e6:.2f} MB)")
     return True
 
 
-def download_faiss_index(index_path: Path) -> bool:
-    """Download FAISS index from GitHub Releases (handles redirects)."""
+def download_file(file_path: Path, url: str, name: str) -> bool:
+    """Download a file from GitHub Releases (handles redirects)."""
     try:
-        print(f"  Downloading FAISS index from GitHub Releases...")
-        print(f"  URL: {FAISS_INDEX_URL}")
+        print(f"  Downloading {name}...")
+        print(f"  URL: {url}")
 
         # Ensure directory exists
-        index_path.parent.mkdir(parents=True, exist_ok=True)
+        file_path.parent.mkdir(parents=True, exist_ok=True)
 
         # Check for GitHub token (needed for private repos)
         github_token = os.getenv('GITHUB_TOKEN') or os.getenv('GH_TOKEN')
-
-        # Build headers
-        headers = {
-            'Accept': 'application/octet-stream',
-            'User-Agent': 'IRIS-SearchAPI/1.0'
-        }
-        if github_token:
-            print(f"  Using GitHub token for authentication...")
-            headers['Authorization'] = f'token {github_token}'
 
         # Use subprocess with curl for reliable downloads with redirects
         import shutil
         if shutil.which('curl'):
             print(f"  Using curl for download...")
-            cmd = ['curl', '-L', '-o', str(index_path), '--progress-bar']
+            cmd = ['curl', '-L', '-o', str(file_path), '--progress-bar']
             if github_token:
                 cmd.extend(['-H', f'Authorization: token {github_token}'])
-            cmd.extend(['-H', 'Accept: application/octet-stream', FAISS_INDEX_URL])
+            cmd.extend(['-H', 'Accept: application/octet-stream', url])
             result = subprocess.run(cmd, capture_output=False)
-            if result.returncode == 0 and index_path.exists() and index_path.stat().st_size > 1000000:
-                print(f"  Download complete: {index_path.stat().st_size / 1e6:.1f} MB")
+            if result.returncode == 0 and file_path.exists() and file_path.stat().st_size > 100:
+                print(f"  Download complete: {file_path.stat().st_size / 1e6:.2f} MB")
                 return True
             else:
-                print(f"  curl download failed, trying urllib...")
+                print(f"  curl download failed")
+                return False
 
-        # Fallback: urllib with redirect handler
-        opener = urllib.request.build_opener(urllib.request.HTTPRedirectHandler())
-        request = urllib.request.Request(FAISS_INDEX_URL, headers=headers)
-
-        with opener.open(request) as response:
-            total_size = int(response.headers.get('Content-Length', 0))
-            downloaded = 0
-            chunk_size = 1024 * 1024  # 1MB chunks
-
-            with open(index_path, 'wb') as f:
-                while True:
-                    chunk = response.read(chunk_size)
-                    if not chunk:
-                        break
-                    f.write(chunk)
-                    downloaded += len(chunk)
-                    if total_size > 0:
-                        percent = min(100, downloaded * 100 / total_size)
-                        mb_downloaded = downloaded / 1e6
-                        mb_total = total_size / 1e6
-                        print(f"\r  Progress: {percent:.1f}% ({mb_downloaded:.1f}/{mb_total:.1f} MB)", end='', flush=True)
-
-        print()  # Newline after progress
-        print(f"  Download complete: {index_path.stat().st_size / 1e6:.1f} MB")
-        return True
+        print(f"  ERROR: curl not available")
+        return False
 
     except Exception as e:
-        print(f"  ERROR downloading FAISS index: {e}")
+        print(f"  ERROR downloading {name}: {e}")
         import traceback
         traceback.print_exc()
         return False
@@ -173,23 +146,27 @@ def load_resources():
     print('  Loading embedding model...')
     model = SentenceTransformer('all-MiniLM-L6-v2')
 
-    # Ensure FAISS index exists (download if needed)
-    print('  Checking FAISS index...')
-    if not ensure_faiss_index(INDEX_PATH):
+    # Ensure all LFS files are downloaded
+    print('  Checking data files...')
+    if not ensure_file_downloaded(INDEX_PATH, FAISS_INDEX_URL, "FAISS index"):
         raise RuntimeError("Failed to load or download FAISS index")
+    if not ensure_file_downloaded(LOOKUP_PATH, LOOKUP_URL, "researcher lookup"):
+        raise RuntimeError("Failed to load or download researcher lookup")
+    if not ensure_file_downloaded(METADATA_PATH, METADATA_URL, "metadata"):
+        raise RuntimeError("Failed to load or download metadata")
 
     # Load FAISS index
     print('  Loading FAISS index...')
     index = faiss.read_index(str(INDEX_PATH))
     index.nprobe = 50  # Search more clusters for better recall
-    
+
     # Load lookup
     print('  Loading researcher lookup...')
     with open(LOOKUP_PATH, 'r', encoding='utf-8') as f:
         lookup = json.load(f)
     # Convert string keys to int
     lookup = {int(k): v for k, v in lookup.items()}
-    
+
     # Load metadata
     with open(METADATA_PATH, 'r') as f:
         metadata = json.load(f)
