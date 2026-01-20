@@ -8,6 +8,7 @@
     "packages/*"
   ],
   "scripts": {
+    "start": "npm run start --workspace=@ksu-research/web",
     "dev": "turbo run dev",
     "build": "turbo run build",
     "lint": "turbo run lint",
