@@ -69,7 +69,7 @@ export async function GET(
       works_count: researcher.worksCount || 0,
 
       // Publications
-      publications: researcher.publications.map(p => ({
+      publications: researcher.publications.map((p: typeof researcher.publications[number]) => ({
         title: p.publication.title,
         year: p.publication.publishedDate ? new Date(p.publication.publishedDate).getFullYear() : null,
         journal: p.publication.journal,
