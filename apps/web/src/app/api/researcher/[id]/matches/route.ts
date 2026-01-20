@@ -98,7 +98,7 @@ export async function GET(
     });
 
     // Calculate matches
-    const matches = allResearchers.map(candidate => {
+    const matches = allResearchers.map((candidate: typeof allResearchers[number]) => {
       const candidateEmail = candidate.user?.email?.toLowerCase();
       const candidateJson = jsonData.find(r => r.email?.toLowerCase() === candidateEmail);
       const candidateInterests = candidateJson?.scholar?.interests || [];
