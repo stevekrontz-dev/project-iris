@@ -54,7 +54,7 @@ def ensure_faiss_index(index_path: Path) -> bool:
 
 
 def download_faiss_index(index_path: Path) -> bool:
-    """Download FAISS index from GitHub Releases (supports private repos via token)."""
+    """Download FAISS index from GitHub Releases (handles redirects)."""
     try:
         print(f"  Downloading FAISS index from GitHub Releases...")
         print(f"  URL: {FAISS_INDEX_URL}")
@@ -65,17 +65,35 @@ def download_faiss_index(index_path: Path) -> bool:
         # Check for GitHub token (needed for private repos)
         github_token = os.getenv('GITHUB_TOKEN') or os.getenv('GH_TOKEN')
 
-        # Create request with auth header if token available
-        request = urllib.request.Request(FAISS_INDEX_URL)
-        request.add_header('Accept', 'application/octet-stream')
+        # Build headers
+        headers = {
+            'Accept': 'application/octet-stream',
+            'User-Agent': 'IRIS-SearchAPI/1.0'
+        }
         if github_token:
             print(f"  Using GitHub token for authentication...")
-            request.add_header('Authorization', f'token {github_token}')
-        else:
-            print(f"  WARNING: No GITHUB_TOKEN set - download may fail for private repos")
+            headers['Authorization'] = f'token {github_token}'
 
-        # Download with progress
-        with urllib.request.urlopen(request) as response:
+        # Use subprocess with curl for reliable downloads with redirects
+        import shutil
+        if shutil.which('curl'):
+            print(f"  Using curl for download...")
+            cmd = ['curl', '-L', '-o', str(index_path), '--progress-bar']
+            if github_token:
+                cmd.extend(['-H', f'Authorization: token {github_token}'])
+            cmd.extend(['-H', 'Accept: application/octet-stream', FAISS_INDEX_URL])
+            result = subprocess.run(cmd, capture_output=False)
+            if result.returncode == 0 and index_path.exists() and index_path.stat().st_size > 1000000:
+                print(f"  Download complete: {index_path.stat().st_size / 1e6:.1f} MB")
+                return True
+            else:
+                print(f"  curl download failed, trying urllib...")
+
+        # Fallback: urllib with redirect handler
+        opener = urllib.request.build_opener(urllib.request.HTTPRedirectHandler())
+        request = urllib.request.Request(FAISS_INDEX_URL, headers=headers)
+
+        with opener.open(request) as response:
             total_size = int(response.headers.get('Content-Length', 0))
             downloaded = 0
             chunk_size = 1024 * 1024  # 1MB chunks
@@ -99,6 +117,8 @@ def download_faiss_index(index_path: Path) -> bool:
 
     except Exception as e:
         print(f"  ERROR downloading FAISS index: {e}")
+        import traceback
+        traceback.print_exc()
         return False
 
 from fastapi import FastAPI, Query
