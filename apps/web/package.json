@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
-    "build": "next build",
+    "build": "prisma generate --schema=../../packages/database/prisma/schema.prisma && next build",
     "start": "next start",
     "lint": "eslint",
     "clean": "rm -rf .next node_modules"
@@ -20,6 +20,7 @@
     "react-dom": "19.2.1"
   },
   "devDependencies": {
+    "prisma": "^6.6.0",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/react": "^19",
