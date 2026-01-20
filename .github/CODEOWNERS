@@ -1,0 +1,11 @@
+# Default owners for everything in the repo
+* @steve
+
+# Database schema requires careful review
+packages/database/ @steve
+
+# AI algorithms
+packages/ai/ @steve
+
+# Web application
+apps/web/ @steve

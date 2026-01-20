@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KSU Research Platform - Technical Overview for IT</title>
+    <style>
+        :root { --ksu-gold: #FFC423; --ksu-black: #000000; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.7; color: #1a1a1a; background: #fff; max-width: 900px; margin: 0 auto; padding: 2rem; }
+        .header { border-bottom: 4px solid var(--ksu-gold); padding-bottom: 1rem; margin-bottom: 2rem; }
+        .badge { display: inline-block; background: #1e3a8a; color: white; padding: 0.25rem 0.75rem; border-radius: 4px; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; }
+        h1 { font-size: 2rem; margin-top: 0.5rem; }
+        h2 { font-size: 1.5rem; margin: 2rem 0 1rem; color: var(--ksu-black); border-left: 4px solid #1e3a8a; padding-left: 1rem; }
+        h3 { font-size: 1.125rem; margin: 1.5rem 0 0.75rem; }
+        code { background: #f1f5f9; padding: 0.125rem 0.375rem; border-radius: 4px; font-family: 'Courier New', monospace; font-size: 0.875rem; }
+        pre { background: #1a1a1a; color: #e2e8f0; padding: 1rem; border-radius: 8px; overflow-x: auto; font-size: 0.875rem; margin: 1rem 0; }
+        .callout { background: #eff6ff; border-left: 4px solid #1e3a8a; padding: 1rem 1.5rem; margin: 1.5rem 0; }
+        .callout-green { background: #f0fdf4; border-left-color: #22c55e; }
+        ul { margin: 1rem 0 1rem 1.5rem; }
+        li { margin: 0.5rem 0; }
+        table { width: 100%; border-collapse: collapse; margin: 1rem 0; }
+        th, td { padding: 0.75rem; text-align: left; border-bottom: 1px solid #e2e8f0; }
+        th { background: #f8fafc; font-weight: 600; }
+        .tag { display: inline-block; background: #e2e8f0; padding: 0.125rem 0.5rem; border-radius: 4px; font-size: 0.75rem; margin-right: 0.25rem; }
+        .signature { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #e2e8f0; }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <span class="badge">Technical Specification</span>
+        <h1>KSU Research Platform: Architecture & Security Overview</h1>
+        <p style="color: #64748b; margin-top: 0.5rem;">Prepared for the Office of the CIO / IT Security</p>
+    </div>
+
+    <p><strong>[CIO Name],</strong></p>
+
+    <p>Before the Research Office moves forward with the KSU Research platform, I wanted to provide a comprehensive technical overview and address security considerations upfront.</p>
+
+    <h2>Executive Summary</h2>
+
+    <p>KSU Research is an <strong>on-premise</strong> research collaboration platform with AI-powered matching. Unlike cloud SaaS solutions, <strong>all data remains within KSU infrastructure</strong>. The AI engine (IRIS) runs locally using open-source models - no data is sent to OpenAI, Google, or any external service.</p>
+
+    <h2>Architecture Overview</h2>
+
+    <pre>
+┌─────────────────────────────────────────────────────────────┐
+│                    KSU NETWORK                               │
+│                                                              │
+│  ┌──────────────┐    ┌──────────────┐    ┌──────────────┐   │
+│  │   Web App    │───▶│   API        │───▶│  PostgreSQL  │   │
+│  │  (Next.js)   │    │  (Node.js)   │    │  + pgvector  │   │
+│  └──────────────┘    └──────────────┘    └──────────────┘   │
+│         │                   │                               │
+│         │                   ▼                               │
+│         │           ┌──────────────┐                        │
+│         │           │    IRIS      │                        │
+│         └──────────▶│   (Ollama)   │   ◀── LOCAL AI        │
+│                     │  Llama 3.2   │       No external API  │
+│                     └──────────────┘                        │
+│                                                              │
+└─────────────────────────────────────────────────────────────┘
+                           │
+                           ✗ NO EXTERNAL DATA TRANSFER
+    </pre>
+
+    <h2>Technology Stack</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Component</th>
+                <th>Technology</th>
+                <th>Notes</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Frontend</td>
+                <td>Next.js 15, React 19, TypeScript</td>
+                <td>Modern, maintainable codebase</td>
+            </tr>
+            <tr>
+                <td>Backend</td>
+                <td>Next.js API Routes, Node.js</td>
+                <td>Single deployment unit</td>
+            </tr>
+            <tr>
+                <td>Database</td>
+                <td>PostgreSQL 16 + pgvector</td>
+                <td>Vector similarity search built-in</td>
+            </tr>
+            <tr>
+                <td>AI Engine</td>
+                <td>Ollama + Llama 3.2 / Nomic Embed</td>
+                <td>100% local inference</td>
+            </tr>
+            <tr>
+                <td>Authentication</td>
+                <td>NextAuth.js</td>
+                <td>SSO/SAML integration ready</td>
+            </tr>
+            <tr>
+                <td>ORM</td>
+                <td>Prisma</td>
+                <td>Type-safe database access</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h2>Infrastructure Requirements</h2>
+
+    <h3>Minimum (Pilot - 500 users)</h3>
+    <table>
+        <tr><td><strong>Server</strong></td><td>1x VM or bare metal</td></tr>
+        <tr><td><strong>CPU</strong></td><td>8 cores</td></tr>
+        <tr><td><strong>RAM</strong></td><td>32 GB</td></tr>
+        <tr><td><strong>Storage</strong></td><td>100 GB SSD</td></tr>
+        <tr><td><strong>GPU</strong></td><td>Optional (improves AI speed)</td></tr>
+        <tr><td><strong>OS</strong></td><td>Ubuntu 22.04 LTS or RHEL 8/9</td></tr>
+    </table>
+
+    <h3>Recommended (Full deployment - 2000+ users)</h3>
+    <table>
+        <tr><td><strong>App Server</strong></td><td>2x VM (load balanced)</td></tr>
+        <tr><td><strong>Database</strong></td><td>Managed PostgreSQL or dedicated server</td></tr>
+        <tr><td><strong>AI Server</strong></td><td>1x with NVIDIA GPU (RTX 3090 or better)</td></tr>
+        <tr><td><strong>RAM</strong></td><td>64 GB per app server</td></tr>
+    </table>
+
+    <h2>Security Considerations</h2>
+
+    <div class="callout-green callout">
+        <strong>Data Residency:</strong> All data stays within KSU infrastructure. Zero external API calls for AI inference. No cloud dependencies.
+    </div>
+
+    <h3>Authentication & Authorization</h3>
+    <ul>
+        <li>SSO integration via SAML 2.0 (Shibboleth compatible)</li>
+        <li>Role-based access control (Researcher, Admin, Institution Admin)</li>
+        <li>Row-level security in PostgreSQL</li>
+        <li>Session management with secure, httpOnly cookies</li>
+    </ul>
+
+    <h3>Data Protection</h3>
+    <ul>
+        <li>TLS 1.3 for all connections</li>
+        <li>Database encryption at rest (if required)</li>
+        <li>No PII stored in logs</li>
+        <li>Full audit trail of data access</li>
+        <li>User-controlled privacy settings</li>
+    </ul>
+
+    <h3>Compliance</h3>
+    <ul>
+        <li><strong>FERPA:</strong> No student data collected; faculty control their data</li>
+        <li><strong>Export Control:</strong> No data leaves US jurisdiction</li>
+        <li><strong>IRB:</strong> Platform itself doesn't conduct research; just facilitates connections</li>
+        <li><strong>SOC 2:</strong> Architecture supports certification if needed</li>
+    </ul>
+
+    <h2>Integration Points</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>System</th>
+                <th>Integration Type</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>KSU SSO</td>
+                <td>SAML 2.0</td>
+                <td>Ready</td>
+            </tr>
+            <tr>
+                <td>ORCID</td>
+                <td>OAuth 2.0</td>
+                <td>Ready</td>
+            </tr>
+            <tr>
+                <td>Institutional Repository</td>
+                <td>API / OAI-PMH</td>
+                <td>Planned</td>
+            </tr>
+            <tr>
+                <td>HR System</td>
+                <td>Read-only feed</td>
+                <td>Optional</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h2>Deployment Model</h2>
+
+    <p>We provide:</p>
+    <ul>
+        <li>Docker containers for easy deployment</li>
+        <li>Kubernetes manifests (if applicable)</li>
+        <li>Deployment documentation</li>
+        <li>Initial setup support</li>
+    </ul>
+
+    <p>KSU manages:</p>
+    <ul>
+        <li>Infrastructure provisioning</li>
+        <li>Network configuration</li>
+        <li>SSL certificates</li>
+        <li>Backup and disaster recovery</li>
+    </ul>
+
+    <h2>Questions I Anticipate</h2>
+
+    <p><strong>Q: Can we audit the AI models?</strong><br>
+    A: Yes. We use open-source models (Llama 3.2, Nomic Embed). Full transparency into how recommendations are generated.</p>
+
+    <p><strong>Q: What about updates and patches?</strong><br>
+    A: We provide versioned releases. You control when to update. No automatic cloud updates.</p>
+
+    <p><strong>Q: What if Ollama/Llama changes licensing?</strong><br>
+    A: The models are already downloaded locally. Future licensing changes don't affect deployed instances. We also support alternative models.</p>
+
+    <h2>Next Steps</h2>
+
+    <p>Happy to schedule a technical deep-dive with your team to address:</p>
+    <ul>
+        <li>Network architecture review</li>
+        <li>Security assessment requirements</li>
+        <li>Integration specifications</li>
+        <li>Pilot infrastructure planning</li>
+    </ul>
+
+    <div class="signature">
+        <p><strong>[Your Name]</strong><br>
+        KSU Research Platform - Technical Lead<br>
+        [Email] | [Phone]</p>
+    </div>
+</body>
+</html>

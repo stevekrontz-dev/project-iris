@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IRIS Collaboration Network</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <style>
+        .gradient-bg { background: linear-gradient(135deg, #0f0f23 0%, #1a1a3e 100%); }
+        .node { cursor: pointer; }
+        .node:hover { stroke: #fff; stroke-width: 2px; }
+        .link { stroke: #4a5568; stroke-opacity: 0.6; }
+        .tooltip { position: absolute; background: rgba(0,0,0,0.9); border: 1px solid #4a5568; border-radius: 8px; padding: 12px; color: white; pointer-events: none; max-width: 300px; }
+    </style>
+</head>
+<body class="gradient-bg min-h-screen text-white">
+    <div class="container mx-auto px-4 py-6">
+        <header class="text-center mb-6">
+            <h1 class="text-4xl font-bold bg-gradient-to-r from-green-400 to-blue-500 bg-clip-text text-transparent">
+                Research Collaboration Network
+            </h1>
+            <p class="text-gray-400 mt-2">Southeast R1/R2 Universities - High Impact Researchers (h≥30)</p>
+        </header>
+
+        <div class="flex gap-4 mb-4 justify-center flex-wrap">
+            <div class="bg-gray-800/50 rounded-lg px-4 py-2">
+                <span class="text-gray-400">Nodes:</span>
+                <span id="nodeCount" class="text-white font-bold">0</span>
+            </div>
+            <div class="bg-gray-800/50 rounded-lg px-4 py-2">
+                <span class="text-gray-400">Edges:</span>
+                <span id="edgeCount" class="text-white font-bold">0</span>
+            </div>
+            <div class="bg-gray-800/50 rounded-lg px-4 py-2">
+                <span class="text-gray-400">Avg Degree:</span>
+                <span id="avgDegree" class="text-white font-bold">0</span>
+            </div>
+        </div>
+
+        <div class="flex gap-4 mb-4 justify-center flex-wrap">
+            <select id="instFilter" class="bg-gray-800 border border-gray-700 rounded px-3 py-2 text-white">
+                <option value="">All Institutions</option>
+            </select>
+            <select id="colorBy" class="bg-gray-800 border border-gray-700 rounded px-3 py-2 text-white">
+                <option value="institution">Color by Institution</option>
+                <option value="h_index">Color by H-Index</option>
+                <option value="degree">Color by Connections</option>
+            </select>
+            <input type="text" id="searchNode" placeholder="Search researcher..." 
+                class="bg-gray-800 border border-gray-700 rounded px-3 py-2 text-white w-64">
+        </div>
+
+        <div id="network" class="bg-gray-900/50 rounded-xl border border-gray-800" style="height: 700px;"></div>
+        
+        <div id="tooltip" class="tooltip hidden"></div>
+
+        <div class="mt-6 grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="bg-gray-800/50 rounded-xl p-4">
+                <h3 class="text-xl font-bold mb-4 text-green-400">Top Collaborators</h3>
+                <div id="topCollaborators" class="space-y-2 max-h-64 overflow-y-auto"></div>
+            </div>
+            <div class="bg-gray-800/50 rounded-xl p-4">
+                <h3 class="text-xl font-bold mb-4 text-blue-400">Institution Legend</h3>
+                <div id="legend" class="grid grid-cols-2 gap-2 text-sm"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const width = document.getElementById('network').clientWidth;
+        const height = 700;
+        
+        const institutionColors = {
+            'Georgia Institute of Technology': '#B3A369',
+            'Emory University': '#012169',
+            'Duke University': '#00539B',
+            'University of North Carolina': '#7BAFD4',
+            'University of Florida': '#FA4616',
+            'Vanderbilt University': '#866D4B',
+            'Virginia Tech': '#630031',
+            'Auburn University': '#0C2340',
+            'Clemson University': '#F56600',
+            'University of Georgia': '#BA0C2F',
+            'Wake Forest University': '#9E7E38',
+            'North Carolina State': '#CC0000',
+            'Georgia State University': '#0039A6',
+            'University of Alabama': '#9E1B32',
+            'University of Virginia': '#232D4B'
+        };
+        
+        function getInstitutionColor(inst) {
+            for (const [key, color] of Object.entries(institutionColors)) {
+                if (inst.includes(key) || key.includes(inst.split(' ')[0])) return color;
+            }
+            return '#666';
+        }
+
+        const svg = d3.select('#network')
+            .append('svg')
+            .attr('width', width)
+            .attr('height', height);
+
+        const g = svg.append('g');
+
+        // Zoom
+        svg.call(d3.zoom()
+            .scaleExtent([0.1, 4])
+            .on('zoom', (event) => g.attr('transform', event.transform)));
+
+        const tooltip = d3.select('#tooltip');
+
+        // Load data
+        fetch('data/consortium/network/collaboration_network.json')
+            .then(r => r.json())
+            .then(data => {
+                document.getElementById('nodeCount').textContent = data.stats.total_nodes.toLocaleString();
+                document.getElementById('edgeCount').textContent = data.stats.total_edges.toLocaleString();
+                document.getElementById('avgDegree').textContent = data.stats.avg_degree.toFixed(1);
+
+                // Filter to connected nodes only for cleaner viz
+                const connectedIds = new Set();
+                data.edges.forEach(e => {
+                    connectedIds.add(e.source);
+                    connectedIds.add(e.target);
+                });
+                
+                const nodes = data.nodes.filter(n => connectedIds.has(n.id));
+                const nodeMap = new Map(nodes.map(n => [n.id, n]));
+                const edges = data.edges.filter(e => nodeMap.has(e.source) && nodeMap.has(e.target));
+
+                // Populate institution filter
+                const institutions = [...new Set(nodes.map(n => n.institution))].sort();
+                const instSelect = document.getElementById('instFilter');
+                institutions.forEach(inst => {
+                    const opt = document.createElement('option');
+                    opt.value = inst;
+                    opt.textContent = inst.substring(0, 40);
+                    instSelect.appendChild(opt);
+                });
+
+                // Create simulation
+                const simulation = d3.forceSimulation(nodes)
+                    .force('link', d3.forceLink(edges).id(d => d.id).distance(100))
+                    .force('charge', d3.forceManyBody().strength(-200))
+                    .force('center', d3.forceCenter(width / 2, height / 2))
+                    .force('collision', d3.forceCollide().radius(d => Math.sqrt(d.h_index) + 5));
+
+                // Draw edges
+                const link = g.append('g')
+                    .selectAll('line')
+                    .data(edges)
+                    .join('line')
+                    .attr('class', 'link')
+                    .attr('stroke-width', d => Math.sqrt(d.weight));
+
+                // Draw nodes
+                const node = g.append('g')
+                    .selectAll('circle')
+                    .data(nodes)
+                    .join('circle')
+                    .attr('class', 'node')
+                    .attr('r', d => Math.max(5, Math.sqrt(d.h_index) / 2))
+                    .attr('fill', d => getInstitutionColor(d.institution))
+                    .call(d3.drag()
+                        .on('start', dragstarted)
+                        .on('drag', dragged)
+                        .on('end', dragended))
+                    .on('mouseover', (event, d) => {
+                        tooltip.classed('hidden', false)
+                            .html(`
+                                <strong>${d.name}</strong><br>
+                                ${d.institution}<br>
+                                <span class="text-purple-400">h-index: ${d.h_index}</span><br>
+                                <span class="text-blue-400">Citations: ${d.citations.toLocaleString()}</span><br>
+                                <span class="text-green-400">Connections: ${d.degree}</span><br>
+                                <span class="text-gray-400">${d.field || ''}</span>
+                            `)
+                            .style('left', (event.pageX + 10) + 'px')
+                            .style('top', (event.pageY - 10) + 'px');
+                    })
+                    .on('mouseout', () => tooltip.classed('hidden', true));
+
+                simulation.on('tick', () => {
+                    link
+                        .attr('x1', d => d.source.x)
+                        .attr('y1', d => d.source.y)
+                        .attr('x2', d => d.target.x)
+                        .attr('y2', d => d.target.y);
+                    node
+                        .attr('cx', d => d.x)
+                        .attr('cy', d => d.y);
+                });
+
+                function dragstarted(event) {
+                    if (!event.active) simulation.alphaTarget(0.3).restart();
+                    event.subject.fx = event.subject.x;
+                    event.subject.fy = event.subject.y;
+                }
+                function dragged(event) {
+                    event.subject.fx = event.x;
+                    event.subject.fy = event.y;
+                }
+                function dragended(event) {
+                    if (!event.active) simulation.alphaTarget(0);
+                    event.subject.fx = null;
+                    event.subject.fy = null;
+                }
+
+                // Top collaborators list
+                const sorted = [...nodes].sort((a, b) => b.degree - a.degree).slice(0, 20);
+                document.getElementById('topCollaborators').innerHTML = sorted.map((n, i) => `
+                    <div class="flex justify-between text-sm py-1 border-b border-gray-700">
+                        <span>${i+1}. ${n.name.substring(0, 30)}</span>
+                        <span class="text-green-400">${n.degree} connections</span>
+                    </div>
+                `).join('');
+
+                // Legend
+                document.getElementById('legend').innerHTML = Object.entries(institutionColors).map(([name, color]) => `
+                    <div class="flex items-center gap-2">
+                        <div class="w-3 h-3 rounded-full" style="background: ${color}"></div>
+                        <span class="text-gray-300 truncate">${name.substring(0, 25)}</span>
+                    </div>
+                `).join('');
+
+                // Search
+                document.getElementById('searchNode').addEventListener('input', (e) => {
+                    const term = e.target.value.toLowerCase();
+                    node.attr('opacity', d => d.name.toLowerCase().includes(term) || !term ? 1 : 0.1);
+                    link.attr('opacity', d => {
+                        const srcMatch = d.source.name.toLowerCase().includes(term);
+                        const tgtMatch = d.target.name.toLowerCase().includes(term);
+                        return (srcMatch || tgtMatch || !term) ? 0.6 : 0.05;
+                    });
+                });
+            });
+    </script>
+</body>
+</html>

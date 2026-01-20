@@ -1,0 +1,636 @@
+// KSU Research - Research Development Acceleration Platform
+// Prisma Schema with Transparency-First Design
+
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["postgresqlExtensions"]
+}
+
+datasource db {
+  provider   = "postgresql"
+  url        = env("DATABASE_URL")
+  extensions = [vector, pgcrypto]
+}
+
+// ============================================
+// CORE ENTITIES
+// ============================================
+
+model User {
+  id            String    @id @default(cuid())
+  email         String    @unique
+  emailVerified DateTime?
+  name          String?
+  image         String?
+  role          UserRole  @default(RESEARCHER)
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  // Relations
+  researcher    Researcher?
+  accounts      Account[]
+  sessions      Session[]
+  dataUsageLogs DataUsageLog[]
+
+  @@map("users")
+}
+
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String? @db.Text
+  access_token      String? @db.Text
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.Text
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+  @@map("accounts")
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("sessions")
+}
+
+enum UserRole {
+  RESEARCHER
+  ADMIN
+  INSTITUTION_ADMIN
+}
+
+// ============================================
+// RESEARCHER PROFILES
+// ============================================
+
+model Researcher {
+  id                String              @id @default(cuid())
+  userId            String              @unique
+  user              User                @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  // Basic Info
+  firstName         String
+  lastName          String
+  title             String?             // Dr., Prof., etc.
+  position          String?             // Associate Professor, etc.
+  bio               String?             @db.Text
+  photoUrl          String?
+
+  // KSU Info
+  departmentId      String?
+  department        Department?         @relation(fields: [departmentId], references: [id])
+  officeLocation    String?
+  officePhone       String?
+
+  // External IDs
+  orcidId           String?             @unique
+  googleScholarId   String?
+  scopusId          String?
+  openalexId        String?             @unique
+
+  // Metrics
+  hIndex            Int?                @default(0)
+  citationCount     Int?                @default(0)
+  worksCount        Int?                @default(0)
+
+  // Profile Status
+  profileStatus     ProfileStatus       @default(UNCLAIMED)
+  claimedAt         DateTime?
+  lastActiveAt      DateTime?
+
+  // AI/Embeddings
+  embedding         Unsupported("vector(1536)")?
+  embeddingUpdatedAt DateTime?
+
+  createdAt         DateTime            @default(now())
+  updatedAt         DateTime            @updatedAt
+
+  // Relations
+  researchInterests ResearcherInterest[]
+  publications      PublicationAuthor[]
+  grants            GrantTeamMember[]
+  equipment         EquipmentAccess[]
+  collaborations    Collaboration[]
+  aiMatches         AIMatch[]           @relation("MatchedResearcher")
+  aiMatchesInitiated AIMatch[]          @relation("InitiatingResearcher")
+  privacySettings   PrivacySettings?
+  dataConsents      DataConsent[]
+
+  @@index([departmentId])
+  @@map("researchers")
+}
+
+enum ProfileStatus {
+  UNCLAIMED       // Pre-populated from scraping
+  CLAIMED         // User has claimed their profile
+  VERIFIED        // Verified by institution
+  INACTIVE        // No longer active
+}
+
+model PrivacySettings {
+  id                    String     @id @default(cuid())
+  researcherId          String     @unique
+  researcher            Researcher @relation(fields: [researcherId], references: [id], onDelete: Cascade)
+
+  // Visibility Controls
+  showEmail             Boolean    @default(false)
+  showPhone             Boolean    @default(false)
+  showPublications      Boolean    @default(true)
+  showGrants            Boolean    @default(true)
+  showEquipment         Boolean    @default(true)
+  showInAIMatches       Boolean    @default(true)
+
+  // AI Preferences
+  allowAIMatching       Boolean    @default(true)
+  allowCrossDiscMatch   Boolean    @default(true)
+
+  // Notification Preferences
+  emailMatchAlerts      Boolean    @default(true)
+  emailGrantAlerts      Boolean    @default(true)
+  emailCollabRequests   Boolean    @default(true)
+
+  updatedAt             DateTime   @updatedAt
+
+  @@map("privacy_settings")
+}
+
+// ============================================
+// ACADEMIC STRUCTURE
+// ============================================
+
+model Department {
+  id          String       @id @default(cuid())
+  name        String
+  code        String?      @unique
+  collegeId   String?
+  college     College?     @relation(fields: [collegeId], references: [id])
+
+  researchers Researcher[]
+
+  @@map("departments")
+}
+
+model College {
+  id          String       @id @default(cuid())
+  name        String
+  code        String?      @unique
+
+  departments Department[]
+
+  @@map("colleges")
+}
+
+// ============================================
+// RESEARCH INTERESTS & KEYWORDS
+// ============================================
+
+model ResearchArea {
+  id          String               @id @default(cuid())
+  name        String               @unique
+  description String?
+  parentId    String?
+  parent      ResearchArea?        @relation("ResearchAreaHierarchy", fields: [parentId], references: [id])
+  children    ResearchArea[]       @relation("ResearchAreaHierarchy")
+
+  researchers ResearcherInterest[]
+  publications PublicationArea[]
+
+  @@map("research_areas")
+}
+
+model ResearcherInterest {
+  id             String       @id @default(cuid())
+  researcherId   String
+  researcher     Researcher   @relation(fields: [researcherId], references: [id], onDelete: Cascade)
+  researchAreaId String
+  researchArea   ResearchArea @relation(fields: [researchAreaId], references: [id])
+
+  isPrimary      Boolean      @default(false)
+  expertise      Int          @default(3) // 1-5 scale
+
+  @@unique([researcherId, researchAreaId])
+  @@map("researcher_interests")
+}
+
+// ============================================
+// PUBLICATIONS
+// ============================================
+
+model Publication {
+  id              String              @id @default(cuid())
+  title           String
+  abstract        String?             @db.Text
+  publicationType PublicationType
+
+  // External IDs
+  doi             String?             @unique
+  pmid            String?
+  arxivId         String?
+
+  // Publication Details
+  journal         String?
+  conference      String?
+  publisher       String?
+  volume          String?
+  issue           String?
+  pages           String?
+  publishedDate   DateTime?
+
+  // Metrics
+  citationCount   Int                 @default(0)
+
+  // AI/Embeddings
+  embedding       Unsupported("vector(1536)")?
+
+  createdAt       DateTime            @default(now())
+  updatedAt       DateTime            @updatedAt
+
+  authors         PublicationAuthor[]
+  areas           PublicationArea[]
+
+  @@map("publications")
+}
+
+enum PublicationType {
+  JOURNAL_ARTICLE
+  CONFERENCE_PAPER
+  BOOK_CHAPTER
+  BOOK
+  THESIS
+  PREPRINT
+  PATENT
+  OTHER
+}
+
+model PublicationAuthor {
+  id             String      @id @default(cuid())
+  publicationId  String
+  publication    Publication @relation(fields: [publicationId], references: [id], onDelete: Cascade)
+  researcherId   String?
+  researcher     Researcher? @relation(fields: [researcherId], references: [id])
+
+  authorName     String      // For unlinked authors
+  authorOrder    Int
+  isCorresponding Boolean    @default(false)
+
+  @@unique([publicationId, authorOrder])
+  @@map("publication_authors")
+}
+
+model PublicationArea {
+  id             String       @id @default(cuid())
+  publicationId  String
+  publication    Publication  @relation(fields: [publicationId], references: [id], onDelete: Cascade)
+  researchAreaId String
+  researchArea   ResearchArea @relation(fields: [researchAreaId], references: [id])
+
+  @@unique([publicationId, researchAreaId])
+  @@map("publication_areas")
+}
+
+// ============================================
+// GRANTS & FUNDING
+// ============================================
+
+model Grant {
+  id              String            @id @default(cuid())
+  title           String
+  abstract        String?           @db.Text
+
+  // Funding Details
+  fundingAgency   String
+  programName     String?
+  awardNumber     String?           @unique
+  awardAmount     Decimal?          @db.Decimal(15, 2)
+
+  // Dates
+  startDate       DateTime?
+  endDate         DateTime?
+
+  // Status
+  status          GrantStatus       @default(ACTIVE)
+
+  // External Data
+  nihReporterId   String?
+  nsfAwardId      String?
+
+  createdAt       DateTime          @default(now())
+  updatedAt       DateTime          @updatedAt
+
+  teamMembers     GrantTeamMember[]
+
+  @@map("grants")
+}
+
+enum GrantStatus {
+  ACTIVE
+  COMPLETED
+  PENDING
+  EXPIRED
+}
+
+model GrantTeamMember {
+  id           String     @id @default(cuid())
+  grantId      String
+  grant        Grant      @relation(fields: [grantId], references: [id], onDelete: Cascade)
+  researcherId String
+  researcher   Researcher @relation(fields: [researcherId], references: [id])
+
+  role         GrantRole
+
+  @@unique([grantId, researcherId])
+  @@map("grant_team_members")
+}
+
+enum GrantRole {
+  PI              // Principal Investigator
+  CO_PI           // Co-Principal Investigator
+  SENIOR_PERSONNEL
+  CONSULTANT
+  OTHER
+}
+
+// ============================================
+// EQUIPMENT & RESOURCES
+// ============================================
+
+model Equipment {
+  id              String            @id @default(cuid())
+  name            String
+  description     String?           @db.Text
+  manufacturer    String?
+  model           String?
+
+  // Location
+  building        String?
+  room            String?
+  departmentId    String?
+
+  // Availability
+  isShared        Boolean           @default(false)
+  accessType      EquipmentAccess_Type @default(DEPARTMENT_ONLY)
+  usageFee        Decimal?          @db.Decimal(10, 2)
+
+  // Status
+  status          EquipmentStatus   @default(AVAILABLE)
+
+  createdAt       DateTime          @default(now())
+  updatedAt       DateTime          @updatedAt
+
+  accessList      EquipmentAccess[]
+
+  @@map("equipment")
+}
+
+enum EquipmentAccess_Type {
+  OWNER_ONLY
+  DEPARTMENT_ONLY
+  COLLEGE_ONLY
+  UNIVERSITY_WIDE
+  EXTERNAL_ALLOWED
+}
+
+enum EquipmentStatus {
+  AVAILABLE
+  IN_USE
+  MAINTENANCE
+  RETIRED
+}
+
+model EquipmentAccess {
+  id           String     @id @default(cuid())
+  equipmentId  String
+  equipment    Equipment  @relation(fields: [equipmentId], references: [id], onDelete: Cascade)
+  researcherId String
+  researcher   Researcher @relation(fields: [researcherId], references: [id])
+
+  accessLevel  String     // owner, trained, pending
+  trainedDate  DateTime?
+
+  @@unique([equipmentId, researcherId])
+  @@map("equipment_access")
+}
+
+// ============================================
+// COLLABORATIONS
+// ============================================
+
+model Collaboration {
+  id              String              @id @default(cuid())
+  title           String?
+  description     String?             @db.Text
+  status          CollaborationStatus @default(PROPOSED)
+
+  // Origin
+  originatedFromAI Boolean            @default(false)
+  aiMatchId       String?
+
+  createdAt       DateTime            @default(now())
+  updatedAt       DateTime            @updatedAt
+
+  members         Researcher[]
+  messages        CollaborationMessage[]
+
+  @@map("collaborations")
+}
+
+enum CollaborationStatus {
+  PROPOSED
+  ACTIVE
+  COMPLETED
+  DECLINED
+}
+
+model CollaborationMessage {
+  id              String        @id @default(cuid())
+  collaborationId String
+  collaboration   Collaboration @relation(fields: [collaborationId], references: [id], onDelete: Cascade)
+  senderId        String
+  content         String        @db.Text
+  createdAt       DateTime      @default(now())
+
+  @@map("collaboration_messages")
+}
+
+// ============================================
+// AI MATCHING & TRANSPARENCY
+// ============================================
+
+model AIMatch {
+  id                  String     @id @default(cuid())
+
+  // Participants
+  researcherId        String
+  researcher          Researcher @relation("InitiatingResearcher", fields: [researcherId], references: [id])
+  matchedResearcherId String
+  matchedResearcher   Researcher @relation("MatchedResearcher", fields: [matchedResearcherId], references: [id])
+
+  // Match Details
+  matchScore          Float      // 0-1 similarity score
+  matchType           MatchType
+
+  // TRANSPARENCY: Explain why this match was made
+  explanationText     String     @db.Text
+  matchingFactors     Json       // Detailed breakdown of factors
+
+  // User Actions
+  status              MatchStatus @default(SUGGESTED)
+  viewedAt            DateTime?
+  respondedAt         DateTime?
+  feedback            MatchFeedback?
+
+  createdAt           DateTime   @default(now())
+
+  @@unique([researcherId, matchedResearcherId, matchType])
+  @@index([researcherId])
+  @@index([matchedResearcherId])
+  @@map("ai_matches")
+}
+
+enum MatchType {
+  COLLABORATOR        // Potential research collaborator
+  METHODOLOGY         // Shared methodology/technique
+  EQUIPMENT           // Equipment sharing opportunity
+  GRANT               // Potential grant partner
+  CROSS_DISCIPLINARY  // Cross-disciplinary synergy
+}
+
+enum MatchStatus {
+  SUGGESTED
+  VIEWED
+  INTERESTED
+  NOT_INTERESTED
+  CONNECTED
+}
+
+enum MatchFeedback {
+  HELPFUL
+  NOT_RELEVANT
+  ALREADY_CONNECTED
+  WRONG_FIELD
+}
+
+// ============================================
+// DATA TRANSPARENCY & COMPLIANCE
+// ============================================
+
+model DataConsent {
+  id           String     @id @default(cuid())
+  researcherId String
+  researcher   Researcher @relation(fields: [researcherId], references: [id], onDelete: Cascade)
+
+  consentType  ConsentType
+  granted      Boolean
+  grantedAt    DateTime?
+  revokedAt    DateTime?
+  ipAddress    String?
+
+  @@unique([researcherId, consentType])
+  @@map("data_consents")
+}
+
+enum ConsentType {
+  TERMS_OF_SERVICE
+  PRIVACY_POLICY
+  AI_MATCHING
+  DATA_ENRICHMENT
+  MARKETING_EMAILS
+}
+
+model DataUsageLog {
+  id           String   @id @default(cuid())
+  userId       String?
+  user         User?    @relation(fields: [userId], references: [id])
+
+  action       String   // e.g., "ai_match_generated", "profile_viewed"
+  entityType   String   // e.g., "researcher", "publication"
+  entityId     String?
+  metadata     Json?
+  ipAddress    String?
+  userAgent    String?
+
+  createdAt    DateTime @default(now())
+
+  @@index([userId])
+  @@index([action])
+  @@index([createdAt])
+  @@map("data_usage_logs")
+}
+
+// ============================================
+// GRANT OPPORTUNITIES (External Data)
+// ============================================
+
+model GrantOpportunity {
+  id              String    @id @default(cuid())
+  title           String
+  description     String?   @db.Text
+
+  fundingAgency   String
+  programName     String?
+  opportunityNumber String?
+
+  // Amounts
+  minAward        Decimal?  @db.Decimal(15, 2)
+  maxAward        Decimal?  @db.Decimal(15, 2)
+
+  // Dates
+  postDate        DateTime?
+  dueDate         DateTime?
+
+  // Eligibility
+  eligibility     String?   @db.Text
+
+  // Source
+  sourceUrl       String?
+  source          String    // grants.gov, nsf, nih, etc.
+
+  // AI Matching
+  embedding       Unsupported("vector(1536)")?
+
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+
+  @@map("grant_opportunities")
+}
+
+// ============================================
+// SCRAPING & DATA IMPORT TRACKING
+// ============================================
+
+model DataImport {
+  id           String       @id @default(cuid())
+  source       String       // ksu_facultyweb, google_scholar, orcid, etc.
+  status       ImportStatus @default(PENDING)
+
+  recordsFound Int          @default(0)
+  recordsImported Int       @default(0)
+  recordsFailed Int         @default(0)
+
+  startedAt    DateTime?
+  completedAt  DateTime?
+  errorLog     String?      @db.Text
+
+  createdAt    DateTime     @default(now())
+
+  @@map("data_imports")
+}
+
+enum ImportStatus {
+  PENDING
+  RUNNING
+  COMPLETED
+  FAILED
+}

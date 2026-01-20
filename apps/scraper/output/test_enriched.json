@@ -1,0 +1,1290 @@
+[
+  {
+    "net_id": "habaza",
+    "name": "Hussein Abaza",
+    "first_name": "Hussein",
+    "last_name": "Abaza",
+    "title": "Professor",
+    "department": null,
+    "college": "Architecture\n\n\n\n\n\n\n\n\n\n\n\nContact Info\n\n\n\nKennesaw Campus1000 Chastain RoadKennesaw",
+    "email": "habaza@kennesaw.edu",
+    "phone": "470-578-4236",
+    "office": null,
+    "photo_url": "https://facultyweb.kennesaw.edu/habaza/abaza.jpg",
+    "bio": null,
+    "research_interests": [],
+    "education": [],
+    "publications": [],
+    "courses": [],
+    "profile_url": "https://facultyweb.kennesaw.edu/habaza/index.php",
+    "scholar": {
+      "scholar_id": "rMuEtsgAAAAJ",
+      "name": "Robert Hamwey",
+      "affiliation": "United Nations",
+      "interests": [
+        "Finance",
+        "Air conditioning",
+        "astrophysics",
+        "environmental science",
+        "international trade",
+        "Bridge (graph theory)"
+      ],
+      "h_index": 13,
+      "i10_index": 15,
+      "total_citations": 555,
+      "publications": [
+        {
+          "title": "Economic evaluation and calculations of energy savings by upgrading the heating systems in pre manufactured homes",
+          "authors": [
+            "Nehad Elsawaf",
+            "Tarek Abdel-Salam",
+            "Hussein Abaza"
+          ],
+          "year": 2013,
+          "journal": "Energy and Buildings",
+          "abstract": null,
+          "citations": 17,
+          "doi": "10.1016/j.enbuild.2012.12.036",
+          "article_url": "https://doi.org/10.1016/j.enbuild.2012.12.036",
+          "source": "openalex"
+        },
+        {
+          "title": "An Interactive Design Advisor for Energy Efficient Buildings",
+          "authors": [
+            "Hussein Abaza"
+          ],
+          "year": 2008,
+          "journal": "Journal of Green Building",
+          "abstract": "Abstract This paper presents a holistic evaluation model that assists in designing energy efficient buildings. The model is based on computer-designer interaction. Here, the designer suggests a range of design alternatives, and in turn, the computer evaluation model generates a matrix of design solutions and performs various environmental simulations. The performances of the various design solutions are then analyzed to derive relationships that explain the impact that the different building components have on energy consumption. The relationships are represented in the form of statistical relations and interactive data charts. The evaluation model was tested and used to evaluate an energy efficient house. The designer of this house implemented Strategies for integrating solar radiation, thermal mass, thermal insulation, and air ventilation to conserve energy. A field study and computer simulation were conducted to monitor the actual performance of the house, and to validate the evaluation model results. The research derived mathematical relations between thermal mass, thermal insulation, solar radiation and natural ventilation and the resulted energy consumption. The research also suggests general design guidelines to improve the energy performance of buildings, and to enhance thermal comfort.",
+          "citations": 15,
+          "doi": "10.3992/jgb.3.1.112",
+          "article_url": "https://doi.org/10.3992/jgb.3.1.112",
+          "source": "openalex"
+        },
+        {
+          "title": "Utilizing Latent Building Thermal Mass for Dehumidification",
+          "authors": [
+            "Hussein Abaza"
+          ],
+          "year": 2005,
+          "journal": "Journal of Building Physics",
+          "abstract": "Traditionally, attic space in buildings is perceived as a source of nuisance. In winter, moisture condensation on the attic ceiling encourages mildew growth. In summer, the heat buildup in the attic space increases the cooling load. However, if the attic is integrated in a holistic design and control strategy, it can function as a solar energy collector, a heat exchanger, and a desiccant. This research investigates energy saving by optimizing direct and indirect ventilation through the attic to precool buildings and to reduce humidity. The proposed energy saving strategies are examined in a double story house with an attic. The house is located in a moderate-humid climate. The built-up heat in the attic space and outside air ventilation is used to dry up roof construction materials during the day. When outside air cools down during the night but maintains high humidity, the indoor air is circulated through the attic space. The attic construction materials absorb moisture from the indoor air. Thus, indoor air loses both heat and moisture. EnergyPlus Simulation software was used to simulate these cooling and dehumidification strategies. The simulation results show a significant passive cooling and dehumidification in the building.",
+          "citations": 5,
+          "doi": "10.1177/1744259105051799",
+          "article_url": "https://doi.org/10.1177/1744259105051799",
+          "source": "openalex"
+        },
+        {
+          "title": "An integrated design and control strategy for energy-efficient buildings",
+          "authors": [
+            "Hussein Abaza",
+            "Yvan J. Beliveau",
+            "J. W. Jones"
+          ],
+          "year": 2002,
+          "journal": "PhDT",
+          "abstract": null,
+          "citations": 3,
+          "doi": null,
+          "article_url": "https://scholar.lib.vt.edu/theses/available/etd-04072002-093147/unrestricted/research311.pdf",
+          "source": "openalex"
+        },
+        {
+          "title": "The Use Of Attic Space For Cooling and Dehumidification",
+          "authors": [
+            "Hussein Abaza"
+          ],
+          "year": 2002,
+          "journal": "Purdue e-Pubs (Purdue University)",
+          "abstract": "Traditionally, attic space in buildings is perceived as a source of nuisance where the moisture condensation occurs in winter encourages mildew growth, and heat build up in the attic space in summer increases the cooling load. However, if the attic is integrated in a holistic design and control strategy, it can function as a solar collector, a heat exchanger, and a desiccant!. This research investigates energy saving by optimizing direct and indirect ventilation through attic to pre-cool buildings and reduces humidity. This strategy was examined in a double story house with attic in a moderatehumid climate. The built up heat in the attic space and outside air ventilation were used to dry up roof construction materials during the day. When outside air cools down during the night but maintains high humidity, the indoor air circulates through the attic space. The attic construction materials absorb moisture from the indoor air. Thus indoor air loses both heat and moisture. EnergyPlus Simulation software was used to simulate this cooling and dehumidification strategy. The simulation results showed significant passive cooling and dehumidification in the building. Key notes: Dehumidification, Nighttime ventilation, Indirect Ventilation, Cooling load Introduction Traditionally, utilizing nighttime ventilation and thermal mass is a major strategy for passive cooling in dry climates. However, in moderate and humid climates, passive cooling through ventilation is more difficult to achieve. In these climates, the outside air is relatively cold during the early evening, but its relative humidity is high. Therefore, it is not suitable for nighttime ventilation. Later at night, outside relative humidity reaches the upper limit of the comfort zone, but the outside air  remains equal or more than the inside air enthalpy. Thus, introducing outside air to the space may reduce the inside air temperature without reducing the air enthalpy. Instead it could lead to more moisture absorpti",
+          "citations": 2,
+          "doi": null,
+          "article_url": "https://docs.lib.purdue.edu/iracc/536",
+          "source": "openalex"
+        },
+        {
+          "title": "Dehumidification Through Indirect Nighttime Ventilation",
+          "authors": [
+            "Hussein Abaza",
+            "Yvan J. Beliveau",
+            "J. W. Jones"
+          ],
+          "year": 2001,
+          "journal": "",
+          "abstract": "Abstract Natural ventilation is an important passive cooling strategy. Using cool night air can cool the building structure and lower air conditions energy consumption. However, there are obstacles in using this cooling strategy, including high relative humidity, pollution, limitations in the thermal storage of the building, and low nighttime air temperature. This paper investigates energy savings by indirect ventilation to pre-cool buildings and reduces humidity. The nighttime ventilation strategy is based on optimizing the use of direct and indirect natural ventilation through an air-to-air heat exchanger. This strategy has been tested at the Beliveau House in Blacksburg, Virginia. Simulation results suggest that the indirect ventilation strategy at the Beliveau House reduces inside relative humidity on hot humid summer days by 20%, and the total summer cooling load by 38% when compared to the existing condition.",
+          "citations": 1,
+          "doi": "10.1115/sed2001-107",
+          "article_url": "https://doi.org/10.1115/sed2001-107",
+          "source": "openalex"
+        },
+        {
+          "title": "Adaptive Low-e Double Glazing Window",
+          "authors": [
+            "Hussein Abaza",
+            "Ihab Sa'ad"
+          ],
+          "year": 2006,
+          "journal": "Journal of Green Building",
+          "abstract": "Abstract This paper investigates the thermal performance of a new adaptive window which is seasonally reversible. The new window is similar in construction to the regular double-hung low-e windows, but can reverse its properties. In this window, the low-e coating faces the inside during the heating season, which reflects the infrared radiation to the inside. During the cooling season, the low-e coating faces the outside to reflect the outside heat. This window was tested in two test cells to evaluate its thermal performance. WINDOW5.2a software was used to predict the window thermal properties and BEANS building simulation software was used to predict the energy savings of the new window design. The simulation results showed an increase in the heat gain through the new window of up to 38% over the conventional double-glazing low-e window during the heating period for heavy thermal mass buildings, and 14% for light weight thermal mass buildings. At the same time, the window maintained its low heat gain properties in the cooling season. When used in moderate climates, the new adaptive window will significantly reduce energy consumption in buildings during both the heating and the cooling seasons.",
+          "citations": 1,
+          "doi": "10.3992/jgb.1.4.104",
+          "article_url": "https://doi.org/10.3992/jgb.1.4.104",
+          "source": "openalex"
+        },
+        {
+          "title": "Using Radiant Heating System to Prevent Bridge Freezing",
+          "authors": [
+            "Hussein Abaza",
+            "Amaal Al Shenawa",
+            "Scott Semmelink"
+          ],
+          "year": 2023,
+          "journal": "",
+          "abstract": "Abstract Bridge freezing before roads is a major concern in cold climates as it is a major cause for road accidents. Several active systems were made to prevent bridge surface freezing. These systems include several automated and complex systems such as automatic anti-freeze spray, using phase change materials in the concrete bridge’s deck, and imbedding heating system in bridge’s decks. These systems are usually expensive to run and operate and some of these systems have negative impact on the environment. This research investigates using radiant heaters for maintaining the concrete temperature within the required limits. Several passive and active methods are used to maintain concrete temperature above the that of the adjacent road. Radiant heaters provide direct, instantaneous, and uniform heating to the bridge surface. The Infrared radiant heating method was tested using an environmental control chamber. Two concrete samples were placed in the climate chamber that simulates cold weather. Thermocouples were used to record the surface temperature, the middle of the concrete samples’ temperature and the bottom of the samples’ temperature. Infrared camera was also used to measure and verify the concrete surface temperatures. The data analysis showed that concrete surface temperature dropped quickly and become significantly lower than the ambient temperature in the absence of solar radiation. However, introducing radiant heating brings the concrete surface temperature and the core temperature of the concrete samples to the required temperature in a short period of time. A comparison between this research results and other research that investigated the performance of other freezing prevention methods showed that using radiant heating to prevent bridge freezing is effective, economical, and can be applied to existing bridges.",
+          "citations": 1,
+          "doi": "10.1115/ht2023-105739",
+          "article_url": "https://doi.org/10.1115/ht2023-105739",
+          "source": "openalex"
+        },
+        {
+          "title": "Assessment of Using Heat Pumps for Heating in Mobile Homes: A Case Study from North Carolina",
+          "authors": [
+            "Hussein Abaza"
+          ],
+          "year": 2009,
+          "journal": "Journal of Green Building",
+          "abstract": "Abstract This paper presents the results of “Upgrade and Save”, a program to upgrade the standard electric furnaces and air-conditioning units in Mobile Homes for energy-efficient heat pumps. This program is implemented in North Carolina, USA and pays about $700 through a rebate provided by the North Carolina State Energy Office to the Mobile Homes' owners. The goal of this project is to subsidize low-income families by lowering their heating cost in the winter as well as improving their homes' indoor thermal comfort. More than 300 mobile homes have participated in this program. Field measurements, meter readings of the actual electrical consumption, and annual building energy simulation were used to measure the dollar saving and the indoor thermal comfort improvement in the mobile homes after the heating system upgrade. This research proved that the dollar saving of using the heat pump for heating in mobile homes ranges from $51 to $128 annually.",
+          "citations": 1,
+          "doi": "10.3992/jgb.4.3.135",
+          "article_url": "https://doi.org/10.3992/jgb.4.3.135",
+          "source": "openalex"
+        },
+        {
+          "title": "A Design Framework for Integrated Design and Control Strategies in Energy Efficient Buildings",
+          "authors": [
+            "Hussein Abaza"
+          ],
+          "year": 2002,
+          "journal": "VTechWorks (Virginia Tech)",
+          "abstract": "This research proposes a computer evaluation model that assists architects and designers in producing buildings with low energy consumption. The model is based on computer-designer interaction. Here, the designer suggests a range of design alternatives, and, in turn, the computer evaluation model generates a matrix of design solutions and performs various environmental simulations. The performances of the various design solutions then analyzed by a statistical analysis package that derives relationships. These relationships explain the impact that the different building components have on energy consumption. The relationships are represented in the form of statistical relations and interactive data charts.&#13;\\n&#13;\\nThe evaluation model was tested and used to support new ventilation strategies for the Beliveau House in Blacksburg, Virginia. The designer of this house implemented strategies for integrating solar radiation, thermal mass, thermal insulation, and air ventilation to conserve energy. A field study and computer simulation were conducted to monitor the actual performance of the house and to validate the evaluation model results.&#13;\\n&#13;\\nBased on the evaluation model results, this research suggests new direct and indirect ventilation control strategies to reduce cooling energy and to improve comfort. The research also suggests general design guidelines to improve the energy performance of buildings and to enhance thermal comfort. These design guidelines are based on a holistic view of integrating the building components that has significant impact on buildings thermal performance.",
+          "citations": 0,
+          "doi": null,
+          "article_url": "http://hdl.handle.net/10919/26672",
+          "source": "openalex"
+        },
+        {
+          "title": "Towards Net-Zero Energy Consumption with Near Net-Zero Initial Cost: A Case Study from Georgia, USA",
+          "authors": [
+            "Hussein Abaza",
+            "Amaal Al Shenawa"
+          ],
+          "year": 2023,
+          "journal": "Green Building & Construction Economics",
+          "abstract": "This research presents a case study of a single-family home in Georgia, United States, that achieves near net-zero energy costs for the heating, ventilation, and air conditioning (HVAC) system with near-zero additional capital investment. Building information modeling (BIM), energy analysis, and practical common construction practices were integrated to trade-off between design and construction alternatives to achieve these results. An accelerated number of publications addressed net-zero energy buildings (NZEB). Much of this research addresses means and methods to make buildings produce as much energy as they consume (net-zero site or building energy) or make buildings produce energy and sell it to offset the buildings’ energy bills (net-zero cost). However, NZEBs still constitute a small fraction of the building industry, which is mainly due to higher initial costs, significant deviations from common construction practices, or altering common building operations and comfort levels. In this research, a practical approach for achieving NZEB was tested and used in constructing a single-family home. BIM software that generates annual energy consumption with every design alternative was used during the design and construction phases of this home. The BIM model was also used to generate building materials quantities to estimate the initial construction cost. In this case study, the initial construction cost of the selected design was less than that of comparable homes in the same area. The post-occupancy evaluation showed that the annual energy consumption related to heating and cooling was 72% less than that of comparable homes in the same area. Energy consumption related to hot water consumption was 21% less, and energy consumption for lighting was reduced by 22%. In conclusion, general design guidelines and lessons learned are established to help the residential building industry adopt energy-efficient design and construction approaches to reduce energy consumption i",
+          "citations": 0,
+          "doi": "10.37256/gbce.4220232292",
+          "article_url": "https://doi.org/10.37256/gbce.4220232292",
+          "source": "openalex"
+        },
+        {
+          "title": "Moisture Behavior in Buildings",
+          "authors": [
+            "Hussein Abaza"
+          ],
+          "year": 2012,
+          "journal": "AV Akademikerverlag eBooks",
+          "abstract": "Revision with unchanged content. Challenges related to energy consumption, moisture, and mold control in buildings have reached a crises level. This book introduces a mathematical model for understanding traditional architecture and finding solutions for our current energy efficiency, moisture, and mold related problems. Based on lessons from the past, this book introduces a new understanding of thermal mass in buildings that include utilizing latent thermal mass to control moisture and reduce energy consumption in buildings.    Here in this book, you will find a holistic evaluation model that assists architects and designers in producing healthy buildings with low energy consumption. This book discusses the use of field monitoring and computer simulation for both heat and moisture transfer to test and analyze suggested design and control strategies to reduce energy consumption in buildings as well as to improve air quality and depress mold growth. This book also sug­gests general design guidelines to improve energy performance of buildings and to enhance thermal comfort.   This book is very valuable for Researchers, Architects, Engineers, Builders, and Policy makers who are involved in the design and construction of buildings.",
+          "citations": 0,
+          "doi": null,
+          "article_url": "https://www.knigozal.com/store/ru/book/moisture-behavior-in-buildings/isbn/978-3-639-41898-9",
+          "source": "openalex"
+        },
+        {
+          "title": "Reduce Bridge Icing by Improving the Bridges' Surface Thermal Emissivity.",
+          "authors": [
+            "Hussein Abaza",
+            "Connie Ciesielski"
+          ],
+          "year": 2006,
+          "journal": "",
+          "abstract": "Bridge icing is a major safety concern. In cold climates, bridge decks usually reach the freezing temperature before the adjacent roads. This “preferential icing” increases the possibility of cars having accidents over bridges. The objective of this research is to decrease preferential icing over bridges. This research investigates optimizing the bridge’s surface thermal properties in order to keep the bridge deck surface temperature from reaching the freezing point before the adjacent roads. Field data and thermal transfer simulations were used to investigate the effect of surface reflectancy, moisture transfer and wind on the freezing of bridges and roads. First, the Energy-Plus computer simulation model was used to simulate a typical bridge and road structure in a relatively cold climate. These computer simulation models were validated with field readings. Then, different surface properties of the concrete bridge deck were tested and integrated to match the freezing cycle of the bridge deck with the adjacent road surface. This research has shown that reducing reflectancy and emissivity of the bridge deck surface would reduce the freezing cycle of the bridge deck. This research also concluded that optimizing the surface properties and the exposure of bridges’ decks should lower the traffic accidents due to preferential icing (icing of bridge surface before adjacent roads).",
+          "citations": 0,
+          "doi": null,
+          "article_url": "https://www.ijme.us/cd_06/PDF/IT%20302-083.pdf",
+          "source": "openalex"
+        }
+      ],
+      "sources": [
+        "orcid",
+        "openalex"
+      ],
+      "ksu_verified": true
+    },
+    "h_index": 13,
+    "citation_count": 555,
+    "api_sources": [
+      "openalex",
+      "orcid"
+    ],
+    "ksu_verified": true
+  },
+  {
+    "net_id": "habbott",
+    "name": "Heather Abbott-Lyon",
+    "first_name": "Heather",
+    "last_name": "Abbott-Lyon",
+    "title": "Professor",
+    "department": "Chemistry and Biochemistry\nInterim Director of Research Development and Strategic InitiativesOffice of Research\n550 Cobb Ave",
+    "college": "Science and Mathematics & University \n\nSafety Committee",
+    "email": "habbott@kennesaw.edu",
+    "phone": "470-578-6140",
+    "office": null,
+    "photo_url": "https://facultyweb.kennesaw.edu/habbott/images/Heather%20Abbott-Lyon_MY_0052%20-%20small.jpg",
+    "bio": null,
+    "research_interests": [],
+    "education": [],
+    "publications": [],
+    "courses": [],
+    "profile_url": "https://facultyweb.kennesaw.edu/habbott/index.php",
+    "scholar": {
+      "name": "Heather Abbott",
+      "affiliation": "Director of Research Development and Professor of Chemistry, Kennesaw State University",
+      "interests": [
+        "Oceanography",
+        "physical chemistry",
+        "research development",
+        "Analytical Chemistry (journal)",
+        "Environmental chemistry",
+        "surface science",
+        "astrobiology",
+        "astrochemistry"
+      ],
+      "citedby": 1456,
+      "h_index": 19,
+      "i10_index": 23,
+      "scholar_id": "uk6CaDkAAAAJ",
+      "profile_url": "https://scholar.google.com/citations?user=uk6CaDkAAAAJ",
+      "publications": [
+        {
+          "title": "Role of ceria in oxidative dehydrogenation on supported vanadia catalysts",
+          "authors": [
+            "Maria Veronica Ganduglia-Pirovano",
+            "Cristina Popa",
+            "Joachim Sauer",
+            "Heather Abbott",
+            "Alexander Uhl",
+            "Martin Baron",
+            "Dario Stacchiola",
+            "Oleksandr Bondarchuk",
+            "Shamil Shaikhutdinov",
+            "Hans-Joachim Freund"
+          ],
+          "date": "2010/2/24",
+          "year": 2010,
+          "journal": "Journal of the American Chemical Society",
+          "volume": "132",
+          "issue": "7",
+          "pages": "2345-2349",
+          "publisher": "American Chemical Society",
+          "abstract": "The effect of the suppport on oxidative dehydrogenation activity for vanadia/ceria systems is examined for the oxidation of methanol to formaldehyde by use of well-defined VOx/CeO2(111) model catalysts. Temperature-programmed desorption at low vanadia loadings revealed reactivity at much lower temperature (370 K) as compared to pure ceria and vanadia on inert supports such as silica. Density functional theory is applied and the energies of hydrogenation and oxygen vacancy formation also predict an enhanced reactivity of the vanadia/ceria system. At the origin of this support effect is the ability of ceria to stabilize reduced states by accommodating electrons in localized f-states.",
+          "citations": 0,
+          "article_url": "https://pubs.acs.org/doi/abs/10.1021/ja910574h",
+          "doi": "10.1021/ja910574h"
+        },
+        {
+          "title": "Resolving the atomic structure of vanadia monolayer catalysts: monomers, trimers, and oligomers on ceria",
+          "authors": [
+            "Martin Baron",
+            "Heather Abbott",
+            "Oleksandr Bondarchuk",
+            "Dario Stacchiola",
+            "Alexander Uhl",
+            "Shamil Shaikhutdinov",
+            "Hans‐Joachim Freund",
+            "Cristina Popa",
+            "Maria Veronica Ganduglia‐Pirovano",
+            "Joachim Sauer"
+          ],
+          "date": "2009/10/12",
+          "year": 2009,
+          "journal": "Angewandte Chemie International Edition",
+          "volume": "48",
+          "issue": "43",
+          "pages": "8006-8009",
+          "publisher": "WILEY‐VCH Verlag",
+          "abstract": "Supported vanadium oxide catalysts have received considerable attention owing to their high activity for selective oxidation reactions.[1–5] The reactivity has been shown to depend strongly on the oxide support,[2–5] with reducible oxides (eg, ceria, titania, and zirconia) exhibiting much higher turnover frequencies for oxidative dehydrogenation (ODH) reactions than irreducible oxides (eg, silica and alumina).[3, 5] Structural characterization of the catalysts has been performed primarily using Raman and UV/Vis spectroscopy (see Ref.[4, 6, 7] and references therein), as well as X-ray absorption spectroscopy.[8] These results have been used to postulate that vanadia catalysts consist of isolated and polymer structures that wet the supporting oxide (so-called “monolayer catalysts”). To elucidate the surface chemistry of vanadia, different model systems, such as vanadia single crystals [9] and thin films [10] as well as …",
+          "citations": 0,
+          "article_url": "https://onlinelibrary.wiley.com/doi/abs/10.1002/anie.200903085",
+          "doi": "10.1002/anie.200903085"
+        },
+        {
+          "title": "Archean phosphorus liberation induced by iron redox geochemistry",
+          "authors": [
+            "Barry Herschy",
+            "Sae Jung Chang",
+            "Ruth Blake",
+            "Aivo Lepland",
+            "Heather Abbott-Lyon",
+            "Jacqueline Sampson",
+            "Zachary Atlas",
+            "Terence P Kee",
+            "Matthew A Pasek"
+          ],
+          "date": "2018/4/9",
+          "year": 2018,
+          "journal": "Nature communications",
+          "volume": "9",
+          "issue": "1",
+          "pages": "1346",
+          "publisher": "Nature Publishing Group UK",
+          "abstract": "The element phosphorus (P) is central to ecosystem growth and is proposed to be a limiting nutrient for life. The Archean ocean may have been strongly phosphorus-limited due to the selective binding of phosphate to iron oxyhydroxide. Here we report a new route to solubilizing phosphorus in the ancient oceans: reduction of phosphate to phosphite by iron(II) at low (<200 °C) diagenetic temperatures. Reduction of phosphate to phosphite was likely widespread in the Archean, as the reaction occurs rapidly and is demonstrated from thermochemical modeling, experimental analogs, and detection of phosphite in early Archean rocks. We further demonstrate that the higher solubility of phosphite compared to phosphate results in the liberation of phosphorus from ferruginous sediments. This phosphite is relatively stable after its formation, allowing its accumulation in the early oceans. As such, phosphorus, not as …",
+          "citations": 0,
+          "article_url": "https://www.nature.com/articles/s41467-018-03835-3"
+        },
+        {
+          "title": "Theoretical study of formamide decomposition pathways",
+          "authors": [
+            "Vinh Son Nguyen",
+            "Heather L Abbott",
+            "M Michele Dawley",
+            "Thomas M Orlando",
+            "Jerzy Leszczynski",
+            "Minh Tho Nguyen"
+          ],
+          "date": "2011/2/10",
+          "year": 2011,
+          "journal": "The Journal of Physical Chemistry A",
+          "volume": "115",
+          "issue": "5",
+          "pages": "841-851",
+          "publisher": "American Chemical Society",
+          "abstract": "The chemical transformations of formamide (NH2CHO), a molecule of prebiotic interest as a precursor for biomolecules, are investigated using methods of electronic structure computations and Rice−Rampserger−Kassel−Marcus (RRKM) theory. Specifically, quantum chemical calculations applying the coupled-cluster theory CCSD(T), whose energies are extrapolated to the complete basis set limit (CBS), are carried out to construct the [CH3NO] potential energy surface. RRKM theory is then used to systematically examine decomposition channels leading to the formation of small molecules including CO, NH3, H2O, HCN, HNC, H2, HNCO, and HOCN. The energy barriers for the decarboxylation, dehydrogenation, and dehydration processes are found to be in the range of 73−78 kcal/mol. H2 loss is predicted to be a one-step process although a two-step process is competitive. CO elimination is found to prefer a two …",
+          "citations": 0,
+          "article_url": "https://pubs.acs.org/doi/abs/10.1021/jp109143j",
+          "doi": "10.1021/jp109143j"
+        },
+        {
+          "title": "CO adsorption on monometallic and bimetallic Au− Pd nanoparticles supported on oxide thin films",
+          "authors": [
+            "Heather L Abbott",
+            "Andreas Aumer",
+            "Yu Lei",
+            "Chithra Asokan",
+            "Randall J Meyer",
+            "Martin Sterrer",
+            "Shamil Shaikhutdinov",
+            "H-J Freund"
+          ],
+          "date": "2010/10/14",
+          "year": 2010,
+          "journal": "The Journal of Physical Chemistry C",
+          "volume": "114",
+          "issue": "40",
+          "pages": "17099-17104",
+          "publisher": "American Chemical Society",
+          "abstract": "Supported Au−Pd catalysts have been shown to exhibit superior catalytic performances when compared to their monometallic counterparts in a variety of reactions. In addition, the nature of the support often plays a critical role in reactivity. To gain a deeper understanding of the structure−reactivity relationship of the Au−Pd catalysts, here we have employed model systems where monometallic and bimetallic Au−Pd nanoparticles are deposited on well-ordered thin films of reducible and irreducible oxides (i.e., Fe3O4(111), MgO(100), and CeO2(111)). Surface structures of the model systems were characterized by temperature-programmed desorption, sum frequency generation, and infrared reflection absorption spectroscopy of CO as a probe molecule. In agreement with previous studies, the results show segregation of gold to the surface. Density functional theory calculations confirm that Au prefers to be at the …",
+          "citations": 0,
+          "article_url": "https://pubs.acs.org/doi/abs/10.1021/jp1038333",
+          "doi": "10.1021/jp1038333"
+        },
+        {
+          "title": "Relating methanol oxidation to the structure of ceria-supported vanadia monolayer catalysts",
+          "authors": [
+            "Heather L Abbott",
+            "Alexander Uhl",
+            "Martin Baron",
+            "Yu Lei",
+            "Randall J Meyer",
+            "Dario J Stacchiola",
+            "Oleksandr Bondarchuk",
+            "Shamil Shaikhutdinov",
+            "Hans-Joachim Freund"
+          ],
+          "date": "2010/5/25",
+          "year": 2010,
+          "journal": "Journal of Catalysis",
+          "volume": "272",
+          "issue": "1",
+          "pages": "82-91",
+          "publisher": "Academic Press",
+          "abstract": "Vanadia “monolayer”-type catalysts supported on reducible oxides such as ceria previously have shown high activity for the selective oxidation of alcohols. Here, a model system consisting of vanadia particles deposited on well-ordered CeO2(111) thin films has been employed. Scanning tunneling microscopy (STM), photoelectron spectroscopy (PES), and infrared reflection absorption spectroscopy (IRAS) were used to characterize the VOx/CeO2 surface as a function of vanadia loading. The formation of isolated monomeric species as well as two-dimensional vanadia islands that wet the ceria support was directly observed by STM. The vanadia species exhibit V in a +5 oxidation state and expose vanadyl (VO) groups with stretching vibrations that blue-shift from ∼1005cm−1 to ∼1040cm−1 with increasing coverage. Temperature programmed desorption (TPD) of methanol revealed three peaks for formaldehyde …",
+          "citations": 0,
+          "article_url": "https://www.sciencedirect.com/science/article/pii/S0021951710000898"
+        },
+        {
+          "title": "Using Effusive Molecular Beams and Microcanonical Unimolecular Rate Theory to Characterize CH4 Dissociation on Pt(111)",
+          "authors": [
+            "Kristy M DeWitt",
+            "Leticia Valadez",
+            "Heather L Abbott",
+            "Kurt W Kolasinski",
+            "Ian Harrison"
+          ],
+          "date": "2006/4/6",
+          "year": 2006,
+          "journal": "The Journal of Physical Chemistry B",
+          "volume": "110",
+          "issue": "13",
+          "pages": "6705-6713",
+          "publisher": "American Chemical Society",
+          "abstract": "The dissociative sticking coefficient for CH4 on Pt(111) has been measured as a function of both gas temperature (Tg) and surface temperature (Ts) using effusive molecular beam and angle-integrated ambient gas dosing methods. The experimental results are used to optimize the three parameters of a microcanonical unimolecular rate theory (MURT) model of the reactive system. The MURT calculations allow us to extract transition state properties from the data as well as to compare our data directly to other molecular beam and thermal equilibrium sticking measurements. We find a threshold energy for dissociation of E0 = 52.5 ± 3.5 kJ mol-1. Furthermore, the MURT with an optimized parameter set provides for a predictive understanding of the kinetics of this C−H bond activation reaction, that is, it allows us to predict the dissociative sticking coefficient of CH4 on Pt(111) for any combination of Ts and Tg even if the …",
+          "citations": 0,
+          "article_url": "https://pubs.acs.org/doi/abs/10.1021/jp0566865",
+          "doi": "10.1021/jp0566865"
+        },
+        {
+          "title": "Microcanonical unimolecular rate theory at surfaces. II. Vibrational state resolved dissociative chemisorption of methane on Ni (100)",
+          "authors": [
+            "HL Abbott",
+            "A Bukoski",
+            "I Harrison"
+          ],
+          "date": "2004/8/22",
+          "year": 2004,
+          "journal": "The Journal of chemical physics",
+          "volume": "121",
+          "issue": "8",
+          "pages": "3792-3810",
+          "publisher": "American Institute of Physics",
+          "abstract": "A three-parameter microcanonical theory of gas-surface reactivity is used to investigate the dissociative chemisorption of methane impinging on a Ni(100) surface. Assuming an apparent threshold energy for dissociative chemisorption of  contributions to the dissociative sticking coefficient from individual methane vibrational states are calculated: (i) as a function of molecular translational energy to model nonequilibrium molecular beam experiments and (ii) as a function of temperature to model thermal equilibrium mbar pressure bulb experiments. Under fairly typical molecular beam conditions (e.g.,    sticking from methane in the ground vibrational state dominates the overall sticking. In contrast, under thermal equilibrium conditions at temperatures  the dissociative sticking is dominated by methane in vibrationally excited states, particularly those involving excitation of the  bending mode …",
+          "citations": 0,
+          "article_url": "https://pubs.aip.org/aip/jcp/article-abstract/121/8/3792/464729"
+        },
+        {
+          "title": "Serpentinization as a route to liberating phosphorus on habitable worlds",
+          "authors": [
+            "Matthew A Pasek",
+            "Arthur Omran",
+            "Tian Feng",
+            "Maheen Gull",
+            "Carolyn Lang",
+            "Josh Abbatiello",
+            "Lyle Garong",
+            "Ray Johnston",
+            "Jeffrey Ryan",
+            "Heather Abbott-Lyon"
+          ],
+          "date": "2022/11/1",
+          "year": 2022,
+          "journal": "Geochimica et Cosmochimica Acta",
+          "volume": "336",
+          "pages": "332-340",
+          "publisher": "Pergamon",
+          "abstract": "A general assumption about the geochemical behavior of phosphorus (P) is that it exists exclusively in the +5 oxidation as phosphate. However, in extremely reducing environments, other oxidation states of phosphorus such as +3 may also be stable. Such environments—if prevalent globally—may determine planetary habitability, which is in part governed by nutrient availability, including the availability of the element phosphorus. Here we show a route to P liberation from water-rock reactions that are thought to be common throughout the Solar System. We report the speciation of phosphorus in several serpentinite rocks and muds to include the ion phosphite (HPO32− with P3+) and show that reduction of phosphate to phosphite may be predicted from thermodynamic models of serpentinization. Furthermore, the amount of phosphite exceeds the amounts predicted from thermodynamic models in three of nine …",
+          "citations": 0,
+          "article_url": "https://www.sciencedirect.com/science/article/pii/S0016703722005130"
+        },
+        {
+          "title": "The complex core level spectra of CeO2: An analysis in terms of atomic and charge transfer effects",
+          "authors": [
+            "Paul S Bagus",
+            "Constance J Nelin",
+            "Eugene S Ilton",
+            "Martin Baron",
+            "Heather Abbott",
+            "Elena Primorac",
+            "Helmut Kuhlenbeck",
+            "Shamil Shaikhutdinov",
+            "H-J Freund"
+          ],
+          "date": "2010/3/5",
+          "year": 2010,
+          "journal": "Chemical Physics Letters",
+          "volume": "487",
+          "issue": "4-6",
+          "pages": "237-240",
+          "publisher": "North-Holland",
+          "abstract": "We present a rigorous parameter-free theoretical treatment of the Ce 4s and 5s photoelectron spectra of CeO2. The currently accepted model explains the satellite structure in the photoelectron spectra in terms of mixed valence (Ce 4f0 O 2p6, Ce 4f1 O 2p5, and Ce 4f2 O 2p4) configurations. We show that charge transfer (CT) into Ce 5d as well as configurations involving intra-atomic movement of charge must be considered in addition and compute their contributions to the spectra.",
+          "citations": 0,
+          "article_url": "https://www.sciencedirect.com/science/article/pii/S0009261410000801"
+        },
+        {
+          "title": "Methane dissociative chemisorption on Ru (0001) and comparison to metal nanocatalysts",
+          "authors": [
+            "Heather L Abbott",
+            "Ian Harrison"
+          ],
+          "date": "2008/2/15",
+          "year": 2008,
+          "journal": "Journal of Catalysis",
+          "volume": "254",
+          "issue": "1",
+          "pages": "27-38",
+          "publisher": "Academic Press",
+          "abstract": "Microcanonical unimolecular rate theory (MURT) was used to characterize methane dissociative chemisorption on Ru(0001). Simulations of supersonic molecular beam and thermal bulb-derived dissociative sticking coefficients indicated that the threshold energy for CH4 dissociative chemisorption on Ru(0001) was E0=59 kJ/mol and that two surface oscillators were active in the gas-surface collision complexes. MURT analysis of CH4 supersonic beam experiments on several surfaces found that E0 decreased from Ni(100)→Ru(0001)→Pt(111)→Ir(111). Although MURT simulations of CH4 thermal dissociative sticking coefficients were in fairly good accord with thermal bulb experiments at mbar pressures, they were as much as 3–4 orders of magnitude higher than the apparent sticking coefficients derived from CH4 decomposition or reforming rates on supported nanoscale metal catalysts. Consequently, the varied …",
+          "citations": 0,
+          "article_url": "https://www.sciencedirect.com/science/article/pii/S0021951707004319"
+        },
+        {
+          "title": "Distinctive Coordination of CO vs N2 to Rhodium Cations: An Infrared and Computational Study",
+          "authors": [
+            "AD Brathwaite",
+            "HL Abbott-Lyon",
+            "MA Duncan"
+          ],
+          "date": "2016/10/6",
+          "year": 2016,
+          "journal": "The Journal of Physical Chemistry A",
+          "volume": "120",
+          "issue": "39",
+          "pages": "7659-7670",
+          "publisher": "American Chemical Society",
+          "abstract": "Carbonyl and nitrogen complexes with Rh+ are produced in a molecular beam using laser ablation and a pulsed-nozzle source. Mass-selected ions of the form Rh(CO)n+ and Rh(N2)n+ are investigated via infrared laser photodissociation spectroscopy. The fragmentation patterns and infrared spectra provide information on the coordination and geometries of these complexes. The shifts in vibrational frequencies relative to the uncoordinated ligands give insight into the nature of the bonding interactions involved. Experimental band positions and intensities are compared to those predicted by density functional theory (DFT). Rh+ coordinates only four nitrogen molecules, whereas it can accommodate five carbonyl ligands. The fifth CO ligand resides in an axial site with bonding intermediate between coordination and solvation. The carbonyl stretch in Rh(CO)4+ (2160 cm–1) is blue-shifted with respect to the molecular …",
+          "citations": 0,
+          "article_url": "https://pubs.acs.org/doi/abs/10.1021/acs.jpca.6b07749",
+          "doi": "10.1021/acs.jpca.6b07749"
+        },
+        {
+          "title": "Dissociative chemisorption of methane on Ni(100): Threshold energy from  eigenstate-resolved sticking measurements",
+          "authors": [
+            "HL Abbott",
+            "A Bukoski",
+            "DF Kavulak",
+            "I Harrison"
+          ],
+          "date": "2003/10/1",
+          "year": 2003,
+          "journal": "The Journal of chemical physics",
+          "volume": "119",
+          "issue": "13",
+          "pages": "6407-6410",
+          "publisher": "American Institute of Physics",
+          "abstract": "A three-parameter microcanonical theory of gas-surface reactivity is used to model the dissociative sticking of vibrationally excited methane with two quanta of energy in the  antisymmetric C–H stretch. An apparent threshold energy for C–H bond cleavage of  incident on Ni(100) of 65 kJ/mol is found, in quantitative agreement with ab initio quantum chemistry calculations but 38 kJ/mol less than GGA-DFT calculations. Successful microcanonical analysis and prediction of recent thermal equilibrium and various nonequilibrium dissociative chemisorption experiments for methane on Ni(100) provide no evidence for mode-specific reactivity.",
+          "citations": 0,
+          "article_url": "https://pubs.aip.org/aip/jcp/article-abstract/119/13/6407/534941"
+        },
+        {
+          "title": "The evolution of the surface of the mineral schreibersite in prebiotic chemistry",
+          "authors": [
+            "Nikita L La Cruz",
+            "Danna Qasim",
+            "Heather Abbott-Lyon",
+            "Claire Pirim",
+            "Aaron D McKee",
+            "Thomas Orlando",
+            "Maheen Gull",
+            "Danny Lindsay",
+            "Matthew A Pasek"
+          ],
+          "date": "2016",
+          "year": 2016,
+          "journal": "Physical Chemistry Chemical Physics",
+          "volume": "18",
+          "issue": "30",
+          "pages": "20160-20167",
+          "publisher": "Royal Society of Chemistry",
+          "abstract": "We present a study of the reactions of the meteoritic mineral schreibersite (Fe,Ni)3P, focusing primarily on surface chemistry and prebiotic phosphorylation. In this work, a synthetic analogue of the mineral was synthesized by mixing stoichiometric proportions of elemental iron, nickel and phosphorus and heating in a tube furnace at 820 °C for approximately 235 hours under argon or under vacuum, a modification of the method of Skála and Drábek (2002). Once synthesized, the schreibersite was characterized to confirm the identity of the product as well as to elucidate the oxidation processes affecting the surface. In addition to characterization of the solid product, this schreibersite was reacted with water or with organic solutes in a choline chloride–urea deep eutectic mixture, to constrain potential prebiotic products. Major inorganic solutes produced by reaction of water include orthophosphate, phosphite …",
+          "citations": 0,
+          "article_url": "https://pubs.rsc.org/en/content/articlehtml/2016/cp/c6cp00836d"
+        },
+        {
+          "title": "Microcanonical unimolecular rate theory at surfaces. III. Thermal dissociative chemisorption of methane on Pt (111) and detailed balance",
+          "authors": [
+            "A Bukoski",
+            "HL Abbott",
+            "I Harrison"
+          ],
+          "date": "2005/9/1",
+          "year": 2005,
+          "journal": "The Journal of chemical physics",
+          "volume": "123",
+          "issue": "9",
+          "publisher": "AIP Publishing",
+          "abstract": "A local hot spot model of gas-surface reactivity is used to investigate the state-resolved dynamics of methane dissociative chemisorption on Pt (111) under thermal equilibrium conditions. Three Pt surface oscillators, and the molecular vibrations, rotations, and the translational energy directed along the surface normal are treated as active degrees of freedom in the 16-dimensional microcanonical kinetics. Several energy transfer models for coupling a local hot spot to the surrounding substrate are developed and evaluated within the context of a master equation kinetics approach. Bounds on the thermal dissociative sticking coefficient based on limiting energy transfer models are derived. The three-parameter physisorbed complex microcanonical unimolecular rate theory (PC-MURT) is shown to closely approximate the thermal sticking under any realistic energy transfer model. Assuming an apparent threshold energy …",
+          "citations": 0,
+          "article_url": "https://pubs.aip.org/aip/jcp/article/123/9/094707/984400"
+        },
+        {
+          "title": "Dissociative chemisorption and energy transfer for methane on Ir (111)",
+          "authors": [
+            "Heather L Abbott",
+            "Ian Harrison"
+          ],
+          "date": "2005/5/26",
+          "year": 2005,
+          "journal": "The Journal of Physical Chemistry B",
+          "volume": "109",
+          "issue": "20",
+          "pages": "10371-10380",
+          "publisher": "American Chemical Society",
+          "abstract": "A 3-parameter local hot spot model of gas−surface reactivity is employed to analyze and predict dissociative sticking coefficients for CH4 incident on Ir(111) under varied nonequilibrium and equilibrium conditions. One Ir surface oscillator and the molecular vibrations, rotations, and translational energy directed along the surface normal are treated as active degrees of freedom in the 14 dimensional microcanonical kinetics. The threshold energy for CH4 dissociative chemisorption on Ir(111) derived from modeling molecular beam experiments is E0 = 39 kJ/mol. Over more than 4 orders of magnitude of variation in sticking, the average relative discrepancy between the beam and theoretically derived sticking coefficients is 88%. The experimentally observed enhancement in dissociative sticking as beam translational energies decrease below ∼10 kJ/mol is consistent with a parallel dynamical trapping/energy transfer …",
+          "citations": 0,
+          "article_url": "https://pubs.acs.org/doi/abs/10.1021/jp0505375",
+          "doi": "10.1021/jp0505375"
+        },
+        {
+          "title": "Evolution of ephemeral phosphate minerals on planetary environments",
+          "authors": [
+            "Tian Feng",
+            "Maheen Gull",
+            "Arthur Omran",
+            "Heather Abbott-Lyon",
+            "Matthew A Pasek"
+          ],
+          "date": "2021/6/25",
+          "year": 2021,
+          "journal": "ACS Earth and Space Chemistry",
+          "volume": "5",
+          "issue": "7",
+          "pages": "1647-1656",
+          "publisher": "American Chemical Society",
+          "abstract": "The detection of ammonium-bearing compounds in meteorites, comets, and in Earth’s geologic record is challenging due to the volatilization of ammonia during heating. Struvite (MgNH4PO4·6H2O) is an ammonium-bearing phosphate mineral considered to be relevant to the origin of organophosphates on the early Earth, and it is possible that this mineral may have formed on the early Earth and in meteorites in favorable environments. However, in contrast to other phosphate minerals such as those within the apatite mineral group, there is little evidence of struvite on the early Earth and no detection of it in meteorites, where such high-N (nitrogen) and low-H2O conditions may be more commonplace. Here, we demonstrate that struvite quickly loses ammonia and transforms into a new suite of minerals; hence, this mineral is ephemeral. This ephemerality is demonstrated by the thermal decomposition reactions of …",
+          "citations": 0,
+          "article_url": "https://pubs.acs.org/doi/abs/10.1021/acsearthspacechem.1c00007",
+          "doi": "10.1021/acsearthspacechem.1c00007"
+        },
+        {
+          "title": "Activated Dissociation of CO2 on Rh(111) and CO Oxidation Dynamics",
+          "authors": [
+            "Heather L Abbott",
+            "Ian Harrison"
+          ],
+          "date": "2007/9/6",
+          "year": 2007,
+          "journal": "The Journal of Physical Chemistry C",
+          "volume": "111",
+          "issue": "35",
+          "pages": "13137-13148",
+          "publisher": "American Chemical Society",
+          "abstract": "The activated dissociative chemisorption of CO2 on Rh(111) is characterized theoretically with the aid of detailed balance simulations of the CO2 product state distributions measured in thermally driven CO oxidation experiments. A two-parameter formulation of the physisorbed complex−microcanonical unimolecular rate theory (PC−MURT), a local hot spot model for the CO2 gas-surface reactivity, is used to calculate CO2 dissociative sticking coefficients, as well as the angular yields, mean translational energies, and rovibrational energy distributions of desorbing CO2 product from CO oxidation. Measured CO2 product angular yields and infrared chemiluminescence from CO oxidation are consistent with two parallel mechanisms for activated CO2 dissociative chemisorption on Rh(111):  a direct mechanism and an indirect mechanism involving a thermalized intermediate. The PC−MURT describes the direct …",
+          "citations": 0,
+          "article_url": "https://pubs.acs.org/doi/abs/10.1021/jp073686r",
+          "doi": "10.1021/jp073686r"
+        },
+        {
+          "title": "Nonequilibrium Activated Dissociative Chemisorption:  SiH4 on Si(100)",
+          "authors": [
+            "David F Kavulak",
+            "Heather L Abbott",
+            "Ian Harrison"
+          ],
+          "date": "2005/1/20",
+          "year": 2005,
+          "journal": "The Journal of Physical Chemistry B",
+          "volume": "109",
+          "issue": "2",
+          "pages": "685-688",
+          "publisher": "American Chemical Society",
+          "abstract": "A three-parameter local hot spot model of gas−surface reactivity is employed to analyze and predict dissociative sticking coefficients for SiH4 incident on Si(100) under varied nonequilibrium conditions. Two Si surface oscillators and the molecular vibrations, rotations, and translational energy directed along the local surface normal are active degrees of freedom in the 15 dimensional microcanonical kinetics. The threshold energy for SiH4 dissociative chemisorption is found to be 19 kJ/mol, in quantitative agreement with recent GGA-DFT calculations. A simple scheme for increasing the rate of chemical vapor deposition of silicon from SiH4 at low surface temperatures is modeled.",
+          "citations": 0,
+          "article_url": "https://pubs.acs.org/doi/abs/10.1021/jp044841u",
+          "doi": "10.1021/jp044841u"
+        },
+        {
+          "title": "Effusive Molecular Beam Study of C2H6 Dissociation on Pt(111)",
+          "authors": [
+            "Kristy M DeWitt",
+            "Leticia Valadez",
+            "Heather L Abbott",
+            "Kurt W Kolasinski",
+            "Ian Harrison"
+          ],
+          "date": "2006/4/6",
+          "year": 2006,
+          "journal": "The Journal of Physical Chemistry B",
+          "volume": "110",
+          "issue": "13",
+          "pages": "6714-6720",
+          "publisher": "American Chemical Society",
+          "abstract": "The dissociative sticking coefficient for C2H6 on Pt(111) has been measured as a function of both gas temperature (Tg) and surface temperature (Ts) using effusive molecular beam and angle-integrated ambient gas dosing methods. A microcanonical unimolecular rate theory (MURT) model of the reactive system is used to extract transition state properties from the data as well as to compare our data directly with supersonic molecular beam and thermal equilibrium sticking measurements. We report for the first time the threshold energy for dissociation, E0 = 26.5 ± 3 kJ mol-1. This value is only weakly dependent on the other two parameters of the model. A strong surface temperature dependence in the initial sticking coefficient is observed; however, the relatively weak dependence on gas temperature indicates some combination of the following (i) not all molecular excitations are contributing equally to the …",
+          "citations": 0,
+          "article_url": "https://pubs.acs.org/doi/abs/10.1021/jp055684h",
+          "doi": "10.1021/jp055684h"
+        },
+        {
+          "title": "Adsorption of Water, Methanol, and Formic Acid on Fe<sub>2</sub>NiP, a Meteoritic Mineral Analogue",
+          "authors": [
+            "D. Qasim",
+            "Logan Vlasak",
+            "Aaron Pital",
+            "Thomas Beckman",
+            "Nsamba Mutanda",
+            "Heather Abbott-Lyon"
+          ],
+          "year": 2017,
+          "journal": "The Journal of Physical Chemistry C",
+          "abstract": "The surface of an analogue to the meteoritic mineral schreibersite or (Fe,NO)(3)P was investigated to provide insight into the interaction of the mineral surface with prebiotic molecules such as water, methanol, and formic acid. A protocol for creating synthetic metal-phosphide samples with a surface reflectivity suitable for reflection absorption infrared spectroscopy (RAIRS) was developed and is outlined in this paper. Scanning electron microscopy coupled with energy dispersive spectroscopy revealed an average defect size less than 1 mu m and evidence of subsurface phosphorus segregation. At surface temperatures between 120 and 140 K, RAIRS spectra indicate that water and formic acid interact molecularly with surface atoms, while methanol appears to dissociate into methoxy and protons upon adsorption. The observed infrared spectra provide insight into the adsorption geometries of these prebiotic molecules on synthetic schreibersite. This data suggests the importance of the schreibersite mineral surface in aqueous-phase schreibersite-mediated phosphorylation experiments that have been performed by others and strengthens the argument that schreibersite-induced chemistry could, Occur in astrochemical environments.",
+          "citations": 10,
+          "doi": "10.1021/acs.jpcc.7b01312",
+          "article_url": "https://doi.org/10.1021/acs.jpcc.7b01312",
+          "source": "openalex"
+        },
+        {
+          "title": "Organophosphorus Compound Formation Through the Oxidation of Reduced Oxidation State Phosphorus Compounds on the Hadean Earth",
+          "authors": [
+            "Maheen Gull",
+            "Tian Feng",
+            "Joe Bracegirdle",
+            "Heather Abbott-Lyon",
+            "Matthew A. Pasek"
+          ],
+          "year": 2022,
+          "journal": "Journal of Molecular Evolution",
+          "abstract": null,
+          "citations": 9,
+          "doi": "10.1007/s00239-022-10086-w",
+          "article_url": "https://doi.org/10.1007/s00239-022-10086-w",
+          "source": "openalex"
+        },
+        {
+          "title": "Multimodal Vacuum-Assisted Plasma Ion (VaPI) Source with Transmission Mode and Laser Ablation Sampling Capabilities",
+          "authors": [
+            "Joel D. Keelor",
+            "Paul B. Farnsworth",
+            "Arthur L. Weber",
+            "Heather Abbott-Lyon",
+            "Facundo M. Fernández"
+          ],
+          "year": 2016,
+          "journal": "Journal of the American Society for Mass Spectrometry",
+          "abstract": "We have developed a multimodal ion source design that can be configured on the fly for various analysis modes, designed for more efficient and reproducible sampling at the mass spectrometer atmospheric pressure (AP) interface in a number of different applications. This vacuum-assisted plasma ionization (VaPI) source features interchangeable transmission mode and laser ablation sampling geometries. Operating in both AC and DC power regimes with similar results, the ion source was optimized for parameters including helium flow rate and gas temperature using transmission mode to analyze volatile standards and drug tablets. Using laser ablation, matrix effects were studied, and the source was used to monitor the products of model prebiotic synthetic reactions.",
+          "citations": 5,
+          "doi": "10.1007/s13361-016-1354-8",
+          "article_url": "https://doi.org/10.1007/s13361-016-1354-8",
+          "source": "openalex"
+        },
+        {
+          "title": "Viewpoint on ACS PHYS Division Sponsored Virtual Seminars",
+          "authors": [
+            "Heather Abbott-Lyon",
+            "Carlos R. Baiz",
+            "Partha P. Bera",
+            "Kyle N. Crabtree",
+            "Qiang Cui",
+            "Ryan C. Fortenberry",
+            "Christy F. Landes",
+            "Anne B. McCoy",
+            "Rodrigo Noriega",
+            "David E. Woon"
+          ],
+          "year": 2021,
+          "journal": "The Journal of Physical Chemistry A",
+          "abstract": "ADVERTISEMENT RETURN TO ISSUEPREVViewpointNEXTViewpoint on ACS PHYS Division Sponsored Virtual SeminarsHeather Abbott-LyonHeather Abbott-LyonKennesaw State University, Chair-Elect, Astrochemistry subdivisionMore by Heather Abbott-Lyonhttp://orcid.org/0000-0001-6844-2487, Carlos R. BaizCarlos R. BaizUniversity of Texas at Austin, Chair-Elect, Biophysical subdivisionMore by Carlos R. Baizhttp://orcid.org/0000-0003-0699-8468, Partha P. BeraPartha P. BeraNASA-Ames Research Center, Chair, Astrochemistry subdivisionMore by Partha P. Berahttp://orcid.org/0000-0003-0843-3209, Kyle CrabtreeKyle CrabtreeUniversity of California, Davis, Vice-Chair, Astrochemistry subdivisionMore by Kyle Crabtreehttp://orcid.org/0000-0001-5629-5192, Qiang CuiQiang CuiBoston University, Secretary/Treasurer, PHYSMore by Qiang Cuihttp://orcid.org/0000-0001-6214-5211, Ryan C. FortenberryRyan C. FortenberryUniversity of Mississippi, Past-Chair, Astrochemistry subdivisionMore by Ryan C. Fortenberryhttp://orcid.org/0000-0003-4716-8225, Christy F. LandesChristy F. LandesRice University, Vice-Chair, PHYSMore by Christy F. Landeshttp://orcid.org/0000-0003-4163-6497, Anne B. McCoy*Anne B. McCoyUniversity of Washington, Past-Chair, PHYSMore by Anne B. McCoyhttp://orcid.org/0000-0001-6851-6634, Rodrigo NoriegaRodrigo NoriegaUniversity of Utah, PHYSMore by Rodrigo Noriegahttp://orcid.org/0000-0003-1199-0866, and David E. WoonDavid E. WoonUIUC, Secretary, Astrochemistry subdivisionMore by David E. Woonhttp://orcid.org/0000-0003-3831-5078Cite this: J. Phys. Chem. A 2021, 125, 8, 1680Publication Date (Web):January 28, 2021Publication History Published online28 January 2021Published inissue 4 March 2021https://pubs.acs.org/doi/10.1021/acs.jpca.1c00302https://doi.org/10.1021/acs.jpca.1c00302editorialACS PublicationsCopyright © Published 2021 by American Chemical Society. This publication is available under these Terms of Use. Request reuse permissions This publication is free to access through this site. Learn Mo",
+          "citations": 0,
+          "doi": "10.1021/acs.jpca.1c00302",
+          "article_url": "https://doi.org/10.1021/acs.jpca.1c00302",
+          "source": "openalex"
+        },
+        {
+          "title": "Chemistry at the Organic-Mineral Interface Relevant to Titan",
+          "authors": [
+            "Heather Abbott-Lyon",
+            "M. Michele Dawley",
+            "J. L. McLain",
+            "G. A. Grieves",
+            "Thomas M. Orlando"
+          ],
+          "year": 2010,
+          "journal": "AAS/Division for Planetary Sciences Meeting Abstracts #42",
+          "abstract": null,
+          "citations": 0,
+          "doi": null,
+          "article_url": "http://ui.adsabs.harvard.edu/abs/2010DPS....42.3604A/abstract",
+          "source": "openalex"
+        },
+        {
+          "title": "Hydroxyapatite Thin Films Synthesis By Electrodeposition",
+          "authors": [
+            "Estefania Garcia",
+            "Altuğ S. Poyraz",
+            "Heather Abbott-Lyon"
+          ],
+          "year": 2019,
+          "journal": "ECS Meeting Abstracts",
+          "abstract": "One of the greatest challenges within origins of life research is known as the “phosphorus problem.” The most abundant sources of phosphorus on the early Earth were phosphate minerals such as hydroxyapatite (HA) or Ca 10 (PO 4 ) 6 (OH) 2 . Although HA is insoluble and does not react readily in most aqueous solutions, HA has been shown to phosphorylate nucleobases such as adenosine and uracil in solutions containing urea, ammonium formate and water. However, the mechanism for the dissolution of phosphorus from the surface of HA is unknown within these prebiotic solutions is unknown. Because HA is an insulator, it is difficult to study the mineral surface in situ using traditional surface-sensitive methods. Therefore, we are developing methods to grow thin hydroxyapatite films on a copper substrate. Polarization modulation infrared reflection-absorption spectroscopy (PM-IRRAS) is a technique that allows the structure of gas-solid and liquid-solid interfaces to be probed in situ . In order to utilize this analysis method, HA thin films must meet several criteria. The films must be deposited onto a substrate that has high reflectivity in the infrared region of the electromagnetic spectrum. The choice of metal and the number of defects on the underlying substrate influence the infrared reflectivity. The underlying substrate should also provide easy temperature control. The films must be thinner than the wavelength of the light being reflected (in this case less than 2.5 microns) and they must be relatively uniform in structure and thickness. Electrochemical deposition of the HA films has been chosen for several reasons. First, this method allows for growth on mirror- finished samples, which results in higher signal intensity for the infrared measurements. Electrochemical deposition produces films with a homogeneous composition and customizable thickness. Additionally, this technique is cost efficient compared to synthesis using vacuum deposition methods (e.g., plasma enh",
+          "citations": 0,
+          "doi": "10.1149/ma2019-02/54/2389",
+          "article_url": "https://doi.org/10.1149/ma2019-02/54/2389",
+          "source": "openalex"
+        },
+        {
+          "title": "Surface chemistry of hydroxyapatite",
+          "authors": [
+            "Estefania Garcia",
+            "K. Slavicinska",
+            "Anna Nasatase",
+            "Christian Luda",
+            "Altuğ S. Poyraz",
+            "Heather Abbott-Lyon"
+          ],
+          "year": 2020,
+          "journal": "",
+          "abstract": null,
+          "citations": 0,
+          "doi": "10.1021/scimeetings.0c05238",
+          "article_url": "https://doi.org/10.1021/scimeetings.0c05238",
+          "source": "openalex"
+        },
+        {
+          "title": "Finding Funding: Strategies and Tools for Your Search",
+          "authors": [],
+          "year": 2025,
+          "journal": "The NORDP Consulting Group",
+          "abstract": null,
+          "citations": 0,
+          "doi": "10.5281/ZENODO.16540537",
+          "article_url": "https://zenodo.org/doi/10.5281/zenodo.16540537",
+          "source": "orcid"
+        },
+        {
+          "title": "Adsorption of Water, Methanol, and Formic Acid on Fe2NiP, a Meteoritic Mineral Analogue",
+          "authors": [],
+          "year": 2017,
+          "journal": "The Journal of Physical Chemistry C",
+          "abstract": null,
+          "citations": 0,
+          "doi": "10.1021/ACS.JPCC.7B01312",
+          "article_url": "https://publons.com/wos-op/publon/38046405/",
+          "source": "orcid"
+        },
+        {
+          "title": "Distinctive Coordination of CO vs N<sub>2</sub> to Rhodium Cations: An Infrared and Computational Study",
+          "authors": [],
+          "year": 2016,
+          "journal": "The Journal of Physical Chemistry A",
+          "abstract": null,
+          "citations": 0,
+          "doi": "10.1021/ACS.JPCA.6B07749",
+          "article_url": "https://publons.com/wos-op/publon/38046426/",
+          "source": "orcid"
+        }
+      ],
+      "publication_count": 20,
+      "total_citations": 266,
+      "sources": [
+        "orcid",
+        "openalex"
+      ],
+      "ksu_verified": true
+    },
+    "h_index": 19,
+    "citation_count": 266,
+    "google_scholar_id": "uk6CaDkAAAAJ",
+    "api_sources": [
+      "openalex",
+      "orcid"
+    ],
+    "ksu_verified": true
+  },
+  {
+    "net_id": "jabern21",
+    "name": "John Abernathy",
+    "first_name": "John",
+    "last_name": "Abernathy",
+    "title": "Professor",
+    "department": null,
+    "college": null,
+    "email": "jabern21@kennesaw.edu",
+    "phone": "470-578-6053",
+    "office": null,
+    "photo_url": "https://facultyweb.kennesaw.edu/jabern21/images/john_abernathy.jpg",
+    "bio": null,
+    "research_interests": [],
+    "education": [],
+    "publications": [],
+    "courses": [],
+    "profile_url": "https://facultyweb.kennesaw.edu/jabern21/index.php",
+    "scholar": {
+      "name": "John Abernathy",
+      "affiliation": "Kennesaw State University",
+      "interests": [
+        "Accounting"
+      ],
+      "citedby": 1940,
+      "h_index": 17,
+      "i10_index": 22,
+      "scholar_id": "UQCot9sAAAAJ",
+      "profile_url": "https://scholar.google.com/citations?user=UQCot9sAAAAJ",
+      "publications": [
+        {
+          "title": "The association between characteristics of audit committee accounting experts, audit committee chairs, and financial reporting timeliness",
+          "authors": [
+            "John L Abernathy",
+            "Brooke Beyer",
+            "Adi Masli",
+            "Chad Stefaniak"
+          ],
+          "date": "2014/12/1",
+          "year": 2014,
+          "journal": "Advances in Accounting",
+          "volume": "30",
+          "issue": "2",
+          "pages": "283-297",
+          "publisher": "Elsevier",
+          "abstract": "We investigate the association between audit committee (AC) members' financial expertise and financial reporting timeliness, and extend the discussion by investigating how the source of accounting expertise (e.g., public accounting or CFO) differentially influences financial reporting timeliness. We predict and find that AC accounting financial expertise is associated with timelier accounting information. Further, we find that accounting expertise gained from public accounting experience is associated with timelier financial reporting; however, accounting expertise gained from CFO experience is not. We also find that AC chairs (ACCs) with accounting expertise from public accounting experience are significantly associated with timelier financial reporting while ACCs with CFO-sourced accounting expertise are not. Our results are important for two reasons. First, our results suggest that AC accounting financial expertise …",
+          "citations": 0,
+          "article_url": "https://www.sciencedirect.com/science/article/pii/S0882611014000315"
+        },
+        {
+          "title": "Earnings management constraints and classification shifting",
+          "authors": [
+            "John L Abernathy",
+            "Brooke Beyer",
+            "Eric T Rapley"
+          ],
+          "date": "2014/6",
+          "year": 2014,
+          "journal": "Journal of Business Finance & Accounting",
+          "volume": "41",
+          "issue": "5-6",
+          "pages": "600-626",
+          "abstract": "Prior literature has investigated three forms of earnings management: real earnings management (REM), accruals earnings management (AEM) and classification shifting. Managers make trade‐off decisions among these methods based on the costs, constraints and timing of each strategy. This study investigates whether managers use classification shifting when their ability to use other forms of earnings management is constrained. We find that when REM is constrained by poor financial condition, high levels of institutional ownership and low industry market share, managers are more likely to use classification shifting. Further, we find that when AEM is constrained by low accounting system flexibility and the provision of a cash flow forecast, managers are more likely to use classification shifting. In addition, when we limit our sample to firms that are most likely to have manipulated earnings, we continue to find …",
+          "citations": 0,
+          "article_url": "https://onlinelibrary.wiley.com/doi/abs/10.1111/jbfa.12076",
+          "doi": "10.1111/jbfa.12076"
+        },
+        {
+          "title": "An international perspective on audit report lag: A synthesis of the literature and opportunities for future research",
+          "authors": [
+            "John L Abernathy",
+            "Michael Barnes",
+            "Chad Stefaniak",
+            "Alexandria Weisbarth"
+          ],
+          "date": "2017/3",
+          "year": 2017,
+          "volume": "21",
+          "issue": "1",
+          "pages": "100-127",
+          "abstract": "Audit report lag (ARL) is the length of time from a company's fiscal year‐end to the audit report date, and is often viewed as the most important financial reporting timeliness determinant. Given that timeliness is an area of interest to investors, managers, regulators, auditors and academics, an understanding of ARL determinants is extremely important. As financial markets become more globally oriented, an international understanding of ARL determinants becomes even more important. This paper summarizes the extant literature on ARL and its determinants with an emphasis on international literature. Our review categorizes prior research based on company‐specific and audit‐related factors, and explores the associations that have been identified with respect to ARL. Finally, we identify possible areas of interest not currently present in the literature and speculate on several opportunities for future research.",
+          "citations": 0,
+          "article_url": "https://onlinelibrary.wiley.com/doi/abs/10.1111/ijau.12083",
+          "doi": "10.1111/ijau.12083"
+        },
+        {
+          "title": "Financial statement footnote readability and corporate audit outcomes",
+          "authors": [
+            "John L Abernathy",
+            "Feng Guo",
+            "Thomas R Kubick",
+            "Adi Masli"
+          ],
+          "date": "2019/5/1",
+          "year": 2019,
+          "journal": "Auditing: A Journal of Practice & Theory",
+          "volume": "38",
+          "issue": "2",
+          "pages": "1-26",
+          "publisher": "American Accounting Association",
+          "abstract": "We examine whether the readability of financial statement footnotes in the annual report is informative about audit engagement risk. Using various readability measures, we predict and find that firms with less readable footnotes have longer audit report lag, incur higher audit fees, and are more likely to receive a first time modified going concern opinion. We also show that readability of footnotes is associated with a higher likelihood of financial misstatements and future accounting-related litigation. Our results are robust to several measures of readability used in prior literature, as well as different specifications and design choices, revealing that financial statement footnote readability provides incremental information about audit engagement risk that affects auditor-client contracting.\nData Availability: Data are obtained from public sources identified in the paper.",
+          "citations": 0,
+          "article_url": "https://publications.aaahq.org/ajpt/article-abstract/38/2/1/6062"
+        },
+        {
+          "title": "Evidence on the relation between managerial ability and financial reporting timeliness",
+          "authors": [
+            "John L Abernathy",
+            "Thomas R Kubick",
+            "Adi Masli"
+          ],
+          "date": "2018/7",
+          "year": 2018,
+          "journal": "International Journal of Auditing",
+          "volume": "22",
+          "issue": "2",
+          "pages": "185-196",
+          "abstract": "While prior research has investigated the relation between firm‐level attributes and financial reporting timeliness, there is little evidence on whether managerial ability is associated with financial reporting timeliness. We examine the relation between managerial ability and financial reporting timeliness. Managers with higher ability possess greater human capital and are better able to maintain the systems and controls underlying the company's financial information. We therefore predict that managers with higher ability produce more timely financial disclosures. We find that, incremental to firm‐level attributes, higher managerial ability is associated with a shorter earnings announcement lag, a shorter audit report lag, and a lower probability of a late US Securities and Exchange Commission filing. Collectively, our results suggest that managerial ability has a positive influence on the timeliness of financial reporting.",
+          "citations": 0,
+          "article_url": "https://onlinelibrary.wiley.com/doi/abs/10.1111/ijau.12112",
+          "doi": "10.1111/ijau.12112"
+        },
+        {
+          "title": "Audit committee financial expertise and properties of analyst earnings forecasts",
+          "authors": [
+            "John L Abernathy",
+            "Don Herrmann",
+            "Tony Kang",
+            "Gopal V Krishnan"
+          ],
+          "date": "2013/6/1",
+          "year": 2013,
+          "journal": "Advances in Accounting",
+          "volume": "29",
+          "issue": "1",
+          "pages": "1-11",
+          "publisher": "Elsevier",
+          "abstract": "An important role of financial accounting information is to aid financial statement users in forming expectations about the firm's future earnings. Prior research finds that accounting financial expertise of the audit committee is associated with higher financial reporting quality. We extend this literature by examining the association between audit committee financial expertise and analysts' ability to anticipate future earnings. We find a significant association between accounting financial expertise on the audit committee and analyst earnings forecasts that are more accurate and less dispersed. In contrast, we do not find a significant association between non-accounting financial expertise (i.e., supervisory expertise) and forecast accuracy or forecast dispersion. These findings contribute to our understanding of the benefits of accounting expertise in audit committees by demonstrating an association between accounting …",
+          "citations": 0,
+          "article_url": "https://www.sciencedirect.com/science/article/pii/S0882611012000740"
+        },
+        {
+          "title": "Literature review and research opportunities on credibility of corporate social responsibility reporting",
+          "authors": [
+            "John Abernathy",
+            "Chad Stefaniak",
+            "Anne Wilkins",
+            "Jacqueline Olson"
+          ],
+          "date": "2017/4/3",
+          "year": 2017,
+          "volume": "32",
+          "issue": "1",
+          "pages": "24-41",
+          "publisher": "Emerald Publishing Limited",
+          "abstract": "Purpose\nThe purpose of this paper is to identify and synthesize the current academic literature on emerging trends to increase CSR reporting credibility.\nDesign/methodology/approach\nThis paper synthesizes literature on emerging trends to increase CSR reporting credibility from the past ten years, focusing mainly on the most recent five years, by searching ABI/Inform and Business Source Premier for academic papers containing the following keywords: Corporate Social Responsibility (CSR) Reporting, CSR, Sustainability, and Social Responsibility.\nFindings\nThis paper identifies four relatively unexplored trends to improve CSR credibility: CSR assurance, integrated reporting, CSR reporting standards, and CSR regulation.\nResearch limitations/implications\nThis study will be of use to academic researchers to facilitate research and discussion on the credibility of CSR disclosure.\nPractical implications\nRegulatory agencies …",
+          "citations": 0,
+          "article_url": "https://www.emerald.com/insight/content/doi/10.1108/AJB-04-2016-0013/full/html",
+          "doi": "10.1108/AJB-04-2016-0013/full/html"
+        },
+        {
+          "title": "A summary of 10 years of PCAOB research: What have we learned?✩",
+          "authors": [
+            "John L Abernathy",
+            "Michael Barnes",
+            "Chad Stefaniak"
+          ],
+          "date": "2013/11/30",
+          "year": 2013,
+          "volume": "32",
+          "issue": "1",
+          "pages": "30-60",
+          "publisher": "Emerald Publishing Limited",
+          "abstract": "For the past 10 years, the Public Company Accounting Oversight Board (PCAOB) has operated as an independent overseer of public company audits. Over 70 percent of PCAOB studies have been published since 2010, evidencing the increasing relevance of PCAOB-related research in recent years. Our paper reviews the existing literature on the PCAOB’s four primary functions – registration, standard-setting, inspections, and enforcement. In particular, we examine PCAOB registration trends and evaluate the effects of PCAOB registration requirements on the issuer audit market, as well as discuss the relative costs and benefits (e.g., auditor behavior changes, improvements in audit quality, auditor perceptions) of the 16 auditing standards the PCAOB passed in its first 10 years of operation. Further, we summarize the literature’s findings on the effects of the PCAOB inspection process on various facets of audit …",
+          "citations": 0,
+          "article_url": "https://www.emerald.com/insight/content/doi/10.1016/j.acclit.2013.10.002/full/html",
+          "doi": "10.1016/j.acclit.2013.10.002/full/html"
+        },
+        {
+          "title": "How the source of audit committee accounting expertise influences financial reporting timeliness",
+          "authors": [
+            "John L Abernathy",
+            "Brooke Beyer",
+            "Adi Masli",
+            "Chad M Stefaniak"
+          ],
+          "date": "2015/6/1",
+          "year": 2015,
+          "journal": "Current Issues in Auditing",
+          "volume": "9",
+          "issue": "1",
+          "pages": "P1-P9",
+          "publisher": "American Accounting Association",
+          "abstract": "This article summarizes “The Association between Characteristics of Audit Committee Accounting Experts, Audit Committee Chairs, and Financial Reporting Timeliness”(Abernathy, Beyer, Masli, and Stefaniak 2014), which investigates the association between audit committee members' accounting expertise and financial reporting timeliness. While we find a positive relation between audit committee accounting expertise and financial reporting timeliness, interestingly, we also find that accounting expertise gained from public accounting experience is associated with more timely financial reporting than accounting expertise gained from CFO experience. We discuss implications of these findings for auditors, companies, and regulators.",
+          "citations": 0,
+          "article_url": "https://publications.aaahq.org/cia/article/9/1/P1/7221"
+        },
+        {
+          "title": "External auditor responses to tax risk",
+          "authors": [
+            "John L Abernathy",
+            "Andrew R Finley",
+            "Eric T Rapley",
+            "James Stekelberg"
+          ],
+          "date": "2021/7",
+          "year": 2021,
+          "journal": "Journal of Accounting, Auditing & Finance",
+          "volume": "36",
+          "issue": "3",
+          "pages": "489-516",
+          "publisher": "SAGE Publications",
+          "abstract": "Both practitioners and academics are increasingly focusing their attention on the riskiness of firms’ tax planning activities. In this study, we examine how external auditors respond to tax risk, measured using the volatility of firms’ annual cash and GAAP (Generally Accepted Accounting Principles) effective tax rates. Consistent with the notion that tax risk represents a source of engagement risk that is priced by external auditors, we first document a positive association between audit fees and tax risk incremental to fee premiums arising from tax aggressiveness. We also find that knowledge spillover benefits related to the provision of tax nonaudit services moderate this positive association. In supplemental tests, we provide evidence on additional auditor responses to tax risk. In particular, we document that tax risk is positively associated with both audit report lag and the likelihood of the auditor reporting a tax-related …",
+          "citations": 0,
+          "article_url": "https://journals.sagepub.com/doi/abs/10.1177/0148558X19867821",
+          "doi": "10.1177/0148558X19867821"
+        },
+        {
+          "title": "Schedule UTP: Stock price reaction and economic consequences",
+          "authors": [
+            "John L Abernathy",
+            "Stephan A Davenport",
+            "Eric T Rapley"
+          ],
+          "date": "2013/3/1",
+          "year": 2013,
+          "journal": "The Journal of the American Taxation Association",
+          "volume": "35",
+          "issue": "1",
+          "pages": "25-48",
+          "publisher": "American Accounting Assocation",
+          "abstract": "In 2010, the Internal Revenue Service (IRS) announced the requirement to disclose uncertain tax positions (UTP) on a new schedule (Schedule UTP) to be filed with federal corporate income tax returns. Schedule UTP could increase a firm's tax burden by providing a roadmap for the IRS to identify firms' tax-planning strategies. We find that stock returns around the development of Schedule UTP are negative, consistent with investors' concern that Schedule UTP would impose costs on firms. However, we document a significant positive stock price reaction to the release of the final draft of Schedule UTP in which the IRS relaxed many of the controversial provisions of Schedule UTP. Additionally, we find this positive reaction is incrementally larger for more tax-aggressive firms. Finally, we find a significant decrease in reported unrecognized tax benefits (UTBs) and additions to UTBs after the adoption of Schedule …",
+          "citations": 0,
+          "article_url": "https://publications.aaahq.org/jata/article-abstract/35/1/25/8962"
+        },
+        {
+          "title": "General Counsel Prominence and Corporate Tax Policy",
+          "authors": [
+            "John Abernathy",
+            "Thomas Kubick",
+            "Adi Masli"
+          ],
+          "date": "2016",
+          "year": 2016,
+          "journal": "Journal of the American Taxation Association",
+          "volume": "38",
+          "issue": "1",
+          "pages": "39-56",
+          "abstract": "Prior research provides evidence that individual executives have a significant effect on firm-level tax policy. Further research has shown that having a corporate general counsel (GC) in a firm's top management team (top five highest-paid executives) significantly affects a firm's accounting and disclosure practices. In this paper, we examine the role of the GC in corporate tax policy. Specifically, we use the ascension of the corporate GC to top management as the identifying event in which the role and influence of the corporate GC becomes more salient. We find strong evidence that GC ascension to top management is associated with an increase in tax aggressiveness, as evidenced by greater book-tax differences and a higher likelihood of engaging in tax shelter activities.\nData Availability: Data are obtained from public sources identified in the paper.",
+          "citations": 0,
+          "article_url": "https://publications.aaahq.org/jata/article-abstract/38/1/39/9055"
+        },
+        {
+          "title": "The effect of general counsel prominence on the pricing of audit services",
+          "authors": [
+            "John L Abernathy",
+            "Thomas R Kubick",
+            "Adi NS Masli"
+          ],
+          "date": "2019/1/1",
+          "year": 2019,
+          "journal": "Journal of Accounting and Public Policy",
+          "volume": "38",
+          "issue": "1",
+          "pages": "1-14",
+          "publisher": "Elsevier",
+          "abstract": "We investigate the effect of corporate general counsel (GC) ascension to the senior management team on the pricing of audit services. Prior research suggests that the GC position may have a significant influence in setting the tone at the top by promoting corporate integrity, ethics, and serving as a governance and monitoring mechanism, but also recognizes that prominent GCs may face ethical dilemmas, causing them to disregard professional responsibilities to curry the favor of the CEO and other executives. Using audit fees to proxy for audit engagement risk, we find a negative association between GC ascension to top management and audit fees. We investigate the mechanisms behind this relation and find GC ascension is associated with a reduction in both default risk and financial misstatement risk, which supports auditors’ perceived reduction in client business risk and audit risk, respectively.",
+          "citations": 0,
+          "article_url": "https://www.sciencedirect.com/science/article/pii/S0278425419300341"
+        },
+        {
+          "title": "Is there a relation between residual audit fees and analysts’ forecasts?",
+          "authors": [
+            "John L Abernathy",
+            "Tony Kang",
+            "Gopal V Krishnan",
+            "Changjiang Wang"
+          ],
+          "date": "2018/7",
+          "year": 2018,
+          "journal": "Journal of Accounting, Auditing & Finance",
+          "volume": "33",
+          "issue": "3",
+          "pages": "299-323",
+          "publisher": "SAGE Publications",
+          "abstract": "We examine the relationship between residual audit fees and the ability to predict future earnings. Recent research suggests that residual audit fees contain information about accounting quality. However, residual audit fees could either represent high accounting quality or a risk premium for low accounting quality. We extend this literature by providing evidence that residual audit fees are indicative of a lower quality information environment which has a negative impact on investors’ ability to anticipate future earnings. Specifically, we first show that residual audit fees are negatively associated with the ability of current earnings to predict future earnings. Furthermore, residual audit fees are negatively associated with analyst forecast accuracy and positively associated with the dispersion in analyst forecasts. Overall, our results are consistent with the notion that residual audit fees are indicative of poor earnings quality …",
+          "citations": 0,
+          "article_url": "https://journals.sagepub.com/doi/abs/10.1177/0148558X16637963",
+          "doi": "10.1177/0148558X16637963"
+        },
+        {
+          "title": "Does greater access to employees with information technology capability improve financial reporting quality?",
+          "authors": [
+            "John L Abernathy",
+            "Jan (J) Philipp Klaus",
+            "Linh Le",
+            "Adi Masli"
+          ],
+          "date": "2023/9",
+          "year": 2023,
+          "journal": "Contemporary Accounting Research",
+          "volume": "40",
+          "issue": "3",
+          "pages": "2071-2105",
+          "publisher": "John Wiley & Sons, Inc.",
+          "abstract": "Although information technology (IT) plays an essential role in financial reporting, many companies today lack sufficient human capabilities to utilize IT competently. We examine the association between a firm's access to IT‐capable labor and financial reporting quality (FRQ). We proxy for access to IT‐capable labor using workforce measures in the metropolitan statistical area (MSA) where the firm operates, including (1) the number of IT‐related college degrees relative to the total active workforce, (2) the level of education of IT graduates, (3) the income level of IT graduates, and (4) a composite measure. We find that firms in MSAs with a higher IT‐competent labor force are associated with fewer financial reporting misstatements and internal control issues. This study contributes to the emerging literature stream examining the influence of geographic labor characteristics on firm‐level outcomes and the research on …",
+          "citations": 0,
+          "article_url": "https://onlinelibrary.wiley.com/doi/abs/10.1111/1911-3846.12869",
+          "doi": "10.1111/1911-3846.12869"
+        },
+        {
+          "title": "Comments of the Auditing Standards Committee of the Auditing Section of the American Accounting Association on PCAOB Concept Release on Audit Quality Indicators, No. 2015-005 …",
+          "authors": [
+            "Zabihollah Rezaee",
+            "John Abernathy",
+            "Monika Causholli",
+            "Paul N Michas",
+            "Pamela B Roush",
+            "Stephen Rowe",
+            "Uma K Velury"
+          ],
+          "date": "2016/6/1",
+          "year": 2016,
+          "journal": "Current Issues in Auditing",
+          "volume": "10",
+          "issue": "1",
+          "pages": "C11-C27",
+          "publisher": "American Accounting Association",
+          "abstract": "On July 1, 2015, the Public Accounting Oversight Board (PCAOB) issued its Concept Release seeking comments by September 29, 2015 on a portfolio of 28 potential Audit Quality Indicators (AQIs). The Auditing Standards Committee of the Auditing Section of the American Accounting Association is pleased to provide comments on the PCAOB Rulemaking Docket Matter No. 041. The committee wholeheartedly supports the development, implementation, and disclosure of AQIs, and commends the PCAOB for its comprehensive and relevant concept release. The committee has a number of suggestions for the PCAOB on its AQIs project. We summarize these here, with detailed discussion later in the text. We suggest that the PCAOB:\nUse its authority as a regulatory body to gather and analyze privately held information while maintaining the confidentiality of this sensitive information (eg, partner performance and …",
+          "citations": 0,
+          "article_url": "https://publications.aaahq.org/cia/article-abstract/10/1/C11/6964"
+        },
+        {
+          "title": "High-quality information technology and capital investment decisions",
+          "authors": [
+            "John L Abernathy",
+            "Brooke Beyer",
+            "Jimmy F Downes",
+            "Eric T Rapley"
+          ],
+          "date": "2020/9/1",
+          "year": 2020,
+          "journal": "Journal of Information Systems",
+          "volume": "34",
+          "issue": "3",
+          "pages": "1-29",
+          "publisher": "American Accounting Association",
+          "abstract": "We examine the effect of high-quality information technology (IT) on management's capital investment decisions. Evaluating capital investment decisions with contemporary investment efficiency and long-term measures of investment effectiveness, we document a positive relation between high-quality IT and capital investment decision quality. In particular, we find high-quality IT is associated with more optimal levels of investment as well as fewer future fixed asset write-downs. We also disaggregate investment efficiency and find the relation with IT quality holds for investment decisions related to capital expenditures and acquisitions, but not research and development expenditures. Overall, our results suggest managers equipped with better internal information from higher-quality IT are able to make superior capital investment decisions. Our study contributes to the literature by providing evidence of a …",
+          "citations": 0,
+          "article_url": "https://publications.aaahq.org/jis/article-abstract/34/3/1/1176"
+        },
+        {
+          "title": "The economic relevance of chief marketing officers in firms’ top management teams",
+          "authors": [
+            "John L Abernathy",
+            "Thomas R Kubick",
+            "Adi Masli"
+          ],
+          "date": "2013/12/1",
+          "year": 2013,
+          "journal": "Journal of Business & Economics Research",
+          "volume": "11",
+          "issue": "12",
+          "abstract": "The presence of the Chief Marketing Officer (CMO) in the top management team (TMT) should translate into additional wealth creation for shareholders. Using performance attribution analysis, the authors construct a long-short portfolio that buys (sells) stocks of firms with (without) a CMO in the TMT and find this investment strategy would have earned risk-adjusted excess returns of approximately 3%. Additional analyses suggest the value of having a CMO in the TMT manifests primarily among firms with high operating margin, low asset turnover, high profitability, high R&D intensity and high advertising expenses. The authors conclude that having a CMO in the TMT has a positive impact on shareholder wealth.",
+          "citations": 0,
+          "article_url": "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=2494452"
+        },
+        {
+          "title": "Comments of the auditing standards committee of the auditing section of the American accounting association on PCAOB Staff consultation paper, auditing accounting estimates and …",
+          "authors": [
+            "John Abernathy",
+            "Karl E Hackenbrack",
+            "Jennifer R Joe",
+            "Mikhail Pevzner",
+            "Yi-Jing Wu"
+          ],
+          "date": "2015/6/1",
+          "year": 2015,
+          "journal": "Current Issues in Auditing",
+          "volume": "9",
+          "issue": "1",
+          "pages": "C1-C11",
+          "publisher": "American Accounting Association",
+          "abstract": "Recently, the Public Companies Accounting Oversight Board (PCAOB) solicited public comments on its Staff Consultation Paper Auditing Accounting Estimates and Fair Value Measurements. This commentary summarizes the contributors' views on the various questions asked in the PCAOB Staff Consultation Paper. Our comments submitted to the PCAOB appear below.\nData Availability: The invitation to comment (which invited comments through November 4, 2014), with links to the consultation paper, is available at: http://pcaobus.org/Standards/Pages/SCP _ Accounting _ Estimates _ Fair_Value.aspx",
+          "citations": 0,
+          "article_url": "https://publications.aaahq.org/cia/article-abstract/9/1/C1/7215"
+        },
+        {
+          "title": "Income statement reporting discretion allowed by FIN 48: Interest and penalty expense classification",
+          "authors": [
+            "John L Abernathy",
+            "Brooke Beyer",
+            "Andrew D Gross",
+            "Eric T Rapley"
+          ],
+          "date": "2017/4/1",
+          "year": 2017,
+          "journal": "The Journal of the American Taxation Association",
+          "volume": "39",
+          "issue": "1",
+          "pages": "45-66",
+          "publisher": "American Accounting Assocation",
+          "abstract": "Financial Accounting Standards Board Interpretation No. 48 (FIN 48, ) allows discretion regarding the income statement classification of interest and penalty expenses for unrecognized tax benefits (UTBs). We investigate whether tax avoidance, management compensation, and debt agreements affect the expense classification election and whether this discretion has implications for financial statement users. We find firms that engage in tax avoidance activities, measured by effective tax rates (ETRs) and involvement in tax disputes, are more likely to include interest and penalties in tax expense. We also find that interest and penalties are more likely to be classified as tax expense when CEO compensation is more sensitive to pre-tax income. Finally, we find that UTB interest and penalty expense classification is associated with analysts' ETR forecast accuracy, which suggests there is a potential unintended …",
+          "citations": 0,
+          "article_url": "https://publications.aaahq.org/jata/article-abstract/39/1/45/9009"
+        }
+      ],
+      "publication_count": 20,
+      "sources": [
+        "orcid"
+      ],
+      "ksu_verified": true
+    },
+    "h_index": 17,
+    "citation_count": 0,
+    "google_scholar_id": "UQCot9sAAAAJ",
+    "api_sources": [
+      "orcid"
+    ],
+    "ksu_verified": true
+  }
+]

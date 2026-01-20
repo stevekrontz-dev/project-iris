@@ -1,0 +1,522 @@
+// ============================================
+// IRIS MULTI-TENANT SCHEMA EXTENSION
+// ============================================
+// Adds multi-tenancy support for institutional isolation
+// + Federation layer for cross-institutional discovery
+// ============================================
+
+// ============================================
+// TENANT MANAGEMENT
+// ============================================
+
+model Tenant {
+  id              String          @id @default(cuid())
+  slug            String          @unique    // "ksu", "emory", "gatech", "gsu"
+  name            String                     // "Kennesaw State University"
+  shortName       String?                    // "KSU"
+  domain          String?                    // "kennesaw.edu"
+  
+  // Tenant Type
+  tenantType      TenantType      @default(CONSORTIUM)
+  
+  // Branding
+  logoUrl         String?
+  primaryColor    String?         @default("#FFD700")
+  
+  // Settings
+  settings        Json?           // Tenant-specific configuration
+  
+  // Federation Settings
+  federationEnabled Boolean       @default(true)
+  publicDiscovery   Boolean       @default(true)  // Allow in consortium search
+  
+  // Status
+  status          TenantStatus    @default(ACTIVE)
+  
+  // Subscription (for future billing)
+  subscriptionTier SubscriptionTier @default(FREE)
+  subscriptionExpiresAt DateTime?
+  
+  createdAt       DateTime        @default(now())
+  updatedAt       DateTime        @updatedAt
+  
+  // Relations
+  users           TenantUser[]
+  people          Person[]
+  departments     TenantDepartment[]
+  colleges        TenantCollege[]
+  dataImports     TenantDataImport[]
+  apiKeys         TenantApiKey[]
+  
+  @@map("tenants")
+}
+
+enum TenantType {
+  FULL            // Full tenant with all features (paying customer)
+  CONSORTIUM      // Public data only (scraped for consortium)
+  TRIAL           // Trial period
+}
+
+enum TenantStatus {
+  ACTIVE
+  SUSPENDED
+  PENDING_SETUP
+  ARCHIVED
+}
+
+enum SubscriptionTier {
+  FREE            // Basic features, consortium-only
+  STARTER         // Small institutions
+  PROFESSIONAL    // Medium institutions
+  ENTERPRISE      // Large universities, custom features
+}
+
+// ============================================
+// TENANT USERS & ACCESS
+// ============================================
+
+model TenantUser {
+  id              String          @id @default(cuid())
+  tenantId        String
+  tenant          Tenant          @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  userId          String
+  
+  role            TenantUserRole  @default(MEMBER)
+  
+  // Permissions (can be customized per tenant)
+  permissions     Json?
+  
+  invitedAt       DateTime?
+  joinedAt        DateTime        @default(now())
+  lastActiveAt    DateTime?
+  
+  @@unique([tenantId, userId])
+  @@map("tenant_users")
+}
+
+enum TenantUserRole {
+  OWNER           // Full control, billing
+  ADMIN           // Manage users, settings
+  EDITOR          // Edit data, run imports
+  MEMBER          // View and search
+  VIEWER          // Read-only
+}
+
+model TenantApiKey {
+  id              String          @id @default(cuid())
+  tenantId        String
+  tenant          Tenant          @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  
+  name            String
+  keyHash         String          // Hashed API key
+  keyPrefix       String          // First 8 chars for identification
+  
+  scopes          String[]        // ["read", "write", "admin"]
+  
+  expiresAt       DateTime?
+  lastUsedAt      DateTime?
+  
+  createdAt       DateTime        @default(now())
+  revokedAt       DateTime?
+  
+  @@map("tenant_api_keys")
+}
+
+// ============================================
+// MULTI-TENANT PERSON MODEL
+// ============================================
+// Replaces single-tenant "Researcher" with tenant-scoped "Person"
+
+model Person {
+  id                String              @id @default(cuid())
+  tenantId          String
+  tenant            Tenant              @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  
+  // Unique identifier within tenant's source system
+  sourceId          String?             // Employee ID, faculty ID, etc.
+  
+  // Basic Info
+  firstName         String
+  lastName          String
+  fullName          String              // Computed/stored for search
+  title             String?             // Dr., Prof., etc.
+  position          String?             // "Associate Professor"
+  personType        PersonType          @default(FACULTY)
+  
+  // Contact
+  email             String?
+  phone             String?
+  officeLocation    String?
+  
+  // Organizational
+  departmentId      String?
+  department        TenantDepartment?   @relation(fields: [departmentId], references: [id])
+  collegeId         String?
+  college           TenantCollege?      @relation(fields: [collegeId], references: [id])
+  
+  // Bio & Research
+  bio               String?             @db.Text
+  researchInterests String[]            // Simple array for flexibility
+  keywords          String[]            // Searchable keywords
+  
+  // External Identifiers
+  orcidId           String?
+  googleScholarId   String?
+  openalexId        String?
+  linkedinUrl       String?
+  websiteUrl        String?
+  photoUrl          String?
+  
+  // Metrics (from enrichment)
+  hIndex            Int?
+  citationCount     Int?
+  publicationCount  Int?
+  
+  // Embeddings for semantic search
+  embedding         Unsupported("vector(1536)")?
+  embeddingModel    String?             // "text-embedding-3-small"
+  embeddingUpdatedAt DateTime?
+  
+  // Data Management
+  dataSource        String              // "census_scrape", "faculty_directory", "manual"
+  dataQuality       DataQuality         @default(RAW)
+  lastEnrichedAt    DateTime?
+  
+  // Federation/Discovery
+  federationEnabled Boolean             @default(true)  // Visible in consortium search
+  publicProfile     Boolean             @default(true)  // Basic info visible externally
+  
+  // Status
+  status            PersonStatus        @default(ACTIVE)
+  
+  createdAt         DateTime            @default(now())
+  updatedAt         DateTime            @updatedAt
+  
+  // Relations
+  publications      PersonPublication[]
+  grants            PersonGrant[]
+  federatedProfile  FederatedProfile?
+  
+  @@unique([tenantId, sourceId])
+  @@unique([tenantId, email])
+  @@index([tenantId])
+  @@index([tenantId, departmentId])
+  @@index([fullName])
+  @@index([tenantId, status])
+  @@map("people")
+}
+
+enum PersonType {
+  FACULTY
+  STAFF
+  RESEARCHER
+  POSTDOC
+  GRADUATE_STUDENT
+  ADMINISTRATOR
+  EMERITUS
+  AFFILIATE
+  OTHER
+}
+
+enum PersonStatus {
+  ACTIVE
+  INACTIVE
+  ON_LEAVE
+  RETIRED
+  UNKNOWN
+}
+
+enum DataQuality {
+  RAW             // Just scraped, no validation
+  VALIDATED       // Basic validation passed
+  ENRICHED        // External data added
+  VERIFIED        // Human verified
+}
+
+// ============================================
+// TENANT-SCOPED ORGANIZATIONAL STRUCTURE
+// ============================================
+
+model TenantCollege {
+  id              String              @id @default(cuid())
+  tenantId        String
+  tenant          Tenant              @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  
+  name            String
+  code            String?
+  shortName       String?
+  
+  departments     TenantDepartment[]
+  people          Person[]
+  
+  @@unique([tenantId, name])
+  @@unique([tenantId, code])
+  @@map("tenant_colleges")
+}
+
+model TenantDepartment {
+  id              String              @id @default(cuid())
+  tenantId        String
+  tenant          Tenant              @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  
+  name            String
+  code            String?
+  shortName       String?
+  
+  collegeId       String?
+  college         TenantCollege?      @relation(fields: [collegeId], references: [id])
+  
+  people          Person[]
+  
+  @@unique([tenantId, name])
+  @@unique([tenantId, code])
+  @@map("tenant_departments")
+}
+
+// ============================================
+// FEDERATION LAYER
+// ============================================
+// Aggregated, opt-in profiles for cross-institutional discovery
+
+model FederatedProfile {
+  id                String          @id @default(cuid())
+  personId          String          @unique
+  person            Person          @relation(fields: [personId], references: [id], onDelete: Cascade)
+  
+  // Denormalized for fast federation queries
+  tenantId          String
+  tenantSlug        String
+  tenantName        String
+  
+  // Public-safe data only
+  fullName          String
+  position          String?
+  departmentName    String?
+  collegeName       String?
+  institutionName   String
+  
+  // Research focus
+  researchInterests String[]
+  keywords          String[]
+  
+  // External profiles (public)
+  orcidId           String?
+  googleScholarUrl  String?
+  websiteUrl        String?
+  photoUrl          String?
+  
+  // Aggregated metrics
+  hIndex            Int?
+  citationCount     Int?
+  publicationCount  Int?
+  
+  // Embedding for cross-institutional semantic search
+  embedding         Unsupported("vector(1536)")?
+  
+  // Discovery settings
+  seekingCollaborators Boolean      @default(false)
+  collaborationInterests String[]   // "grant partnerships", "student mentorship", etc.
+  
+  // Freshness
+  syncedAt          DateTime        @default(now())
+  
+  @@index([tenantSlug])
+  @@index([researchInterests])
+  @@map("federated_profiles")
+}
+
+// ============================================
+// CONSORTIUM (Group of Tenants)
+// ============================================
+
+model Consortium {
+  id              String              @id @default(cuid())
+  slug            String              @unique  // "atlanta-neuroscience"
+  name            String              // "Atlanta Neuroscience Consortium"
+  description     String?             @db.Text
+  
+  // Settings
+  isPublic        Boolean             @default(false)
+  requiresApproval Boolean            @default(true)
+  
+  createdAt       DateTime            @default(now())
+  updatedAt       DateTime            @updatedAt
+  
+  members         ConsortiumMember[]
+  
+  @@map("consortia")
+}
+
+model ConsortiumMember {
+  id              String              @id @default(cuid())
+  consortiumId    String
+  consortium      Consortium          @relation(fields: [consortiumId], references: [id], onDelete: Cascade)
+  tenantId        String
+  
+  role            ConsortiumRole      @default(MEMBER)
+  joinedAt        DateTime            @default(now())
+  
+  // What this tenant shares with consortium
+  shareProfiles   Boolean             @default(true)
+  sharePublications Boolean           @default(true)
+  shareGrants     Boolean             @default(false)
+  
+  @@unique([consortiumId, tenantId])
+  @@map("consortium_members")
+}
+
+enum ConsortiumRole {
+  OWNER           // Created the consortium
+  ADMIN           // Can manage members
+  MEMBER          // Regular participant
+}
+
+// ============================================
+// TENANT DATA IMPORTS
+// ============================================
+
+model TenantDataImport {
+  id              String              @id @default(cuid())
+  tenantId        String
+  tenant          Tenant              @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  
+  importType      ImportType
+  source          String              // URL, file path, API endpoint
+  
+  status          ImportStatus        @default(PENDING)
+  
+  // Stats
+  recordsFound    Int                 @default(0)
+  recordsCreated  Int                 @default(0)
+  recordsUpdated  Int                 @default(0)
+  recordsSkipped  Int                 @default(0)
+  recordsFailed   Int                 @default(0)
+  
+  // Timing
+  startedAt       DateTime?
+  completedAt     DateTime?
+  
+  // Logs
+  logs            Json?               // Detailed import log
+  errorLog        String?             @db.Text
+  
+  createdAt       DateTime            @default(now())
+  
+  @@index([tenantId])
+  @@index([status])
+  @@map("tenant_data_imports")
+}
+
+enum ImportType {
+  FACULTY_DIRECTORY     // Web scrape of faculty pages
+  CENSUS_FILE           // HR census data upload
+  OPENALEX_ENRICHMENT   // OpenAlex publication data
+  ORCID_ENRICHMENT      // ORCID profile data
+  GOOGLE_SCHOLAR        // Google Scholar metrics
+  MANUAL_ENTRY          // Admin manual entry
+  API_SYNC              // External API synchronization
+}
+
+// ============================================
+// PUBLICATIONS (Tenant-Scoped)
+// ============================================
+
+model PersonPublication {
+  id              String              @id @default(cuid())
+  personId        String
+  person          Person              @relation(fields: [personId], references: [id], onDelete: Cascade)
+  publicationId   String
+  publication     TenantPublication   @relation(fields: [publicationId], references: [id], onDelete: Cascade)
+  
+  authorOrder     Int?
+  isCorresponding Boolean             @default(false)
+  
+  @@unique([personId, publicationId])
+  @@map("person_publications")
+}
+
+model TenantPublication {
+  id              String              @id @default(cuid())
+  tenantId        String              // For tenant isolation
+  
+  // Identifiers
+  doi             String?
+  openalexId      String?
+  pmid            String?
+  
+  // Details
+  title           String
+  abstract        String?             @db.Text
+  publicationType String?
+  
+  // Venue
+  journal         String?
+  conference      String?
+  publisher       String?
+  
+  // Dates
+  publishedDate   DateTime?
+  year            Int?
+  
+  // Metrics
+  citationCount   Int                 @default(0)
+  
+  // Embedding
+  embedding       Unsupported("vector(1536)")?
+  
+  createdAt       DateTime            @default(now())
+  updatedAt       DateTime            @updatedAt
+  
+  authors         PersonPublication[]
+  
+  @@unique([tenantId, doi])
+  @@unique([tenantId, openalexId])
+  @@index([tenantId])
+  @@map("tenant_publications")
+}
+
+// ============================================
+// GRANTS (Tenant-Scoped)
+// ============================================
+
+model PersonGrant {
+  id              String              @id @default(cuid())
+  personId        String
+  person          Person              @relation(fields: [personId], references: [id], onDelete: Cascade)
+  grantId         String
+  grant           TenantGrant         @relation(fields: [grantId], references: [id], onDelete: Cascade)
+  
+  role            String?             // "PI", "Co-PI", "Senior Personnel"
+  
+  @@unique([personId, grantId])
+  @@map("person_grants")
+}
+
+model TenantGrant {
+  id              String              @id @default(cuid())
+  tenantId        String
+  
+  title           String
+  abstract        String?             @db.Text
+  
+  fundingAgency   String?
+  awardNumber     String?
+  awardAmount     Decimal?            @db.Decimal(15, 2)
+  
+  startDate       DateTime?
+  endDate         DateTime?
+  status          String?             // "active", "completed", "pending"
+  
+  // Source
+  nihReporterId   String?
+  nsfAwardId      String?
+  
+  createdAt       DateTime            @default(now())
+  updatedAt       DateTime            @updatedAt
+  
+  teamMembers     PersonGrant[]
+  
+  @@unique([tenantId, awardNumber])
+  @@index([tenantId])
+  @@map("tenant_grants")
+}

@@ -1,0 +1,145 @@
+{
+  "completed_at": "2026-01-15T08:15:37.670034+00:00",
+  "queries": 17,
+  "successful": 12,
+  "failed": 5,
+  "total_time_seconds": 3925.0432794094086,
+  "dedupe_stats": {
+    "files_processed": 13,
+    "total_unique": 1389,
+    "with_embeddings": 1388
+  },
+  "worker_results": [
+    {
+      "query": "motor imagery BCI",
+      "worker_id": 3,
+      "success": true,
+      "elapsed": 139.09681940078735,
+      "stdout": "\n============================================================\nSYNAPSE SWARM WORKER 3\nQuery: motor imagery BCI\n============================================================\n\n[W3] Starting harvest: 'motor imagery BCI'\n[W3] Harvested 50/165 for 'motor imagery BCI'\n[W3] Harvested 100/165 for 'motor imagery BCI'\n[W3] Harvested 150/165 for 'motor imagery BCI'\n[W3] Harvested 165/165 for 'motor imagery BCI'\n[W3] Generating embeddings for 165 datasets...\n[W3] Embedded 10/165\n[W3] Embedded 20/165\n[W3] Embedded 30/165\n[W3] Embedded 40/165\n[W3] Embedded 50/165\n[W3] Embedded 60/165\n[W3] Embedded 70/165\n[W3] Embedded 80/165\n[W3] Embedded 90/165\n[W3] Embedded 100/165\n[W3] Embedded 110/165\n[W3] Embedded 120/165\n[W3] Embedded 130/165\n[W3] Embedded 140/165\n[W3] Embedded 150/165\n[W3] Embedded 160/165\n[W3] Saved 165 datasets to motor_imagery_bci.json\n\n[W3] COMPLETE: 165 datasets harvested and embedded\n",
+      "stderr": ""
+    },
+    {
+      "query": "brain computer interface",
+      "worker_id": 0,
+      "success": true,
+      "elapsed": 254.24429774284363,
+      "stdout": "for 'brain computer interface'\n[W0] Harvested 200/300 for 'brain computer interface'\n[W0] Harvested 250/300 for 'brain computer interface'\n[W0] Harvested 300/300 for 'brain computer interface'\n[W0] Generating embeddings for 300 datasets...\n[W0] Embedded 10/300\n[W0] Embedded 20/300\n[W0] Embedded 30/300\n[W0] Embedded 40/300\n[W0] Embedded 50/300\n[W0] Embedded 60/300\n[W0] Embedded 70/300\n[W0] Embedded 80/300\n[W0] Embedded 90/300\n[W0] Embedded 100/300\n[W0] Embedded 110/300\n[W0] Embedded 120/300\n[W0] Embedded 130/300\n[W0] Embedded 140/300\n[W0] Embedded 150/300\n[W0] Embedded 160/300\n[W0] Embedded 170/300\n[W0] Embedded 180/300\n[W0] Embedded 190/300\n[W0] Embedded 200/300\n[W0] Embedded 210/300\n[W0] Embedded 220/300\n[W0] Embedded 230/300\n[W0] Embedded 240/300\n[W0] Embedded 250/300\n[W0] Embedded 260/300\n[W0] Embedded 270/300\n[W0] Embedded 280/300\n[W0] Embedded 290/300\n[W0] Embedded 300/300\n[W0] Saved 300 datasets to brain_computer_interface.json\n\n[W0] COMPLETE: 300 datasets harvested and embedded\n",
+      "stderr": ""
+    },
+    {
+      "query": "EEG electroencephalography",
+      "worker_id": 1,
+      "success": true,
+      "elapsed": 255.58246755599976,
+      "stdout": "lectroencephalography'\n[W1] Harvested 200/300 for 'EEG electroencephalography'\n[W1] Harvested 250/300 for 'EEG electroencephalography'\n[W1] Harvested 300/300 for 'EEG electroencephalography'\n[W1] Generating embeddings for 300 datasets...\n[W1] Embedded 10/300\n[W1] Embedded 20/300\n[W1] Embedded 30/300\n[W1] Embedded 40/300\n[W1] Embedded 50/300\n[W1] Embedded 60/300\n[W1] Embedded 70/300\n[W1] Embedded 80/300\n[W1] Embedded 90/300\n[W1] Embedded 100/300\n[W1] Embedded 110/300\n[W1] Embedded 120/300\n[W1] Embedded 130/300\n[W1] Embedded 140/300\n[W1] Embedded 150/300\n[W1] Embedded 160/300\n[W1] Embedded 170/300\n[W1] Embedded 180/300\n[W1] Embedded 190/300\n[W1] Embedded 200/300\n[W1] Embedded 210/300\n[W1] Embedded 220/300\n[W1] Embedded 230/300\n[W1] Embedded 240/300\n[W1] Embedded 250/300\n[W1] Embedded 260/300\n[W1] Embedded 270/300\n[W1] Embedded 280/300\n[W1] Embedded 290/300\n[W1] Embedded 300/300\n[W1] Saved 300 datasets to eeg_electroencephalography.json\n\n[W1] COMPLETE: 300 datasets harvested and embedded\n",
+      "stderr": ""
+    },
+    {
+      "query": "neural decoding",
+      "worker_id": 2,
+      "success": true,
+      "elapsed": 260.6989552974701,
+      "stdout": "for 'neural decoding'\n[W2] Harvested 150/300 for 'neural decoding'\n[W2] Harvested 200/300 for 'neural decoding'\n[W2] Harvested 250/300 for 'neural decoding'\n[W2] Harvested 300/300 for 'neural decoding'\n[W2] Generating embeddings for 300 datasets...\n[W2] Embedded 10/300\n[W2] Embedded 20/300\n[W2] Embedded 30/300\n[W2] Embedded 40/300\n[W2] Embedded 50/300\n[W2] Embedded 60/300\n[W2] Embedded 70/300\n[W2] Embedded 80/300\n[W2] Embedded 90/300\n[W2] Embedded 100/300\n[W2] Embedded 110/300\n[W2] Embedded 120/300\n[W2] Embedded 130/300\n[W2] Embedded 140/300\n[W2] Embedded 150/300\n[W2] Embedded 160/300\n[W2] Embedded 170/300\n[W2] Embedded 180/300\n[W2] Embedded 190/300\n[W2] Embedded 200/300\n[W2] Embedded 210/300\n[W2] Embedded 220/300\n[W2] Embedded 230/300\n[W2] Embedded 240/300\n[W2] Embedded 250/300\n[W2] Embedded 260/300\n[W2] Embedded 270/300\n[W2] Embedded 280/300\n[W2] Embedded 290/300\n[W2] Embedded 300/300\n[W2] Saved 300 datasets to neural_decoding.json\n\n[W2] COMPLETE: 300 datasets harvested and embedded\n",
+      "stderr": ""
+    },
+    {
+      "query": "P300 speller",
+      "worker_id": 6,
+      "success": true,
+      "elapsed": 15.43149447441101,
+      "stdout": "\n============================================================\nSYNAPSE SWARM WORKER 6\nQuery: P300 speller\n============================================================\n\n[W6] Starting harvest: 'P300 speller'\n[W6] Harvested 16/16 for 'P300 speller'\n[W6] Generating embeddings for 16 datasets...\n[W6] Embedded 10/16\n[W6] Saved 16 datasets to p300_speller.json\n\n[W6] COMPLETE: 16 datasets harvested and embedded\n",
+      "stderr": ""
+    },
+    {
+      "query": "thought to text",
+      "worker_id": 4,
+      "success": true,
+      "elapsed": 262.2336676120758,
+      "stdout": "for 'thought to text'\n[W4] Harvested 150/300 for 'thought to text'\n[W4] Harvested 200/300 for 'thought to text'\n[W4] Harvested 250/300 for 'thought to text'\n[W4] Harvested 300/300 for 'thought to text'\n[W4] Generating embeddings for 300 datasets...\n[W4] Embedded 10/300\n[W4] Embedded 20/300\n[W4] Embedded 30/300\n[W4] Embedded 40/300\n[W4] Embedded 50/300\n[W4] Embedded 60/300\n[W4] Embedded 70/300\n[W4] Embedded 80/300\n[W4] Embedded 90/300\n[W4] Embedded 100/300\n[W4] Embedded 110/300\n[W4] Embedded 120/300\n[W4] Embedded 130/300\n[W4] Embedded 140/300\n[W4] Embedded 150/300\n[W4] Embedded 160/300\n[W4] Embedded 170/300\n[W4] Embedded 180/300\n[W4] Embedded 190/300\n[W4] Embedded 200/300\n[W4] Embedded 210/300\n[W4] Embedded 220/300\n[W4] Embedded 230/300\n[W4] Embedded 240/300\n[W4] Embedded 250/300\n[W4] Embedded 260/300\n[W4] Embedded 270/300\n[W4] Embedded 280/300\n[W4] Embedded 290/300\n[W4] Embedded 300/300\n[W4] Saved 300 datasets to thought_to_text.json\n\n[W4] COMPLETE: 300 datasets harvested and embedded\n",
+      "stderr": ""
+    },
+    {
+      "query": "locked-in syndrome communication",
+      "worker_id": 5,
+      "success": true,
+      "elapsed": 298.4355766773224,
+      "stdout": "W5] Harvested 200/300 for 'locked-in syndrome communication'\n[W5] Harvested 250/300 for 'locked-in syndrome communication'\n[W5] Harvested 300/300 for 'locked-in syndrome communication'\n[W5] Generating embeddings for 300 datasets...\n[W5] Embedded 10/300\n[W5] Embedded 20/300\n[W5] Embedded 30/300\n[W5] Embedded 40/300\n[W5] Embedded 50/300\n[W5] Embedded 60/300\n[W5] Embedded 70/300\n[W5] Embedded 80/300\n[W5] Embedded 90/300\n[W5] Embedded 100/300\n[W5] Embedded 110/300\n[W5] Embedded 120/300\n[W5] Embedded 130/300\n[W5] Embedded 140/300\n[W5] Embedded 150/300\n[W5] Embedded 160/300\n[W5] Embedded 170/300\n[W5] Embedded 180/300\n[W5] Embedded 190/300\n[W5] Embedded 200/300\n[W5] Embedded 210/300\n[W5] Embedded 220/300\n[W5] Embedded 230/300\n[W5] Embedded 240/300\n[W5] Embedded 250/300\n[W5] Embedded 260/300\n[W5] Embedded 270/300\n[W5] Embedded 280/300\n[W5] Embedded 290/300\n[W5] Embedded 300/300\n[W5] Saved 300 datasets to locked-in_syndrome_communication.json\n\n[W5] COMPLETE: 300 datasets harvested and embedded\n",
+      "stderr": ""
+    },
+    {
+      "query": "SSVEP brain",
+      "worker_id": 7,
+      "success": false,
+      "elapsed": 300,
+      "error": "Timeout"
+    },
+    {
+      "query": "cognitive load EEG",
+      "worker_id": 8,
+      "success": true,
+      "elapsed": 296.0540566444397,
+      "stdout": "G'\n[W8] Harvested 250/300 for 'cognitive load EEG'\n[W8] Harvested 300/300 for 'cognitive load EEG'\n[W8] Generating embeddings for 300 datasets...\n[W8] Embedded 10/300\n[W8] Embedded 20/300\n[W8] Embedded 30/300\n[W8] Embedded 40/300\n[W8] Embedded 50/300\n[W8] Embedded 60/300\n[W8] Embedded 70/300\n[W8] Embedded 80/300\n[W8] Embedded 90/300\n[W8] Embedded 100/300\n[W8] Embedded 110/300\n[W8] Embedded 120/300\n[W8] Embedded 130/300\n[W8] Embedded 140/300\n[W8] Embedded 150/300\n[W8] Embedded 160/300\n[W8] Embedded 170/300\n[W8] Embedded 180/300\n[W8] Embedded 190/300\n[W8] Embedded 200/300\n[W8] Embedded 210/300\n[W8] Embedded 220/300\n[W8] Embedded 230/300\n    Embedding error: [WinError 10054] An existing connection was forcibly closed by the remote host\n[W8] Embedded 240/300\n[W8] Embedded 250/300\n[W8] Embedded 260/300\n[W8] Embedded 270/300\n[W8] Embedded 280/300\n[W8] Embedded 290/300\n[W8] Embedded 300/300\n[W8] Saved 300 datasets to cognitive_load_eeg.json\n\n[W8] COMPLETE: 300 datasets harvested and embedded\n",
+      "stderr": ""
+    },
+    {
+      "query": "attention monitoring brain",
+      "worker_id": 9,
+      "success": false,
+      "elapsed": 300,
+      "error": "Timeout"
+    },
+    {
+      "query": "speech neuroprosthesis",
+      "worker_id": 13,
+      "success": true,
+      "elapsed": 59.282695055007935,
+      "stdout": "\n============================================================\nSYNAPSE SWARM WORKER 13\nQuery: speech neuroprosthesis\n============================================================\n\n[W13] Starting harvest: 'speech neuroprosthesis'\n[W13] Harvested 50/55 for 'speech neuroprosthesis'\n[W13] Harvested 55/55 for 'speech neuroprosthesis'\n[W13] Generating embeddings for 55 datasets...\n[W13] Embedded 10/55\n[W13] Embedded 20/55\n[W13] Embedded 30/55\n[W13] Embedded 40/55\n[W13] Embedded 50/55\n[W13] Saved 55 datasets to speech_neuroprosthesis.json\n\n[W13] COMPLETE: 55 datasets harvested and embedded\n",
+      "stderr": ""
+    },
+    {
+      "query": "mental fatigue detection",
+      "worker_id": 10,
+      "success": false,
+      "elapsed": 300,
+      "error": "Timeout"
+    },
+    {
+      "query": "neurofeedback training",
+      "worker_id": 11,
+      "success": false,
+      "elapsed": 300,
+      "error": "Timeout"
+    },
+    {
+      "query": "neural prosthetics",
+      "worker_id": 12,
+      "success": false,
+      "elapsed": 300,
+      "error": "Timeout"
+    },
+    {
+      "query": "multimodal biosignals",
+      "worker_id": 15,
+      "success": true,
+      "elapsed": 53.649829149246216,
+      "stdout": "\n============================================================\nSYNAPSE SWARM WORKER 15\nQuery: multimodal biosignals\n============================================================\n\n[W15] Starting harvest: 'multimodal biosignals'\n[W15] Harvested 50/54 for 'multimodal biosignals'\n[W15] Harvested 54/54 for 'multimodal biosignals'\n[W15] Generating embeddings for 54 datasets...\n[W15] Embedded 10/54\n[W15] Embedded 20/54\n[W15] Embedded 30/54\n[W15] Embedded 40/54\n[W15] Embedded 50/54\n[W15] Saved 54 datasets to multimodal_biosignals.json\n\n[W15] COMPLETE: 54 datasets harvested and embedded\n",
+      "stderr": ""
+    },
+    {
+      "query": "silent speech interface",
+      "worker_id": 14,
+      "success": true,
+      "elapsed": 258.6587781906128,
+      "stdout": "ch interface'\n[W14] Harvested 150/271 for 'silent speech interface'\n[W14] Harvested 200/271 for 'silent speech interface'\n[W14] Harvested 250/271 for 'silent speech interface'\n[W14] Harvested 271/271 for 'silent speech interface'\n[W14] Generating embeddings for 271 datasets...\n[W14] Embedded 10/271\n[W14] Embedded 20/271\n[W14] Embedded 30/271\n[W14] Embedded 40/271\n[W14] Embedded 50/271\n[W14] Embedded 60/271\n[W14] Embedded 70/271\n[W14] Embedded 80/271\n[W14] Embedded 90/271\n[W14] Embedded 100/271\n[W14] Embedded 110/271\n[W14] Embedded 120/271\n[W14] Embedded 130/271\n[W14] Embedded 140/271\n[W14] Embedded 150/271\n[W14] Embedded 160/271\n[W14] Embedded 170/271\n[W14] Embedded 180/271\n[W14] Embedded 190/271\n[W14] Embedded 200/271\n[W14] Embedded 210/271\n[W14] Embedded 220/271\n[W14] Embedded 230/271\n[W14] Embedded 240/271\n[W14] Embedded 250/271\n[W14] Embedded 260/271\n[W14] Embedded 270/271\n[W14] Saved 271 datasets to silent_speech_interface.json\n\n[W14] COMPLETE: 271 datasets harvested and embedded\n",
+      "stderr": ""
+    },
+    {
+      "query": "human computer interaction neuroscience",
+      "worker_id": 16,
+      "success": true,
+      "elapsed": 271.6746416091919,
+      "stdout": "nce'\n[W16] Harvested 250/300 for 'human computer interaction neuroscience'\n[W16] Harvested 300/300 for 'human computer interaction neuroscience'\n[W16] Generating embeddings for 300 datasets...\n[W16] Embedded 10/300\n[W16] Embedded 20/300\n[W16] Embedded 30/300\n[W16] Embedded 40/300\n[W16] Embedded 50/300\n[W16] Embedded 60/300\n[W16] Embedded 70/300\n[W16] Embedded 80/300\n[W16] Embedded 90/300\n[W16] Embedded 100/300\n[W16] Embedded 110/300\n[W16] Embedded 120/300\n[W16] Embedded 130/300\n[W16] Embedded 140/300\n[W16] Embedded 150/300\n[W16] Embedded 160/300\n[W16] Embedded 170/300\n[W16] Embedded 180/300\n[W16] Embedded 190/300\n[W16] Embedded 200/300\n[W16] Embedded 210/300\n[W16] Embedded 220/300\n[W16] Embedded 230/300\n[W16] Embedded 240/300\n[W16] Embedded 250/300\n[W16] Embedded 260/300\n[W16] Embedded 270/300\n[W16] Embedded 280/300\n[W16] Embedded 290/300\n[W16] Embedded 300/300\n[W16] Saved 300 datasets to human_computer_interaction_neuroscience.json\n\n[W16] COMPLETE: 300 datasets harvested and embedded\n",
+      "stderr": ""
+    }
+  ]
+}

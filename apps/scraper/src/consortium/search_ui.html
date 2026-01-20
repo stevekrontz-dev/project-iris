@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IRIS Research Search</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .gradient-bg { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%); }
+        .card-hover:hover { transform: translateY(-2px); box-shadow: 0 10px 40px rgba(0,0,0,0.3); }
+        .search-glow:focus { box-shadow: 0 0 20px rgba(59, 130, 246, 0.5); }
+    </style>
+</head>
+<body class="gradient-bg min-h-screen text-white">
+    <div class="container mx-auto px-4 py-8 max-w-6xl">
+        <!-- Header -->
+        <header class="text-center mb-12">
+            <h1 class="text-5xl font-bold mb-2 bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
+                IRIS Research Search
+            </h1>
+            <p class="text-gray-400 text-lg">Semantic search across 208,206 Southeast R1/R2 researchers</p>
+        </header>
+
+        <!-- Search Box -->
+        <div class="max-w-3xl mx-auto mb-8">
+            <div class="relative">
+                <input type="text" id="searchInput" 
+                    class="w-full px-6 py-4 rounded-xl bg-gray-800/50 border border-gray-700 text-white text-lg search-glow focus:outline-none focus:border-blue-500 transition-all"
+                    placeholder="Search by research area, expertise, or name..."
+                    onkeypress="if(event.key==='Enter') search()">
+                <button onclick="search()" 
+                    class="absolute right-2 top-2 px-6 py-2 bg-blue-600 hover:bg-blue-700 rounded-lg font-semibold transition-colors">
+                    Search
+                </button>
+            </div>
+            
+            <!-- Filters -->
+            <div class="flex flex-wrap gap-4 mt-4 text-sm">
+                <div class="flex items-center gap-2">
+                    <label class="text-gray-400">Min h-index:</label>
+                    <input type="number" id="minH" value="0" min="0" 
+                        class="w-20 px-3 py-1 rounded bg-gray-800 border border-gray-700 text-white">
+                </div>
+                <div class="flex items-center gap-2">
+                    <label class="text-gray-400">Institution:</label>
+                    <input type="text" id="instFilter" placeholder="Any" 
+                        class="w-40 px-3 py-1 rounded bg-gray-800 border border-gray-700 text-white">
+                </div>
+                <div class="flex items-center gap-2">
+                    <label class="text-gray-400">h-weight:</label>
+                    <input type="range" id="hWeight" min="0" max="0.5" step="0.1" value="0.3" 
+                        class="w-24" onchange="updateWeightLabel()">
+                    <span id="hWeightLabel" class="text-gray-400 w-8">0.3</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Stats Bar -->
+        <div id="statsBar" class="max-w-3xl mx-auto mb-8 p-4 rounded-lg bg-gray-800/30 hidden">
+            <div class="flex justify-between text-sm text-gray-400">
+                <span id="resultCount"></span>
+                <span id="searchTime"></span>
+            </div>
+        </div>
+
+        <!-- Results -->
+        <div id="results" class="space-y-4">
+            <!-- Results will be inserted here -->
+        </div>
+
+        <!-- Loading -->
+        <div id="loading" class="hidden text-center py-12">
+            <div class="inline-block animate-spin rounded-full h-12 w-12 border-4 border-blue-500 border-t-transparent"></div>
+            <p class="mt-4 text-gray-400">Searching 208K researchers...</p>
+        </div>
+
+        <!-- Quick Searches -->
+        <div id="quickSearches" class="max-w-3xl mx-auto mt-12">
+            <h3 class="text-gray-400 mb-4 text-center">Quick searches:</h3>
+            <div class="flex flex-wrap justify-center gap-2">
+                <button onclick="quickSearch('brain computer interface')" class="px-4 py-2 rounded-full bg-gray-800 hover:bg-gray-700 text-sm transition-colors">Brain-Computer Interface</button>
+                <button onclick="quickSearch('machine learning neural networks')" class="px-4 py-2 rounded-full bg-gray-800 hover:bg-gray-700 text-sm transition-colors">Machine Learning</button>
+                <button onclick="quickSearch('cancer immunotherapy')" class="px-4 py-2 rounded-full bg-gray-800 hover:bg-gray-700 text-sm transition-colors">Cancer Research</button>
+                <button onclick="quickSearch('climate change')" class="px-4 py-2 rounded-full bg-gray-800 hover:bg-gray-700 text-sm transition-colors">Climate Science</button>
+                <button onclick="quickSearch('neuroscience cognition')" class="px-4 py-2 rounded-full bg-gray-800 hover:bg-gray-700 text-sm transition-colors">Neuroscience</button>
+                <button onclick="quickSearch('robotics automation')" class="px-4 py-2 rounded-full bg-gray-800 hover:bg-gray-700 text-sm transition-colors">Robotics</button>
+                <button onclick="quickSearch('quantum computing')" class="px-4 py-2 rounded-full bg-gray-800 hover:bg-gray-700 text-sm transition-colors">Quantum Computing</button>
+                <button onclick="quickSearch('genetics genomics CRISPR')" class="px-4 py-2 rounded-full bg-gray-800 hover:bg-gray-700 text-sm transition-colors">Genetics</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const API_BASE = 'http://localhost:8000';
+
+        function updateWeightLabel() {
+            document.getElementById('hWeightLabel').textContent = document.getElementById('hWeight').value;
+        }
+
+        function quickSearch(query) {
+            document.getElementById('searchInput').value = query;
+            search();
+        }
+
+        async function search() {
+            const query = document.getElementById('searchInput').value.trim();
+            if (!query) return;
+
+            const minH = document.getElementById('minH').value || 0;
+            const inst = document.getElementById('instFilter').value || '';
+            const hWeight = document.getElementById('hWeight').value;
+
+            document.getElementById('loading').classList.remove('hidden');
+            document.getElementById('results').innerHTML = '';
+            document.getElementById('statsBar').classList.add('hidden');
+            document.getElementById('quickSearches').classList.add('hidden');
+
+            try {
+                const params = new URLSearchParams({
+                    q: query,
+                    limit: 30,
+                    min_h_index: minH,
+                    h_weight: hWeight
+                });
+                if (inst) params.append('institution', inst);
+
+                const response = await fetch(`${API_BASE}/search?${params}`);
+                const data = await response.json();
+
+                displayResults(data);
+            } catch (error) {
+                document.getElementById('results').innerHTML = `
+                    <div class="text-center py-12 text-red-400">
+                        <p>Error connecting to search API</p>
+                        <p class="text-sm mt-2">Make sure the API is running on localhost:8000</p>
+                    </div>
+                `;
+            } finally {
+                document.getElementById('loading').classList.add('hidden');
+            }
+        }
+
+        function displayResults(data) {
+            document.getElementById('statsBar').classList.remove('hidden');
+            document.getElementById('resultCount').textContent = `${data.results.length} results from ${data.total_indexed.toLocaleString()} researchers`;
+            document.getElementById('searchTime').textContent = `${data.search_time_ms.toFixed(1)}ms`;
+
+            if (data.results.length === 0) {
+                document.getElementById('results').innerHTML = `
+                    <div class="text-center py-12 text-gray-400">
+                        <p>No results found for "${data.query}"</p>
+                        <p class="text-sm mt-2">Try different keywords or lower the h-index filter</p>
+                    </div>
+                `;
+                return;
+            }
+
+            const resultsHtml = data.results.map(r => `
+                <div class="p-6 rounded-xl bg-gray-800/50 border border-gray-700 card-hover transition-all">
+                    <div class="flex justify-between items-start">
+                        <div class="flex-1">
+                            <div class="flex items-center gap-3 mb-2">
+                                <span class="text-2xl font-bold text-gray-500">#${r.rank}</span>
+                                <h3 class="text-xl font-semibold text-white">${r.name}</h3>
+                            </div>
+                            <p class="text-blue-400 mb-2">${r.institution}</p>
+                            ${r.field ? `<p class="text-gray-400 text-sm">${r.field}${r.subfield ? ' → ' + r.subfield : ''}</p>` : ''}
+                        </div>
+                        <div class="text-right">
+                            <div class="text-3xl font-bold text-purple-400">h=${r.h_index}</div>
+                            <div class="text-sm text-gray-400">${r.citations.toLocaleString()} citations</div>
+                            <div class="text-sm text-gray-500">${r.works_count} works</div>
+                        </div>
+                    </div>
+                    <div class="mt-4 pt-4 border-t border-gray-700 flex justify-between text-xs text-gray-500">
+                        <span>Semantic: ${(r.semantic_score * 100).toFixed(1)}%</span>
+                        <span>Weighted: ${(r.weighted_score * 100).toFixed(1)}%</span>
+                        ${r.orcid ? `<a href="${r.orcid}" target="_blank" class="text-green-400 hover:underline">ORCID</a>` : ''}
+                        ${r.openalex_id ? `<a href="${r.openalex_id}" target="_blank" class="text-orange-400 hover:underline">OpenAlex</a>` : ''}
+                    </div>
+                </div>
+            `).join('');
+
+            document.getElementById('results').innerHTML = resultsHtml;
+        }
+
+        // Check API status on load
+        fetch(`${API_BASE}/`).then(r => r.json()).then(data => {
+            console.log('API Status:', data);
+        }).catch(e => {
+            console.warn('API not available:', e);
+        });
+    </script>
+</body>
+</html>

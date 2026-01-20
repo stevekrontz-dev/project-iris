@@ -1,0 +1,87 @@
+# Dependencies
+node_modules/
+.pnp
+.pnp.js
+
+# Build outputs
+.next/
+out/
+build/
+dist/
+*.tsbuildinfo
+
+# Environment files
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+.env*.local
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+.DS_Store
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Testing
+coverage/
+.nyc_output/
+
+# Turbo
+.turbo/
+
+# Database
+*.db
+*.sqlite
+
+# Python (scraper)
+__pycache__/
+*.py[cod]
+*$py.class
+.Python
+venv/
+ENV/
+.venv/
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+
+# Credentials (NEVER commit these)
+credentials.json
+service-account.json
+*.pem
+*.key
+
+# Log files
+*.log
+apps/scraper/output/*.log
+
+
+# Large media files (video frames, assets)
+apps/video/frames_cinematic/
+apps/video/frames*/
+apps/video/assets/*.mp4
+apps/video/assets/*.wav
+apps/video/*.wav
+*.mp4
+
+# Scraped data caches
+apps/scraper/data/
+apps/scraper/cache/
+data/consortium/raw/
+data/cache/
+
+# FAISS indices (regenerate from embeddings)
+*.faiss
+*.index

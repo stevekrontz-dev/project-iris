@@ -1,0 +1,27 @@
+{
+  "name": "project-iris",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Project IRIS - Intelligent Research Information System for KSU",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "turbo run dev",
+    "build": "turbo run build",
+    "lint": "turbo run lint",
+    "test": "turbo run test",
+    "db:generate": "turbo run db:generate --filter=@ksu-research/database",
+    "db:push": "turbo run db:push --filter=@ksu-research/database",
+    "db:studio": "turbo run db:studio --filter=@ksu-research/database",
+    "clean": "turbo run clean && rm -rf node_modules"
+  },
+  "devDependencies": {
+    "turbo": "^2.0.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "packageManager": "npm@10.0.0"
+}

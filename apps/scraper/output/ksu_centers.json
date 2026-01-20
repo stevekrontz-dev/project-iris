@@ -1,0 +1,48 @@
+[
+  {
+    "name": "Centers and Facilities",
+    "url": "https://research.kennesaw.edu/offices-services/research/centers-facilities/index.php",
+    "source": "https://research.kennesaw.edu/centers/index.php",
+    "members": [
+      "Faculty Affairs",
+      "Faculty Senate"
+    ],
+    "description": "MyKSU Resources"
+  },
+  {
+    "name": "Center for Excellence in Teaching and Learning",
+    "url": "https://facultydevelopment.kennesaw.edu/",
+    "source": "https://research.kennesaw.edu/centers/index.php",
+    "members": [
+      "About Us",
+      "Contact Us",
+      "Text Only",
+      "Faculty Senate",
+      "Teaching Resources",
+      "Faculty Affairs",
+      "New Faculty"
+    ],
+    "description": "MyKSU Resources"
+  },
+  {
+    "name": "University Initiatives",
+    "url": "https://campus.kennesaw.edu/offices-services/research/university-initiatives/index.php",
+    "source": "https://research.kennesaw.edu/centers/index.php",
+    "members": [
+      "Faculty Affairs",
+      "Faculty Senate"
+    ],
+    "description": "MyKSU Resources"
+  },
+  {
+    "name": "The BrainLab",
+    "url": "https://thebrainlab.kennesaw.edu/",
+    "type": "lab",
+    "error": "HTTPSConnectionPool(host='thebrainlab.kennesaw.edu', port=443): Max retries exceeded with url: / (Caused by NameResolutionError(\"HTTPSConnection(host='thebrainlab.kennesaw.edu', port=443): Failed to resolve 'thebrainlab.kennesaw.edu' ([Errno 11001] getaddrinfo failed)\"))"
+  },
+  {
+    "name": "A-PRIME (Analytics and Programming for Impactful Machine-Learning and Empirical Research)",
+    "url": null,
+    "type": "center"
+  }
+]

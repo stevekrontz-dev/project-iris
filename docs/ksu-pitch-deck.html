@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KSU Research Platform - Partnership Proposal</title>
+    <style>
+        :root {
+            --ksu-gold: #FFC423;
+            --ksu-black: #000000;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #1a1a1a;
+            background: #f8fafc;
+        }
+
+        .slide {
+            min-height: 100vh;
+            padding: 4rem 2rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .slide-dark {
+            background: linear-gradient(135deg, #000 0%, #1a1a1a 100%);
+            color: white;
+            max-width: none;
+        }
+
+        .slide-gold {
+            background: var(--ksu-gold);
+            color: var(--ksu-black);
+            max-width: none;
+        }
+
+        h1 { font-size: 3rem; margin-bottom: 1rem; }
+        h2 { font-size: 2.25rem; margin-bottom: 1.5rem; }
+        h3 { font-size: 1.5rem; margin-bottom: 1rem; }
+
+        .subtitle {
+            font-size: 1.5rem;
+            opacity: 0.9;
+            margin-bottom: 2rem;
+        }
+
+        .highlight { color: var(--ksu-gold); }
+        .highlight-dark { color: var(--ksu-black); }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .card-dark {
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .stat {
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: var(--ksu-gold);
+        }
+
+        .stat-label {
+            font-size: 1rem;
+            color: #64748b;
+        }
+
+        .privacy-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: #059669;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+            font-weight: 600;
+        }
+
+        .check-list {
+            list-style: none;
+            margin-top: 1.5rem;
+        }
+
+        .check-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .check-list li::before {
+            content: "✓";
+            color: #059669;
+            font-weight: bold;
+            font-size: 1.25rem;
+        }
+
+        .x-list li::before {
+            content: "✗";
+            color: #dc2626;
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 2rem;
+        }
+
+        .comparison-table th,
+        .comparison-table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .comparison-table th {
+            background: #f1f5f9;
+            font-weight: 600;
+        }
+
+        .tag {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            background: #e2e8f0;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            margin-right: 0.5rem;
+        }
+
+        .tag-gold {
+            background: var(--ksu-gold);
+            color: var(--ksu-black);
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: var(--ksu-gold);
+            color: var(--ksu-black);
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            font-weight: 600;
+            text-decoration: none;
+            margin-top: 2rem;
+        }
+
+        .divider {
+            height: 4px;
+            background: var(--ksu-gold);
+            width: 100px;
+            margin: 2rem 0;
+        }
+
+        .quote {
+            font-size: 1.5rem;
+            font-style: italic;
+            border-left: 4px solid var(--ksu-gold);
+            padding-left: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        @media (max-width: 768px) {
+            .grid-2, .grid-3 { grid-template-columns: 1fr; }
+            h1 { font-size: 2rem; }
+            h2 { font-size: 1.75rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- SLIDE 1: Title -->
+    <section class="slide slide-dark" style="text-align: center;">
+        <div>
+            <span class="tag tag-gold">PARTNERSHIP PROPOSAL</span>
+            <h1 style="margin-top: 1rem;">KSU Research</h1>
+            <p class="subtitle">Research Development Acceleration Platform</p>
+            <div class="divider" style="margin: 2rem auto;"></div>
+            <p style="font-size: 1.25rem; max-width: 700px; margin: 0 auto;">
+                An AI-powered platform to connect KSU researchers, accelerate discovery,
+                and unlock cross-disciplinary collaboration opportunities.
+            </p>
+            <div style="margin-top: 3rem;">
+                <span class="privacy-badge">🔒 100% On-Premise | Full Data Privacy</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- SLIDE 2: The Problem -->
+    <section class="slide">
+        <span class="tag">THE CHALLENGE</span>
+        <h2>Research Happens in Silos</h2>
+
+        <div class="grid-2" style="margin-top: 2rem;">
+            <div>
+                <ul class="check-list x-list">
+                    <li>Faculty don't know who's working on related problems across campus</li>
+                    <li>Cross-disciplinary collaboration requires chance encounters</li>
+                    <li>Grant opportunities are discovered too late</li>
+                    <li>Expensive equipment sits unused while others need it</li>
+                    <li>New faculty struggle to find collaborators</li>
+                </ul>
+            </div>
+            <div class="card" style="background: #fef3c7;">
+                <h3>Did You Know?</h3>
+                <p style="margin-top: 1rem;">
+                    A 2023 study found that <strong>67% of breakthrough research</strong>
+                    comes from cross-disciplinary teams, yet most researchers have
+                    <strong>limited visibility</strong> into work outside their department.
+                </p>
+                <p style="margin-top: 1rem; font-size: 0.875rem; color: #92400e;">
+                    KSU has over 1,800 faculty across 11 colleges. How many potential
+                    collaborations are being missed?
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- SLIDE 3: The Solution -->
+    <section class="slide slide-gold">
+        <span class="tag">THE SOLUTION</span>
+        <h2 class="highlight-dark">Introducing IRIS</h2>
+        <p class="subtitle highlight-dark">Intelligent Research Information System</p>
+
+        <div class="grid-3">
+            <div class="card">
+                <div class="icon">🔍</div>
+                <h3>Discover</h3>
+                <p>IRIS analyzes research profiles to find meaningful connections you'd never discover on your own.</p>
+            </div>
+            <div class="card">
+                <div class="icon">🤝</div>
+                <h3>Connect</h3>
+                <p>One-click collaboration requests with AI-generated talking points for your first conversation.</p>
+            </div>
+            <div class="card">
+                <div class="icon">💡</div>
+                <h3>Understand</h3>
+                <p>Every recommendation comes with a clear explanation of WHY IRIS thinks you'd work well together.</p>
+            </div>
+        </div>
+
+        <div style="margin-top: 3rem; text-align: center;">
+            <p style="font-size: 1.25rem;">
+                <strong>"Let IRIS find your next breakthrough collaboration."</strong>
+            </p>
+        </div>
+    </section>
+
+    <!-- SLIDE 4: Data Privacy (THE KEY SLIDE) -->
+    <section class="slide slide-dark">
+        <div style="text-align: center; margin-bottom: 2rem;">
+            <span class="privacy-badge" style="font-size: 1rem; padding: 0.75rem 1.5rem;">
+                🔒 FULL DATA PRIVACY GUARANTEE
+            </span>
+        </div>
+
+        <h2 style="text-align: center;">Your Data Never Leaves KSU</h2>
+
+        <div class="grid-2" style="margin-top: 3rem;">
+            <div class="card card-dark">
+                <h3 class="highlight">On-Premise AI</h3>
+                <ul class="check-list" style="color: white;">
+                    <li>All AI processing happens on KSU servers</li>
+                    <li>No data sent to OpenAI, Google, or any external service</li>
+                    <li>IRIS runs entirely within your network</li>
+                    <li>Full control over all data and algorithms</li>
+                </ul>
+            </div>
+            <div class="card card-dark">
+                <h3 class="highlight">Compliance Ready</h3>
+                <ul class="check-list" style="color: white;">
+                    <li>FERPA compliant architecture</li>
+                    <li>Export control compatible</li>
+                    <li>IRB-friendly data handling</li>
+                    <li>SOC 2 certification ready</li>
+                </ul>
+            </div>
+        </div>
+
+        <div style="margin-top: 3rem; background: rgba(255,255,255,0.1); padding: 2rem; border-radius: 12px;">
+            <h3 class="highlight">How It Works</h3>
+            <div style="display: flex; justify-content: space-around; margin-top: 1.5rem; flex-wrap: wrap; gap: 1rem;">
+                <div style="text-align: center;">
+                    <div style="font-size: 2rem;">🏛️</div>
+                    <p>KSU Data Center</p>
+                </div>
+                <div style="font-size: 2rem;">→</div>
+                <div style="text-align: center;">
+                    <div style="font-size: 2rem;">🤖</div>
+                    <p>IRIS (Ollama + Llama)</p>
+                </div>
+                <div style="font-size: 2rem;">→</div>
+                <div style="text-align: center;">
+                    <div style="font-size: 2rem;">📊</div>
+                    <p>Analysis & Matches</p>
+                </div>
+                <div style="font-size: 2rem;">→</div>
+                <div style="text-align: center;">
+                    <div style="font-size: 2rem;">👨‍🔬</div>
+                    <p>Researchers</p>
+                </div>
+            </div>
+            <p style="text-align: center; margin-top: 1.5rem; color: #94a3b8;">
+                Everything stays within KSU's infrastructure. Zero external API calls.
+            </p>
+        </div>
+    </section>
+
+    <!-- SLIDE 5: Features -->
+    <section class="slide">
+        <span class="tag">PLATFORM FEATURES</span>
+        <h2>Built for Researchers, By Design</h2>
+
+        <div class="grid-2">
+            <div>
+                <h3>For Faculty</h3>
+                <ul class="check-list">
+                    <li><strong>AI-Powered Matching</strong> - Find collaborators you didn't know existed</li>
+                    <li><strong>Grant Alerts</strong> - Get notified of relevant funding opportunities</li>
+                    <li><strong>Equipment Sharing</strong> - Access resources across departments</li>
+                    <li><strong>Publication Tracking</strong> - Automatic import from Google Scholar/ORCID</li>
+                    <li><strong>Privacy Controls</strong> - Choose exactly what to share</li>
+                </ul>
+            </div>
+            <div>
+                <h3>For Administration</h3>
+                <ul class="check-list">
+                    <li><strong>Research Analytics</strong> - See collaboration patterns across campus</li>
+                    <li><strong>Grant Success Metrics</strong> - Track funding outcomes</li>
+                    <li><strong>Cross-Disciplinary Reports</strong> - Identify emerging research clusters</li>
+                    <li><strong>ROI Dashboard</strong> - Measure platform impact</li>
+                    <li><strong>Compliance Audit Trail</strong> - Full data usage logging</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- SLIDE 6: Transparency -->
+    <section class="slide" style="background: linear-gradient(135deg, #eff6ff, #f0fdf4);">
+        <span class="tag tag-gold">TRANSPARENT AI</span>
+        <h2>Researchers See How IRIS Works</h2>
+
+        <div class="quote">
+            "We're not hiding behind a black box. Every match includes a full explanation
+            of why IRIS thinks these researchers should connect."
+        </div>
+
+        <div class="grid-3" style="margin-top: 2rem;">
+            <div class="card">
+                <div class="icon">📊</div>
+                <h3>Match Breakdown</h3>
+                <p>See the exact factors that contributed to each recommendation - shared research areas, complementary expertise, publication overlap.</p>
+            </div>
+            <div class="card">
+                <div class="icon">🔍</div>
+                <h3>Data Sources</h3>
+                <p>Users see exactly which data points IRIS used - publications, grants, research interests - and can control access to each.</p>
+            </div>
+            <div class="card">
+                <div class="icon">⚙️</div>
+                <h3>Opt-Out Anytime</h3>
+                <p>Researchers can exclude themselves from AI matching, hide specific projects, or delete their data entirely.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- SLIDE 7: Competitive Advantage -->
+    <section class="slide">
+        <span class="tag">MARKET POSITION</span>
+        <h2>Why KSU Research Wins</h2>
+
+        <table class="comparison-table">
+            <thead>
+                <tr>
+                    <th>Feature</th>
+                    <th>KSU Research</th>
+                    <th>ResearchGate</th>
+                    <th>Clarivate</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>On-Premise Deployment</strong></td>
+                    <td style="color: #059669;">✓ Full control</td>
+                    <td style="color: #dc2626;">✗ Cloud only</td>
+                    <td style="color: #dc2626;">✗ Cloud only</td>
+                </tr>
+                <tr>
+                    <td><strong>Data Privacy</strong></td>
+                    <td style="color: #059669;">✓ No external APIs</td>
+                    <td style="color: #dc2626;">✗ Data leaves institution</td>
+                    <td style="color: #dc2626;">✗ Data leaves institution</td>
+                </tr>
+                <tr>
+                    <td><strong>Transparent AI</strong></td>
+                    <td style="color: #059669;">✓ Full explanations</td>
+                    <td style="color: #f59e0b;">~ Limited</td>
+                    <td style="color: #f59e0b;">~ Limited</td>
+                </tr>
+                <tr>
+                    <td><strong>Institution-Specific</strong></td>
+                    <td style="color: #059669;">✓ Built for KSU</td>
+                    <td style="color: #dc2626;">✗ Generic</td>
+                    <td style="color: #dc2626;">✗ Generic</td>
+                </tr>
+                <tr>
+                    <td><strong>Equipment Sharing</strong></td>
+                    <td style="color: #059669;">✓ Built-in</td>
+                    <td style="color: #dc2626;">✗ No</td>
+                    <td style="color: #dc2626;">✗ No</td>
+                </tr>
+                <tr>
+                    <td><strong>No IP Claims</strong></td>
+                    <td style="color: #059669;">✓ Researchers keep all IP</td>
+                    <td style="color: #f59e0b;">~ TOS concerns</td>
+                    <td style="color: #059669;">✓ Yes</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <!-- SLIDE 8: Implementation -->
+    <section class="slide slide-dark">
+        <span class="tag tag-gold">IMPLEMENTATION</span>
+        <h2>Getting Started</h2>
+
+        <div class="grid-3" style="margin-top: 2rem;">
+            <div class="card card-dark" style="text-align: center;">
+                <div class="stat">1</div>
+                <h3>Data Import</h3>
+                <p>We scrape and import existing faculty data from KSU directories. Pre-populate profiles so faculty just "claim" theirs.</p>
+            </div>
+            <div class="card card-dark" style="text-align: center;">
+                <div class="stat">2</div>
+                <h3>Pilot Launch</h3>
+                <p>Start with 2-3 high-research departments. Gather feedback, iterate, demonstrate value.</p>
+            </div>
+            <div class="card card-dark" style="text-align: center;">
+                <div class="stat">3</div>
+                <h3>Full Rollout</h3>
+                <p>Expand to all colleges. Integration with existing KSU systems (SSO, ORCID, institutional repository).</p>
+            </div>
+        </div>
+
+        <div style="margin-top: 3rem; text-align: center;">
+            <h3 class="highlight">Technical Requirements</h3>
+            <div style="display: flex; justify-content: center; gap: 2rem; margin-top: 1rem; flex-wrap: wrap;">
+                <span class="tag" style="background: rgba(255,255,255,0.1); color: white;">Linux Server (Ubuntu/RHEL)</span>
+                <span class="tag" style="background: rgba(255,255,255,0.1); color: white;">32GB+ RAM</span>
+                <span class="tag" style="background: rgba(255,255,255,0.1); color: white;">PostgreSQL 15+</span>
+                <span class="tag" style="background: rgba(255,255,255,0.1); color: white;">GPU Recommended</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- SLIDE 9: Pricing -->
+    <section class="slide">
+        <span class="tag">PARTNERSHIP MODEL</span>
+        <h2>Investment & Returns</h2>
+
+        <div class="grid-2">
+            <div class="card" style="border: 3px solid var(--ksu-gold);">
+                <h3>Pilot Program</h3>
+                <div class="stat" style="color: #059669;">$0</div>
+                <p class="stat-label" style="margin-bottom: 1rem;">First Year</p>
+                <ul class="check-list">
+                    <li>Full platform access for pilot departments</li>
+                    <li>Implementation support included</li>
+                    <li>Training for faculty and staff</li>
+                    <li>Quarterly ROI reporting</li>
+                </ul>
+                <p style="margin-top: 1rem; font-size: 0.875rem; color: #64748b;">
+                    We're confident the platform will prove its value.
+                </p>
+            </div>
+            <div class="card">
+                <h3>Full Institution License</h3>
+                <div class="stat">$75K</div>
+                <p class="stat-label" style="margin-bottom: 1rem;">Per Year (after pilot)</p>
+                <ul class="check-list">
+                    <li>All faculty and researchers</li>
+                    <li>Unlimited AI matches</li>
+                    <li>Priority support</li>
+                    <li>Custom integrations</li>
+                    <li>Annual security audit</li>
+                </ul>
+            </div>
+        </div>
+
+        <div style="margin-top: 2rem; padding: 1.5rem; background: #f0fdf4; border-radius: 8px; border: 1px solid #bbf7d0;">
+            <strong style="color: #166534;">ROI Guarantee:</strong>
+            If the platform doesn't demonstrate measurable value (new collaborations, grant applications, time saved) within the pilot year, walk away with no obligation.
+        </div>
+    </section>
+
+    <!-- SLIDE 10: Call to Action -->
+    <section class="slide slide-gold" style="text-align: center;">
+        <h2 class="highlight-dark">Let's Accelerate KSU Research Together</h2>
+
+        <p style="font-size: 1.25rem; max-width: 600px; margin: 2rem auto;">
+            KSU has world-class researchers. Let's give them the tools to find each other
+            and create the next breakthrough.
+        </p>
+
+        <div style="margin-top: 3rem;">
+            <h3>Next Steps</h3>
+            <div class="grid-3" style="max-width: 800px; margin: 1.5rem auto;">
+                <div>
+                    <div style="font-size: 2rem;">📅</div>
+                    <p><strong>Schedule Demo</strong></p>
+                    <p style="font-size: 0.875rem;">30-min live walkthrough</p>
+                </div>
+                <div>
+                    <div style="font-size: 2rem;">🎯</div>
+                    <p><strong>Select Pilot Depts</strong></p>
+                    <p style="font-size: 0.875rem;">Choose 2-3 departments</p>
+                </div>
+                <div>
+                    <div style="font-size: 2rem;">🚀</div>
+                    <p><strong>Launch in 30 Days</strong></p>
+                    <p style="font-size: 0.875rem;">Quick implementation</p>
+                </div>
+            </div>
+        </div>
+
+        <div style="margin-top: 3rem; padding-top: 2rem; border-top: 2px solid rgba(0,0,0,0.1);">
+            <p style="font-size: 1rem; color: #1a1a1a;">
+                <strong>KSU Research</strong> | Research Development Acceleration Platform<br>
+                <span style="font-size: 0.875rem;">Powered by IRIS - Intelligent Research Information System</span>
+            </p>
+        </div>
+    </section>
+
+</body>
+</html>

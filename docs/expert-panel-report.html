@@ -1,0 +1,1028 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KSU Research Platform - Expert Panel Report</title>
+    <style>
+        :root {
+            --ksu-gold: #FFC423;
+            --ksu-black: #000000;
+            --ksu-dark: #1a1a1a;
+            --accent-blue: #2563eb;
+            --accent-green: #059669;
+            --accent-purple: #7c3aed;
+            --light-bg: #f8fafc;
+            --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #334155;
+            background: var(--light-bg);
+        }
+
+        .hero {
+            background: linear-gradient(135deg, var(--ksu-black) 0%, var(--ksu-dark) 100%);
+            color: white;
+            padding: 4rem 2rem;
+            text-align: center;
+            border-bottom: 6px solid var(--ksu-gold);
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .hero .subtitle {
+            font-size: 1.25rem;
+            color: var(--ksu-gold);
+            font-weight: 500;
+            margin-bottom: 1rem;
+        }
+
+        .hero .tagline {
+            font-size: 1rem;
+            color: #94a3b8;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .badge {
+            display: inline-block;
+            background: var(--ksu-gold);
+            color: var(--ksu-black);
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-top: 1rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .executive-summary {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--card-shadow);
+            border-left: 4px solid var(--ksu-gold);
+        }
+
+        .executive-summary h2 {
+            color: var(--ksu-black);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .pivot-quote {
+            background: #fef3c7;
+            border-left: 4px solid var(--ksu-gold);
+            padding: 1rem 1.5rem;
+            margin: 1.5rem 0;
+            font-style: italic;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .pivot-quote cite {
+            display: block;
+            margin-top: 0.5rem;
+            font-style: normal;
+            font-weight: 600;
+            color: var(--ksu-dark);
+        }
+
+        .value-props {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .value-prop {
+            background: var(--light-bg);
+            padding: 1rem;
+            border-radius: 8px;
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+        }
+
+        .value-prop .icon {
+            font-size: 1.5rem;
+        }
+
+        .value-prop strong {
+            display: block;
+            color: var(--ksu-black);
+            margin-bottom: 0.25rem;
+        }
+
+        .section-header {
+            text-align: center;
+            margin: 3rem 0 2rem;
+        }
+
+        .section-header h2 {
+            font-size: 1.75rem;
+            color: var(--ksu-black);
+            margin-bottom: 0.5rem;
+        }
+
+        .section-header p {
+            color: #64748b;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .expert-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .expert-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: var(--card-shadow);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .expert-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+
+        .expert-header {
+            padding: 1.5rem;
+            color: white;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .expert-header.ux { background: linear-gradient(135deg, #ec4899, #f472b6); }
+        .expert-header.db { background: linear-gradient(135deg, #3b82f6, #60a5fa); }
+        .expert-header.prof { background: linear-gradient(135deg, #10b981, #34d399); }
+        .expert-header.mktg { background: linear-gradient(135deg, #f59e0b, #fbbf24); }
+        .expert-header.legal { background: linear-gradient(135deg, #6366f1, #818cf8); }
+        .expert-header.admin { background: linear-gradient(135deg, #8b5cf6, #a78bfa); }
+
+        .expert-avatar {
+            width: 60px;
+            height: 60px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.75rem;
+        }
+
+        .expert-info h3 {
+            font-size: 1.125rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .expert-info .role {
+            font-size: 0.875rem;
+            opacity: 0.9;
+        }
+
+        .verdict {
+            padding: 1rem 1.5rem;
+            background: #f0fdf4;
+            border-left: 4px solid #22c55e;
+            margin: 0;
+        }
+
+        .verdict.positive {
+            background: #f0fdf4;
+            border-left-color: #22c55e;
+        }
+
+        .verdict strong {
+            color: #166534;
+            display: block;
+            margin-bottom: 0.25rem;
+        }
+
+        .expert-content {
+            padding: 1.5rem;
+        }
+
+        .expert-content h4 {
+            color: var(--ksu-black);
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin: 1rem 0 0.5rem;
+        }
+
+        .expert-content h4:first-child {
+            margin-top: 0;
+        }
+
+        .expert-content ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .expert-content li {
+            padding: 0.5rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+            border-bottom: 1px solid #f1f5f9;
+        }
+
+        .expert-content li:last-child {
+            border-bottom: none;
+        }
+
+        .expert-content li::before {
+            content: ">";
+            position: absolute;
+            left: 0;
+            color: var(--ksu-gold);
+            font-weight: bold;
+        }
+
+        .competitors-section {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 2rem 0;
+            box-shadow: var(--card-shadow);
+        }
+
+        .competitor-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+        }
+
+        .competitor-table th {
+            background: var(--ksu-black);
+            color: white;
+            padding: 1rem;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        .competitor-table td {
+            padding: 1rem;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .competitor-table tr:hover {
+            background: #f8fafc;
+        }
+
+        .threat-badge {
+            display: inline-block;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .threat-high { background: #fee2e2; color: #991b1b; }
+        .threat-medium { background: #fef3c7; color: #92400e; }
+        .threat-low { background: #d1fae5; color: #065f46; }
+
+        .data-strategy {
+            background: linear-gradient(135deg, #1e3a8a, #3b82f6);
+            color: white;
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+
+        .data-strategy h2 {
+            color: white;
+            margin-bottom: 1rem;
+        }
+
+        .data-sources {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .data-source {
+            background: rgba(255,255,255,0.1);
+            padding: 1rem;
+            border-radius: 8px;
+            backdrop-filter: blur(10px);
+        }
+
+        .data-source strong {
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .data-source code {
+            font-size: 0.75rem;
+            color: #93c5fd;
+        }
+
+        .legal-structure {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 2rem 0;
+            box-shadow: var(--card-shadow);
+        }
+
+        .structure-diagram {
+            background: #f8fafc;
+            border: 2px dashed #cbd5e1;
+            border-radius: 8px;
+            padding: 1.5rem;
+            font-family: 'Courier New', monospace;
+            font-size: 0.875rem;
+            line-height: 1.8;
+            margin: 1rem 0;
+            overflow-x: auto;
+        }
+
+        .implementation-timeline {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 2rem 0;
+            box-shadow: var(--card-shadow);
+        }
+
+        .phase {
+            display: flex;
+            gap: 1.5rem;
+            padding: 1.5rem 0;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .phase:last-child {
+            border-bottom: none;
+        }
+
+        .phase-number {
+            width: 48px;
+            height: 48px;
+            background: var(--ksu-gold);
+            color: var(--ksu-black);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.25rem;
+            flex-shrink: 0;
+        }
+
+        .phase-content h4 {
+            color: var(--ksu-black);
+            margin-bottom: 0.5rem;
+        }
+
+        .phase-tasks {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 0.75rem;
+        }
+
+        .task-chip {
+            background: #f1f5f9;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            color: #475569;
+        }
+
+        .cta-section {
+            background: var(--ksu-black);
+            color: white;
+            border-radius: 12px;
+            padding: 3rem 2rem;
+            text-align: center;
+            margin: 2rem 0;
+        }
+
+        .cta-section h2 {
+            color: var(--ksu-gold);
+            margin-bottom: 1rem;
+        }
+
+        .next-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 2rem;
+            text-align: left;
+        }
+
+        .next-step {
+            background: rgba(255,255,255,0.1);
+            padding: 1rem;
+            border-radius: 8px;
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+        }
+
+        .step-number {
+            background: var(--ksu-gold);
+            color: var(--ksu-black);
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.875rem;
+            flex-shrink: 0;
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            color: #64748b;
+            font-size: 0.875rem;
+        }
+
+        footer a {
+            color: var(--accent-blue);
+            text-decoration: none;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 1.75rem;
+            }
+
+            .expert-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .phase {
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="hero">
+        <h1>KSU Research</h1>
+        <p class="subtitle">Research Development Acceleration Platform</p>
+        <p class="tagline">AI-powered cross-disciplinary collaboration for Kennesaw State University researchers</p>
+        <span class="badge">Expert Panel Report - Ethical Model</span>
+    </header>
+
+    <div class="container">
+        <section class="executive-summary">
+            <h2>Executive Summary</h2>
+            <p>This report compiles feedback from <strong>6 industry experts</strong> evaluating the KSU Research platform concept. After an initial review raised concerns about a hidden IP model, the platform pivoted to a <strong>fully transparent, ethical approach</strong> that received unanimous support from the expert panel.</p>
+
+            <div class="pivot-quote">
+                "Let's go above board and compete with the ones coming out."
+                <cite>- Founder Decision</cite>
+            </div>
+
+            <div class="value-props">
+                <div class="value-prop">
+                    <span class="icon">&#x1F50D;</span>
+                    <div>
+                        <strong>Transparent AI</strong>
+                        AI matching is a marketed feature, not hidden. Researchers see exactly how recommendations are made.
+                    </div>
+                </div>
+                <div class="value-prop">
+                    <span class="icon">&#x1F512;</span>
+                    <div>
+                        <strong>No IP Claims</strong>
+                        Researchers and universities retain ALL intellectual property. Platform takes zero ownership.
+                    </div>
+                </div>
+                <div class="value-prop">
+                    <span class="icon">&#x1F4B0;</span>
+                    <div>
+                        <strong>Institution Pays</strong>
+                        $75K-$150K/year subscription. Free for all faculty and researchers.
+                    </div>
+                </div>
+                <div class="value-prop">
+                    <span class="icon">&#x1F4C8;</span>
+                    <div>
+                        <strong>VC Fund Model</strong>
+                        Separate fund invests in spinouts. Takes equity in companies, not researcher IP.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="section-header">
+            <h2>Expert Panel Reactions</h2>
+            <p>All 6 experts reviewed the ethical, transparent model and provided actionable recommendations for success</p>
+        </div>
+
+        <div class="expert-grid">
+            <!-- UX/UI Designer -->
+            <article class="expert-card">
+                <div class="expert-header ux">
+                    <div class="expert-avatar">&#x1F3A8;</div>
+                    <div class="expert-info">
+                        <h3>UX/UI Designer</h3>
+                        <span class="role">15 Years Experience</span>
+                    </div>
+                </div>
+                <div class="verdict positive">
+                    <strong>VERDICT: Fully Supportive</strong>
+                    Detailed recommendations provided for trust-building design
+                </div>
+                <div class="expert-content">
+                    <h4>Onboarding Flow</h4>
+                    <ul>
+                        <li>3-step progressive profiling (not overwhelming)</li>
+                        <li>"See Your Network" preview before completing profile</li>
+                        <li>Value-first: show AI matches immediately</li>
+                    </ul>
+                    <h4>Key Features</h4>
+                    <ul>
+                        <li>"How the AI Works" transparency page</li>
+                        <li>Clear data controls dashboard</li>
+                        <li>Collaboration request workflow</li>
+                        <li>Equipment booking calendar</li>
+                    </ul>
+                    <h4>Trust Elements</h4>
+                    <ul>
+                        <li>Show exactly what data is used for recommendations</li>
+                        <li>Allow researchers to hide specific work</li>
+                        <li>University branding integration</li>
+                    </ul>
+                </div>
+            </article>
+
+            <!-- Database Architect -->
+            <article class="expert-card">
+                <div class="expert-header db">
+                    <div class="expert-avatar">&#x1F5C4;</div>
+                    <div class="expert-info">
+                        <h3>Database Architect</h3>
+                        <span class="role">20 Years Experience</span>
+                    </div>
+                </div>
+                <div class="verdict positive">
+                    <strong>VERDICT: Enthusiastic</strong>
+                    Enhanced schema designed for transparency and GDPR compliance
+                </div>
+                <div class="expert-content">
+                    <h4>Transparency Tables</h4>
+                    <ul>
+                        <li><code>recommendation_explanations</code> - shows why AI made matches</li>
+                        <li><code>privacy_settings</code> - per-researcher controls</li>
+                        <li><code>data_usage_logs</code> - audit trails</li>
+                        <li><code>consent_records</code> - GDPR compliance</li>
+                    </ul>
+                    <h4>Technical Highlights</h4>
+                    <ul>
+                        <li>45+ tables with transparency-focused design</li>
+                        <li>pgvector for semantic embeddings</li>
+                        <li>Full Row-Level Security (RLS)</li>
+                        <li>Materialized views for AI features</li>
+                    </ul>
+                </div>
+            </article>
+
+            <!-- Research Professor -->
+            <article class="expert-card">
+                <div class="expert-header prof">
+                    <div class="expert-avatar">&#x1F393;</div>
+                    <div class="expert-info">
+                        <h3>Research Professor</h3>
+                        <span class="role">20 Years, Grant Funding Expert</span>
+                    </div>
+                </div>
+                <div class="verdict positive">
+                    <strong>VERDICT: Would Use This Platform</strong>
+                    Ethical model removes all dealbreakers
+                </div>
+                <div class="expert-content">
+                    <h4>Why This Works</h4>
+                    <ul>
+                        <li>No IP claims = no dealbreaker</li>
+                        <li>Transparent AI = can trust the platform</li>
+                        <li>Free for faculty = removes budget friction</li>
+                        <li>Time-saving features = actual value</li>
+                    </ul>
+                    <h4>Most Wanted Features</h4>
+                    <ul>
+                        <li>Grant opportunity matching with deadline alerts</li>
+                        <li>Co-investigator discovery for NSF/NIH</li>
+                        <li>Shared equipment database</li>
+                        <li>Publication impact tracking</li>
+                        <li>Research group management tools</li>
+                    </ul>
+                </div>
+            </article>
+
+            <!-- Marketing Director -->
+            <article class="expert-card">
+                <div class="expert-header mktg">
+                    <div class="expert-avatar">&#x1F4E3;</div>
+                    <div class="expert-info">
+                        <h3>Marketing Director</h3>
+                        <span class="role">15 Years EdTech</span>
+                    </div>
+                </div>
+                <div class="verdict positive">
+                    <strong>VERDICT: Enthusiastic</strong>
+                    Full go-to-market strategy provided
+                </div>
+                <div class="expert-content">
+                    <h4>GTM Strategy</h4>
+                    <ul>
+                        <li>"25 Champions" approach - find influential faculty advocates</li>
+                        <li>Department-by-department rollout</li>
+                        <li>Research Office partnership critical</li>
+                        <li>Pilot with high-research departments first</li>
+                    </ul>
+                    <h4>Messaging Framework</h4>
+                    <ul>
+                        <li><strong>Lead:</strong> "AI-powered research collaboration"</li>
+                        <li><strong>Sub:</strong> "Find collaborators, grants, and opportunities faster"</li>
+                        <li><strong>Differentiation:</strong> "Unlike ResearchGate, built for YOUR university"</li>
+                    </ul>
+                </div>
+            </article>
+
+            <!-- VC Attorney -->
+            <article class="expert-card">
+                <div class="expert-header legal">
+                    <div class="expert-avatar">&#x2696;</div>
+                    <div class="expert-info">
+                        <h3>VC Attorney</h3>
+                        <span class="role">IP & Tech Transfer Specialist</span>
+                    </div>
+                </div>
+                <div class="verdict positive">
+                    <strong>VERDICT: Legally Sound</strong>
+                    Structure confirmed compliant with university and federal requirements
+                </div>
+                <div class="expert-content">
+                    <h4>Platform Legal Foundation</h4>
+                    <ul>
+                        <li>Terms of Service: Explicit "users retain all IP" clause</li>
+                        <li>Privacy Policy: FERPA-compliant, GDPR-ready</li>
+                        <li>Data Processing Agreement template</li>
+                        <li>No liability for research outcomes</li>
+                    </ul>
+                    <h4>Required Documents</h4>
+                    <ul>
+                        <li>Platform Terms of Service</li>
+                        <li>Privacy Policy</li>
+                        <li>University Partnership Agreement</li>
+                        <li>Fund PPM and LPA</li>
+                    </ul>
+                </div>
+            </article>
+
+            <!-- Director of Research -->
+            <article class="expert-card">
+                <div class="expert-header admin">
+                    <div class="expert-avatar">&#x1F3DB;</div>
+                    <div class="expert-info">
+                        <h3>Director of Research</h3>
+                        <span class="role">18 Years University Admin</span>
+                    </div>
+                </div>
+                <div class="verdict positive">
+                    <strong>VERDICT: Would Recommend to Provost</strong>
+                    With clear ROI metrics and compliance requirements met
+                </div>
+                <div class="expert-content">
+                    <h4>What Sells to Leadership</h4>
+                    <ul>
+                        <li>ROI metrics: grant success rates, collaboration outcomes</li>
+                        <li>Compliance: FERPA, export controls, IRB integration</li>
+                        <li>Faculty adoption rates from peer institutions</li>
+                        <li>Integration with existing systems (ORCID)</li>
+                    </ul>
+                    <h4>Requirements for Adoption</h4>
+                    <ul>
+                        <li>SSO integration (Shibboleth/SAML)</li>
+                        <li>SLA with 99.9% uptime guarantee</li>
+                        <li>Dedicated support contact</li>
+                        <li>Annual security audit/SOC 2 compliance</li>
+                    </ul>
+                </div>
+            </article>
+        </div>
+
+        <section class="competitors-section">
+            <h2>Competitive Landscape</h2>
+            <p>Analysis of current market players and emerging AI-powered threats</p>
+
+            <h3 style="margin-top: 1.5rem; color: var(--ksu-black);">Direct Competitors</h3>
+            <table class="competitor-table">
+                <thead>
+                    <tr>
+                        <th>Platform</th>
+                        <th>Users</th>
+                        <th>Key Features</th>
+                        <th>Weakness</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>ResearchGate</strong></td>
+                        <td>165M monthly</td>
+                        <td>Paper sharing, Q&A, profiles</td>
+                        <td>No AI matching, no cross-disciplinary focus</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Academia.edu</strong></td>
+                        <td>64M monthly</td>
+                        <td>Paper hosting, analytics</td>
+                        <td>Freemium spam, no collaboration tools</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Google Scholar</strong></td>
+                        <td>Massive</td>
+                        <td>Citation tracking, search</td>
+                        <td>No networking, no profiles</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Mendeley</strong></td>
+                        <td>Large</td>
+                        <td>Reference management, groups</td>
+                        <td>Owned by Elsevier, limited networking</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3 style="margin-top: 2rem; color: var(--ksu-black);">AI-Powered Competitors (Emerging)</h3>
+            <table class="competitor-table">
+                <thead>
+                    <tr>
+                        <th>Platform</th>
+                        <th>Description</th>
+                        <th>Threat Level</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>University of Arizona KMap</strong></td>
+                        <td>AI-powered research matching, visualizes entire research ecosystem</td>
+                        <td><span class="threat-badge threat-high">HIGH</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Clarivate Academic AI</strong></td>
+                        <td>Agentic AI for researcher matching and funding discovery (launching April 2025)</td>
+                        <td><span class="threat-badge threat-high">HIGH</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Semantic Scholar</strong></td>
+                        <td>AI-enhanced search and paper analysis</td>
+                        <td><span class="threat-badge threat-medium">MEDIUM</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Connected Papers</strong></td>
+                        <td>Visual paper discovery tool</td>
+                        <td><span class="threat-badge threat-low">LOW</span></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div style="background: #fef3c7; padding: 1rem; border-radius: 8px; margin-top: 1.5rem;">
+                <strong>Gap Analysis:</strong> No platform currently does cross-disciplinary AI matching with integrated resource sharing, real-time collaboration on proposals, and spinout company facilitation.
+            </div>
+        </section>
+
+        <section class="data-strategy">
+            <h2>Data Acquisition Strategy</h2>
+            <p>Pre-populate profiles by scraping KSU faculty data + external enrichment</p>
+
+            <div class="data-sources">
+                <div class="data-source">
+                    <strong>Faculty Web</strong>
+                    Names, individual pages, research interests<br>
+                    <code>facultyweb.kennesaw.edu</code>
+                </div>
+                <div class="data-source">
+                    <strong>Campus Directory</strong>
+                    Phone, title, department, email<br>
+                    <code>directory.kennesaw.edu</code>
+                </div>
+                <div class="data-source">
+                    <strong>Google Scholar</strong>
+                    Citations, h-index, publications<br>
+                    <code>scholar.google.com</code>
+                </div>
+                <div class="data-source">
+                    <strong>ORCID</strong>
+                    Verified researcher identities<br>
+                    <code>orcid.org</code>
+                </div>
+                <div class="data-source">
+                    <strong>NIH Reporter</strong>
+                    Federal grant data<br>
+                    <code>reporter.nih.gov</code>
+                </div>
+                <div class="data-source">
+                    <strong>PubMed</strong>
+                    Publications database<br>
+                    <code>pubmed.ncbi.nlm.nih.gov</code>
+                </div>
+            </div>
+
+            <div style="background: rgba(255,255,255,0.1); padding: 1rem; border-radius: 8px; margin-top: 1.5rem;">
+                <strong>Pre-Population Strategy:</strong> Scrape all faculty data -> Create "unclaimed" profiles -> Email faculty: "Your research profile is ready - claim it!" -> Reduces friction to zero.
+            </div>
+        </section>
+
+        <section class="legal-structure">
+            <h2>Recommended Legal Structure</h2>
+            <p>Separate platform and fund entities for clean liability separation</p>
+
+            <div class="structure-diagram">
+PLATFORM CO (Delaware C-Corp)
+├── Owns platform IP (algorithms only)
+├── SaaS subscription revenue
+├── Provides deal flow intelligence to Fund
+│
+GENERAL PARTNER LLC
+├── Manages the Fund
+├── 2% management fee + 20% carry
+│
+LIMITED PARTNERSHIP (Fund)
+├── Outside investors as LPs
+├── Invests in spinout companies
+│
+SPINOUT COMPANIES (Portfolio)
+├── License IP from university TTO
+├── Researchers are founders (15-20% equity)
+├── Fund takes 40-60% equity
+            </div>
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-top: 1.5rem;">
+                <div style="background: #f0fdf4; padding: 1rem; border-radius: 8px;">
+                    <strong style="color: #166534;">Platform Revenue</strong><br>
+                    SaaS subscriptions<br>
+                    Data licensing<br>
+                    Success fees
+                </div>
+                <div style="background: #eff6ff; padding: 1rem; border-radius: 8px;">
+                    <strong style="color: #1e40af;">Fund Returns</strong><br>
+                    Equity in spinouts<br>
+                    2/20 structure<br>
+                    $25-50M target
+                </div>
+                <div style="background: #fef3c7; padding: 1rem; border-radius: 8px;">
+                    <strong style="color: #92400e;">University Gets</strong><br>
+                    5% equity in spinouts<br>
+                    3% royalties<br>
+                    Research funding
+                </div>
+            </div>
+        </section>
+
+        <section class="implementation-timeline">
+            <h2>Implementation Roadmap</h2>
+
+            <div class="phase">
+                <div class="phase-number">1</div>
+                <div class="phase-content">
+                    <h4>Foundation</h4>
+                    <p>Set up core infrastructure and authentication</p>
+                    <div class="phase-tasks">
+                        <span class="task-chip">Next.js + TypeScript</span>
+                        <span class="task-chip">PostgreSQL + Prisma</span>
+                        <span class="task-chip">NextAuth.js (@ksu.edu)</span>
+                        <span class="task-chip">Admin dashboard</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="phase">
+                <div class="phase-number">2</div>
+                <div class="phase-content">
+                    <h4>Data Acquisition</h4>
+                    <p>Build scrapers and populate initial profiles</p>
+                    <div class="phase-tasks">
+                        <span class="task-chip">KSU faculty scraper</span>
+                        <span class="task-chip">Google Scholar enrichment</span>
+                        <span class="task-chip">ORCID integration</span>
+                        <span class="task-chip">Profile claiming flow</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="phase">
+                <div class="phase-number">3</div>
+                <div class="phase-content">
+                    <h4>Core Platform</h4>
+                    <p>Build researcher profiles, search, and collaboration features</p>
+                    <div class="phase-tasks">
+                        <span class="task-chip">Profile pages</span>
+                        <span class="task-chip">Search & discovery</span>
+                        <span class="task-chip">Equipment sharing</span>
+                        <span class="task-chip">Messaging</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="phase">
+                <div class="phase-number">4</div>
+                <div class="phase-content">
+                    <h4>AI Integration</h4>
+                    <p>Add semantic matching and cross-disciplinary opportunity detection</p>
+                    <div class="phase-tasks">
+                        <span class="task-chip">Vector embeddings</span>
+                        <span class="task-chip">Semantic matching</span>
+                        <span class="task-chip">Synergy scoring</span>
+                        <span class="task-chip">Transparency dashboard</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="phase">
+                <div class="phase-number">5</div>
+                <div class="phase-content">
+                    <h4>Launch & Growth</h4>
+                    <p>Beta launch, iteration, and fund formation</p>
+                    <div class="phase-tasks">
+                        <span class="task-chip">Department pilots</span>
+                        <span class="task-chip">Faculty onboarding</span>
+                        <span class="task-chip">Full KSU launch</span>
+                        <span class="task-chip">Fund discussions</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="cta-section">
+            <h2>Ready to Build</h2>
+            <p>The expert panel has validated the ethical model. All 6 specialists support the transparent approach.</p>
+
+            <div class="next-steps">
+                <div class="next-step">
+                    <span class="step-number">1</span>
+                    <div>
+                        <strong>Project Setup</strong><br>
+                        Initialize Git, create Next.js app, configure Prisma
+                    </div>
+                </div>
+                <div class="next-step">
+                    <span class="step-number">2</span>
+                    <div>
+                        <strong>Build Scraper</strong><br>
+                        Start gathering KSU faculty data
+                    </div>
+                </div>
+                <div class="next-step">
+                    <span class="step-number">3</span>
+                    <div>
+                        <strong>Design Database</strong><br>
+                        Implement transparency-focused schema
+                    </div>
+                </div>
+                <div class="next-step">
+                    <span class="step-number">4</span>
+                    <div>
+                        <strong>MVP Development</strong><br>
+                        Core profile and discovery features
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <p>KSU Research - Research Development Acceleration Platform</p>
+        <p>Expert Panel Report generated December 2024</p>
+        <p>Tech Stack: Next.js + PostgreSQL + Prisma + pgvector</p>
+    </footer>
+</body>
+</html>

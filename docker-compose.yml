@@ -1,0 +1,54 @@
+# IRIS Development Stack
+# Run: docker-compose up -d
+
+services:
+  postgres:
+    image: pgvector/pgvector:pg16
+    container_name: iris-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: iris
+    ports:
+      - "5432:5432"
+    volumes:
+      - iris_postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d iris"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Redis for caching (optional, for future use)
+  redis:
+    image: redis:7-alpine
+    container_name: iris-redis
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    volumes:
+      - iris_redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Adminer for database management (dev only)
+  adminer:
+    image: adminer
+    container_name: iris-adminer
+    restart: unless-stopped
+    ports:
+      - "8080:8080"
+    depends_on:
+      - postgres
+
+volumes:
+  iris_postgres_data:
+  iris_redis_data:
+
+# Note: Ollama runs natively on Windows for GPU support
+# Start it with: ollama serve
+# Models needed: gemma3:4b, nomic-embed-text
