@@ -62,7 +62,7 @@ export async function GET(request: NextRequest) {
     // Score all faculty
     const scored = (faculty || [])
       .filter((f: any) => f.embedding && f.embedding.length > 0)
-      .map(f => ({
+      .map((f: any) => ({
         net_id: f.net_id,
         name: f.name,
         title: f.title,
