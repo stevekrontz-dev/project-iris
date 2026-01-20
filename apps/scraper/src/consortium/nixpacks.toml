@@ -1,0 +1,9 @@
+[phases.setup]
+nixPkgs = ["git-lfs"]
+cmds = ["git lfs install", "git lfs pull"]
+
+[phases.build]
+cmds = ["pip install -r requirements.txt"]
+
+[start]
+cmd = "uvicorn search_api:app --host 0.0.0.0 --port ${PORT:-8000}"
