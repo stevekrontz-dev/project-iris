@@ -54,7 +54,7 @@ def ensure_faiss_index(index_path: Path) -> bool:
 
 
 def download_faiss_index(index_path: Path) -> bool:
-    """Download FAISS index from GitHub Releases."""
+    """Download FAISS index from GitHub Releases (supports private repos via token)."""
     try:
         print(f"  Downloading FAISS index from GitHub Releases...")
         print(f"  URL: {FAISS_INDEX_URL}")
@@ -62,18 +62,38 @@ def download_faiss_index(index_path: Path) -> bool:
         # Ensure directory exists
         index_path.parent.mkdir(parents=True, exist_ok=True)
 
+        # Check for GitHub token (needed for private repos)
+        github_token = os.getenv('GITHUB_TOKEN') or os.getenv('GH_TOKEN')
+
+        # Create request with auth header if token available
+        request = urllib.request.Request(FAISS_INDEX_URL)
+        request.add_header('Accept', 'application/octet-stream')
+        if github_token:
+            print(f"  Using GitHub token for authentication...")
+            request.add_header('Authorization', f'token {github_token}')
+        else:
+            print(f"  WARNING: No GITHUB_TOKEN set - download may fail for private repos")
+
         # Download with progress
-        def report_progress(block_num, block_size, total_size):
-            downloaded = block_num * block_size
-            if total_size > 0:
-                percent = min(100, downloaded * 100 / total_size)
-                mb_downloaded = downloaded / 1e6
-                mb_total = total_size / 1e6
-                print(f"\r  Progress: {percent:.1f}% ({mb_downloaded:.1f}/{mb_total:.1f} MB)", end='', flush=True)
+        with urllib.request.urlopen(request) as response:
+            total_size = int(response.headers.get('Content-Length', 0))
+            downloaded = 0
+            chunk_size = 1024 * 1024  # 1MB chunks
 
-        urllib.request.urlretrieve(FAISS_INDEX_URL, str(index_path), report_progress)
+            with open(index_path, 'wb') as f:
+                while True:
+                    chunk = response.read(chunk_size)
+                    if not chunk:
+                        break
+                    f.write(chunk)
+                    downloaded += len(chunk)
+                    if total_size > 0:
+                        percent = min(100, downloaded * 100 / total_size)
+                        mb_downloaded = downloaded / 1e6
+                        mb_total = total_size / 1e6
+                        print(f"\r  Progress: {percent:.1f}% ({mb_downloaded:.1f}/{mb_total:.1f} MB)", end='', flush=True)
+
         print()  # Newline after progress
-
         print(f"  Download complete: {index_path.stat().st_size / 1e6:.1f} MB")
         return True
 
