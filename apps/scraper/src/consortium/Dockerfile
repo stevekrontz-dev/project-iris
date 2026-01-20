@@ -25,3 +25,4 @@ EXPOSE 8000
 
 # Run the API
 CMD ["uvicorn", "search_api:app", "--host", "0.0.0.0", "--port", "8000"]
+# Build 1768893469
