@@ -24,6 +24,13 @@ interface SearchResponse {
   results: ExternalResearcher[];
 }
 
+// Extract just the ID from OpenAlex URL (e.g., "https://openalex.org/A1234567890" -> "A1234567890")
+function extractOpenAlexId(url: string): string {
+  if (!url) return '';
+  const match = url.match(/\/([A-Z]\d+)$/);
+  return match ? match[1] : url.replace(/[^a-zA-Z0-9]/g, '_');
+}
+
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
   const query = searchParams.get('q') || '';
@@ -43,23 +50,27 @@ export async function GET(request: Request) {
     const data: SearchResponse = await res.json();
 
     // Transform to match frontend expected format
-    const formatted = data.results.map((r, index) => ({
-      id: r.openalex_id || `researcher-${index}`,
-      net_id: r.openalex_id || `researcher-${index}`,
-      name: r.name,
-      title: r.field,
-      department: r.subfield || r.field,
-      college: r.institution,
-      photo_url: null,
-      h_index: r.h_index,
-      citation_count: r.citations,
-      interests: r.field ? [r.field, r.subfield].filter(Boolean) : [],
-      publications: [],
-      has_scholar: true,
-      orcidId: r.orcid,
-      works_count: r.works_count,
-      semantic_score: r.semantic_score,
-    }));
+    const formatted = data.results.map((r, index) => {
+      const cleanId = extractOpenAlexId(r.openalex_id) || `researcher-${index}`;
+      return {
+        id: cleanId,
+        net_id: cleanId,
+        name: r.name,
+        title: r.field,
+        department: r.subfield || r.field,
+        college: r.institution,
+        photo_url: null,
+        h_index: r.h_index,
+        citation_count: r.citations,
+        interests: r.field ? [r.field, r.subfield].filter(Boolean) : [],
+        publications: [],
+        has_scholar: true,
+        orcidId: r.orcid,
+        works_count: r.works_count,
+        semantic_score: r.semantic_score,
+        openalex_url: r.openalex_id, // Keep the full URL for reference
+      };
+    });
 
     return NextResponse.json({
       researchers: formatted,

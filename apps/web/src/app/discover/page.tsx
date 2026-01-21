@@ -121,7 +121,9 @@ export default function DiscoverPage() {
     setTimeout(() => setMatchStage('explaining'), 4000);
 
     try {
-      const res = await fetch(`/api/researcher/${researcher.net_id}/matches?limit=5`);
+      // Pass the researcher's field for better matching
+      const field = researcher.title || researcher.interests?.[0] || 'research';
+      const res = await fetch(`/api/researcher/${researcher.net_id}/matches?limit=5&field=${encodeURIComponent(field)}`);
       const data = await res.json();
 
       setTimeout(() => {
