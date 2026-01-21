@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { API_URL } from '@/lib/api';
+import { Navigation } from '@/components/Navigation';
 
 interface Researcher {
   name: string;
@@ -89,28 +90,24 @@ export default function ConsortiumPage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900">
-      {/* Header */}
-      <header className="bg-black/50 border-b border-gray-800">
-        <div className="max-w-7xl mx-auto px-6 py-4">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-4">
-              <div className="w-10 h-10 bg-gradient-to-br from-green-400 to-blue-500 rounded-lg flex items-center justify-center">
-                <span className="text-white font-bold">SE</span>
-              </div>
-              <div>
-                <h1 className="text-white text-xl font-bold">Southeast Research Consortium</h1>
-                <p className="text-gray-400 text-sm">
-                  {stats ? `${stats.total_researchers.toLocaleString()} researchers • ${stats.total_citations.toLocaleString()} citations` : 'Loading...'}
-                </p>
-              </div>
+      <Navigation variant="dark" />
+
+      {/* Page Header */}
+      <div className="bg-black/30 border-b border-gray-800">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-4">
+          <div className="flex items-center gap-4">
+            <div className="w-10 h-10 bg-gradient-to-br from-green-400 to-blue-500 rounded-lg flex items-center justify-center">
+              <span className="text-white font-bold text-sm">SE</span>
             </div>
-            <nav className="flex gap-4">
-              <a href="/" className="text-gray-400 hover:text-white text-sm">KSU IRIS</a>
-              <a href="/network" className="text-gray-400 hover:text-white text-sm">Network</a>
-            </nav>
+            <div>
+              <h2 className="text-white text-lg sm:text-xl font-bold">Southeast Research Consortium</h2>
+              <p className="text-gray-400 text-xs sm:text-sm">
+                {stats ? `${stats.total_researchers.toLocaleString()} researchers` : 'Loading...'}
+              </p>
+            </div>
           </div>
         </div>
-      </header>
+      </div>
 
       <main className="max-w-7xl mx-auto px-6 py-8">
         {/* Search Box */}

@@ -3,11 +3,7 @@
 import { useState } from 'react';
 import { IRISThinking } from '@/components/iris/IRISThinking';
 import { IRISMatchExplainer } from '@/components/iris/IRISMatchExplainer';
-
-// KSU Brand Colors
-const KSU_GOLD = '#FDBB30';
-const KSU_BLACK = '#0B1315';
-const KSU_GREY = '#6B7280';
+import { Navigation } from '@/components/Navigation';
 
 const DEMO_MATCH = {
   matchScore: 0.87,
@@ -68,37 +64,7 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-white">
-      {/* Academic Header */}
-      <header className="bg-[#0B1315] border-b border-gray-800">
-        <div className="max-w-6xl mx-auto px-6 lg:px-8">
-          <div className="py-5 flex items-center justify-between">
-            <div className="flex items-center space-x-4">
-              <div className="w-10 h-10 bg-[#FDBB30] rounded flex items-center justify-center">
-                <span className="text-[#0B1315] font-bold text-sm">KSU</span>
-              </div>
-              <div>
-                <h1 className="text-white text-lg font-semibold tracking-tight">
-                  IRIS
-                </h1>
-                <p className="text-xs text-gray-400">
-                  Intelligent Research Information System
-                </p>
-              </div>
-            </div>
-            <nav className="flex items-center space-x-6 text-sm">
-              <a href="/discover" className="text-gray-400 hover:text-white transition-colors">
-                Discover
-              </a>
-              <a href="#" className="text-gray-400 hover:text-white transition-colors">
-                About
-              </a>
-              <button className="bg-[#FDBB30] text-[#0B1315] px-4 py-2 rounded font-medium text-sm hover:bg-[#e5a826] transition-colors">
-                Sign In with KSU
-              </button>
-            </nav>
-          </div>
-        </div>
-      </header>
+      <Navigation variant="dark" />
 
       {/* Hero Section */}
       <section className="bg-gray-50 border-b border-gray-200">

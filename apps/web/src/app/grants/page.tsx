@@ -2,6 +2,7 @@
 
 import { useEffect, useState, useCallback } from 'react';
 import { API_URL, EMAIL_API_URL } from '@/lib/api';
+import { Navigation } from '@/components/Navigation';
 
 interface Grant {
   source: string;
@@ -40,6 +41,14 @@ interface TeamMember extends Researcher {
   role: string;
   matchedKeywords: string[];
   score: number;
+}
+
+interface ExplanationState {
+  [key: string]: {
+    loading: boolean;
+    explanation?: string;
+    error?: string;
+  };
 }
 
 const INSTITUTIONS = [
@@ -127,6 +136,9 @@ export default function GrantsPage() {
   const [customMessage, setCustomMessage] = useState('');
   const [sendingBriefing, setSendingBriefing] = useState(false);
   const [briefingResult, setBriefingResult] = useState<any>(null);
+
+  // AI Explanation state
+  const [explanations, setExplanations] = useState<ExplanationState>({});
 
   // Load grants
   useEffect(() => {
@@ -264,8 +276,62 @@ export default function GrantsPage() {
   useEffect(() => {
     if (selectedGrant) {
       buildTeam();
+      // Clear explanations when grant changes
+      setExplanations({});
     }
   }, [buildTeam]);
+
+  // Fetch AI explanation for a team member
+  const fetchExplanation = async (member: TeamMember) => {
+    if (!selectedGrant) return;
+
+    const key = member.openalex_id || member.name;
+
+    // Don't fetch if already loading or has explanation
+    if (explanations[key]?.loading || explanations[key]?.explanation) return;
+
+    setExplanations(prev => ({
+      ...prev,
+      [key]: { loading: true }
+    }));
+
+    try {
+      const res = await fetch('/api/ai/match-explanation', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          grant: selectedGrant,
+          researcher: {
+            name: member.name,
+            institution: member.institution,
+            field: member.field,
+            subfield: member.subfield,
+            h_index: member.h_index,
+            matchedKeywords: member.matchedKeywords
+          }
+        })
+      });
+
+      const data = await res.json();
+
+      if (data.error) {
+        setExplanations(prev => ({
+          ...prev,
+          [key]: { loading: false, error: data.error }
+        }));
+      } else {
+        setExplanations(prev => ({
+          ...prev,
+          [key]: { loading: false, explanation: data.explanation }
+        }));
+      }
+    } catch (error) {
+      setExplanations(prev => ({
+        ...prev,
+        [key]: { loading: false, error: 'Failed to generate explanation' }
+      }));
+    }
+  };
 
   const keywordCoverage = selectedGrant ? 
     new Set(team.flatMap(t => t.matchedKeywords)).size / selectedGrant.keywords.length * 100 : 0;
@@ -380,26 +446,22 @@ export default function GrantsPage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900">
-      <header className="bg-black/50 border-b border-gray-800">
-        <div className="max-w-7xl mx-auto px-6 py-4">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-4">
-              <div className="w-10 h-10 bg-gradient-to-br from-green-400 to-emerald-600 rounded-lg flex items-center justify-center text-xl">
-                💰
-              </div>
-              <div>
-                <h1 className="text-white text-xl font-bold">Grant Team Builder</h1>
-                <p className="text-gray-400 text-sm">Unconventional funding sources nobody else knows about</p>
-              </div>
+      <Navigation variant="dark" />
+
+      {/* Page Header */}
+      <div className="bg-black/30 border-b border-gray-800">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-4">
+          <div className="flex items-center gap-4">
+            <div className="w-10 h-10 bg-gradient-to-br from-green-400 to-emerald-600 rounded-lg flex items-center justify-center text-xl">
+              💰
             </div>
-            <nav className="flex gap-4">
-              <a href="/" className="text-gray-400 hover:text-white text-sm">KSU IRIS</a>
-              <a href="/network" className="text-gray-400 hover:text-white text-sm">Network</a>
-              <a href="/consortium" className="text-gray-400 hover:text-white text-sm">Search</a>
-            </nav>
+            <div>
+              <h2 className="text-white text-lg sm:text-xl font-bold">Grant Team Builder</h2>
+              <p className="text-gray-400 text-xs sm:text-sm">Unconventional funding sources nobody else knows about</p>
+            </div>
           </div>
         </div>
-      </header>
+      </div>
 
       <main className="max-w-7xl mx-auto px-6 py-6">
         {/* Category Filter Bar */}
@@ -752,17 +814,67 @@ export default function GrantsPage() {
                               </span>
                             ))}
                           </div>
-                          <div className="mt-2 flex gap-2">
+                          <div className="mt-2 flex flex-wrap gap-2 items-center">
                             {member.orcid && (
                               <a href={member.orcid} target="_blank" className="text-green-400 text-xs hover:underline">ORCID</a>
                             )}
                             {member.openalex_id && (
                               <a href={member.openalex_id} target="_blank" className="text-orange-400 text-xs hover:underline">OpenAlex</a>
                             )}
+                            {(() => {
+                              const key = member.openalex_id || member.name;
+                              const state = explanations[key];
+
+                              if (state?.explanation) {
+                                return null; // Explanation shown below
+                              }
+
+                              return (
+                                <button
+                                  onClick={() => fetchExplanation(member)}
+                                  disabled={state?.loading}
+                                  className="text-purple-400 text-xs hover:text-purple-300 disabled:text-gray-500 flex items-center gap-1"
+                                >
+                                  {state?.loading ? (
+                                    <>
+                                      <span className="animate-spin">⏳</span>
+                                      Analyzing...
+                                    </>
+                                  ) : (
+                                    <>✨ Why this match?</>
+                                  )}
+                                </button>
+                              );
+                            })()}
                           </div>
+
+                          {/* AI Explanation */}
+                          {(() => {
+                            const key = member.openalex_id || member.name;
+                            const state = explanations[key];
+
+                            if (!state?.explanation && !state?.error) return null;
+
+                            return (
+                              <div className={`mt-3 p-3 rounded-lg text-sm ${
+                                state.error
+                                  ? 'bg-red-500/10 border border-red-500/30 text-red-400'
+                                  : 'bg-purple-500/10 border border-purple-500/30 text-purple-200'
+                              }`}>
+                                {state.error ? (
+                                  <p>{state.error}</p>
+                                ) : (
+                                  <>
+                                    <p className="text-purple-400 text-xs font-medium mb-1">AI Match Analysis:</p>
+                                    <p>{state.explanation}</p>
+                                  </>
+                                )}
+                              </div>
+                            );
+                          })()}
                         </div>
                       ))}
-                      
+
                       {/* Send Briefing Section */}
                       <div className="mt-6 pt-6 border-t border-gray-700">
                         <h3 className="text-white font-bold mb-4">📧 Send Team Briefing</h3>

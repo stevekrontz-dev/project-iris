@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState, useMemo, useCallback } from 'react';
 import * as d3 from 'd3';
 import { API_URL } from '@/lib/api';
+import { Navigation } from '@/components/Navigation';
 
 interface Researcher {
   name: string;
@@ -453,25 +454,22 @@ export default function NetworkPage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900">
-      <header className="bg-black/50 border-b border-gray-800">
-        <div className="max-w-7xl mx-auto px-6 py-4">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-4">
-              <div className="w-10 h-10 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-lg flex items-center justify-center text-xl">
-                🔬
-              </div>
-              <div>
-                <h1 className="text-white text-xl font-bold">Research Collaboration Finder</h1>
-                <p className="text-gray-400 text-sm">Find researchers who bridge multiple areas</p>
-              </div>
+      <Navigation variant="dark" />
+
+      {/* Page Header */}
+      <div className="bg-black/30 border-b border-gray-800">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-4">
+          <div className="flex items-center gap-4">
+            <div className="w-10 h-10 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-lg flex items-center justify-center text-xl">
+              🔬
             </div>
-            <nav className="flex gap-4">
-              <a href="/" className="text-gray-400 hover:text-white text-sm">KSU IRIS</a>
-              <a href="/consortium" className="text-gray-400 hover:text-white text-sm">Search</a>
-            </nav>
+            <div>
+              <h2 className="text-white text-lg sm:text-xl font-bold">Collaboration Network</h2>
+              <p className="text-gray-400 text-xs sm:text-sm">Find researchers who bridge multiple areas</p>
+            </div>
           </div>
         </div>
-      </header>
+      </div>
 
       <main className="max-w-7xl mx-auto px-6 py-6">
         {/* Seed Researchers */}
