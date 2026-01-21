@@ -1,103 +1,72 @@
 import { NextResponse } from 'next/server';
-import { PrismaClient } from '@prisma/client';
-import * as fs from 'fs';
 
-const prisma = new PrismaClient();
+const API_URL = process.env.NEXT_PUBLIC_API_URL || 'https://project-iris-production.up.railway.app';
 
-const DATA_PATHS = [
-  'C:/Users/Steve/Projects/project-iris/apps/scraper/output/faculty_api_enriched.json',
-  'C:/Users/Steve/Projects/project-iris/apps/scraper/output/faculty_library.json',
-];
-
-interface JsonResearcher {
-  email?: string;
-  h_index?: number;
-  citation_count?: number;
-  scholar?: {
-    interests?: string[];
-    h_index?: number;
-    citedby?: number;
-    publications?: Array<{ title: string; year?: number }>;
-  };
+interface ExternalResearcher {
+  rank: number;
+  name: string;
+  institution: string;
+  field: string;
+  subfield: string | null;
+  h_index: number;
+  citations: number;
+  works_count: number;
+  openalex_id: string;
+  orcid: string | null;
+  semantic_score: number;
+  weighted_score: number;
 }
 
-let cachedData: JsonResearcher[] | null = null;
-
-function loadJsonData(): JsonResearcher[] {
-  if (cachedData) return cachedData;
-  for (const p of DATA_PATHS) {
-    try {
-      if (fs.existsSync(p)) {
-        cachedData = JSON.parse(fs.readFileSync(p, 'utf-8'));
-        return cachedData!;
-      }
-    } catch { /* skip */ }
-  }
-  return [];
+interface SearchResponse {
+  query: string;
+  total_indexed: number;
+  query_time_ms: number;
+  results: ExternalResearcher[];
 }
 
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
-  const query = searchParams.get('q')?.toLowerCase();
+  const query = searchParams.get('q') || '';
   const limit = parseInt(searchParams.get('limit') || '50');
-  const offset = parseInt(searchParams.get('offset') || '0');
+  const hasScholar = searchParams.get('hasScholar');
 
   try {
-    const where: any = {};
-    if (query) {
-      where.OR = [
-        { firstName: { contains: query, mode: 'insensitive' } },
-        { lastName: { contains: query, mode: 'insensitive' } },
-        { bio: { contains: query, mode: 'insensitive' } },
-        { position: { contains: query, mode: 'insensitive' } },
-      ];
+    // If no search query, return top researchers by h-index
+    const searchQuery = query || 'research';
+    const apiUrl = `${API_URL}/search?q=${encodeURIComponent(searchQuery)}&limit=${limit}`;
+
+    const res = await fetch(apiUrl);
+    if (!res.ok) {
+      throw new Error(`API responded with status ${res.status}`);
     }
 
-    const total = await prisma.researcher.count({ where });
-    const researchers = await prisma.researcher.findMany({
-      where,
-      include: {
-        department: { include: { college: true } },
-        user: { select: { email: true } }
-      },
-      take: limit,
-      skip: offset,
-      orderBy: { lastName: 'asc' }
+    const data: SearchResponse = await res.json();
+
+    // Transform to match frontend expected format
+    const formatted = data.results.map((r, index) => ({
+      id: r.openalex_id || `researcher-${index}`,
+      net_id: r.openalex_id || `researcher-${index}`,
+      name: r.name,
+      title: r.field,
+      department: r.subfield || r.field,
+      college: r.institution,
+      photo_url: null,
+      h_index: r.h_index,
+      citation_count: r.citations,
+      interests: r.field ? [r.field, r.subfield].filter(Boolean) : [],
+      publications: [],
+      has_scholar: true,
+      orcidId: r.orcid,
+      works_count: r.works_count,
+      semantic_score: r.semantic_score,
+    }));
+
+    return NextResponse.json({
+      researchers: formatted,
+      total: data.total_indexed,
+      offset: 0,
+      limit
     });
-
-    const jsonData = loadJsonData();
-
-    const formatted = researchers.map((r: typeof researchers[number]) => {
-      const email = r.user?.email?.toLowerCase();
-      const enrichment = jsonData.find(j => j.email?.toLowerCase() === email);
-
-      return {
-        id: r.id,
-        net_id: r.id,
-        firstName: r.firstName,
-        lastName: r.lastName,
-        name: (r.firstName || '') + ' ' + (r.lastName || ''),
-        title: r.title,
-        position: r.position,
-        bio: r.bio,
-        photoUrl: r.photoUrl,
-        photo_url: r.photoUrl,
-        department: r.department?.name || null,
-        college: r.department?.college?.name || null,
-        email: r.user?.email || null,
-        orcidId: r.orcidId,
-        googleScholarId: r.googleScholarId,
-        profileStatus: r.profileStatus,
-        hasEmbedding: r.embeddingUpdatedAt !== null,
-        has_scholar: r.embeddingUpdatedAt !== null,
-        h_index: enrichment?.h_index || enrichment?.scholar?.h_index || null,
-        citation_count: enrichment?.citation_count || enrichment?.scholar?.citedby || null,
-        interests: enrichment?.scholar?.interests || [],
-        publications: enrichment?.scholar?.publications?.slice(0, 3) || [],
-      };
-    });
-
-    return NextResponse.json({ researchers: formatted, total, offset, limit });
 
   } catch (error) {
     console.error('Error fetching researchers:', error);

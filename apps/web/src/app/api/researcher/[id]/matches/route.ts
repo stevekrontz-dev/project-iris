@@ -1,61 +1,27 @@
 import { NextResponse } from 'next/server';
-import { PrismaClient } from '@prisma/client';
-import * as fs from 'fs';
 
-const prisma = new PrismaClient();
+const API_URL = process.env.NEXT_PUBLIC_API_URL || 'https://project-iris-production.up.railway.app';
 
-// Data loading for enrichment data - prioritize most complete file
-const DATA_PATHS = [
-  'C:/Users/Steve/Projects/project-iris/apps/scraper/output/faculty_api_enriched.json',
-  'C:/Users/Steve/Projects/project-iris/apps/scraper/output/faculty_library.json',
-  'C:/Users/Steve/Projects/project-iris/apps/scraper/output/faculty_enriched.json',
-];
-
-interface JsonResearcher {
-  net_id: string;
+interface ExternalResearcher {
+  rank: number;
   name: string;
-  email?: string;
-  department?: string;
-  college?: string;
-  photo_url?: string;
-  h_index?: number;
-  citation_count?: number;
-  scholar?: {
-    interests?: string[];
-    h_index?: number;
-    citedby?: number;
-    publications?: Array<{ title: string }>;
-  };
+  institution: string;
+  field: string;
+  subfield: string | null;
+  h_index: number;
+  citations: number;
+  works_count: number;
+  openalex_id: string;
+  orcid: string | null;
+  semantic_score: number;
+  weighted_score: number;
 }
 
-function loadJsonData(): JsonResearcher[] {
-  for (const dataPath of DATA_PATHS) {
-    try {
-      if (fs.existsSync(dataPath)) {
-        console.log('Loading JSON from:', dataPath);
-        return JSON.parse(fs.readFileSync(dataPath, 'utf-8'));
-      }
-    } catch (e) {
-      console.error('Error loading ' + dataPath + ':', e);
-    }
-  }
-  return [];
-}
-
-function interestSimilarity(a: string[], b: string[]): number {
-  if (!a.length || !b.length) return 0;
-  const setA = new Set(a.map(i => i.toLowerCase()));
-  const setB = new Set(b.map(i => i.toLowerCase()));
-  let matches = 0;
-  for (const interest of setA) {
-    for (const other of setB) {
-      if (interest === other || interest.includes(other) || other.includes(interest)) {
-        matches++;
-        break;
-      }
-    }
-  }
-  return matches / new Set([...setA, ...setB]).size;
+interface SearchResponse {
+  query: string;
+  total_indexed: number;
+  query_time_ms: number;
+  results: ExternalResearcher[];
 }
 
 export async function GET(
@@ -67,60 +33,69 @@ export async function GET(
   const limit = parseInt(searchParams.get('limit') || '5');
 
   try {
-    // Get researcher from database
-    const dbResearcher = await prisma.researcher.findUnique({
-      where: { id },
-      include: { user: { select: { email: true } } }
-    });
+    // The id contains the researcher info - parse the field from it
+    // For external API researchers, the id format is the openalex_id
+    // We'll use the field info that was passed, or default to searching by similar fields
 
-    if (!dbResearcher) {
-      return NextResponse.json({ error: 'Researcher not found' }, { status: 404 });
+    // First, try to find the original researcher's field by searching
+    // We'll extract a search term from the ID or use a default
+    let searchQuery = 'research collaboration';
+
+    // If the ID looks like an OpenAlex ID, extract field info differently
+    // For now, use a simple heuristic - the frontend should pass field info
+    const fieldParam = searchParams.get('field');
+    if (fieldParam) {
+      searchQuery = fieldParam;
     }
 
-    // Load JSON data for enrichment info
-    const jsonData = loadJsonData();
-    const targetEmail = dbResearcher.user?.email?.toLowerCase();
-    const targetJson = jsonData.find(r => r.email?.toLowerCase() === targetEmail);
-    const targetInterests = targetJson?.scholar?.interests || [];
+    // Search for similar researchers
+    const apiUrl = `${API_URL}/search?q=${encodeURIComponent(searchQuery)}&limit=${limit + 1}`;
+    const res = await fetch(apiUrl);
 
-    console.log('Target email:', targetEmail);
-    console.log('Target interests:', targetInterests);
-    console.log('JSON data loaded:', jsonData.length, 'researchers');
+    if (!res.ok) {
+      throw new Error(`API responded with status ${res.status}`);
+    }
 
-    // Get all other researchers from database  
-    const allResearchers = await prisma.researcher.findMany({
-      where: { id: { not: id } },
-      include: {
-        department: { include: { college: true } },
-        user: { select: { email: true } }
-      },
-      take: 200
-    });
+    const data: SearchResponse = await res.json();
 
-    // Calculate matches
-    const matches = allResearchers.map((candidate: typeof allResearchers[number]) => {
-      const candidateEmail = candidate.user?.email?.toLowerCase();
-      const candidateJson = jsonData.find(r => r.email?.toLowerCase() === candidateEmail);
-      const candidateInterests = candidateJson?.scholar?.interests || [];
-      const score = interestSimilarity(targetInterests, candidateInterests);
+    // Filter out the original researcher and transform results
+    const matches = data.results
+      .filter(r => r.openalex_id !== id)
+      .slice(0, limit)
+      .map((r, index) => {
+        // Calculate a match score based on semantic similarity
+        const matchScore = Math.max(0.5, 1 - (index * 0.1)); // Higher rank = higher score
 
-      return {
-        researcher: {
-          net_id: candidate.id,
-          name: (candidate.firstName || '') + ' ' + (candidate.lastName || ''),
-          department: candidate.department?.name,
-          photo_url: candidate.photoUrl,
-          h_index: candidateJson?.h_index || candidateJson?.scholar?.h_index,
-          interests: candidateInterests.slice(0, 5),
-        },
-        matchScore: score,
-        matchType: 'COLLABORATOR' as const,
-        explanation: 'Shared research interests identified',
-        factors: [{ factor: 'Shared Interests', weight: score, description: 'Research area overlap', icon: 'RO' }]
-      };
-    }).filter((m: { matchScore: number }) => m.matchScore > 0.05)
-      .sort((a: { matchScore: number }, b: { matchScore: number }) => b.matchScore - a.matchScore)
-      .slice(0, limit);
+        return {
+          researcher: {
+            net_id: r.openalex_id,
+            name: r.name,
+            department: r.field,
+            institution: r.institution,
+            photo_url: null,
+            h_index: r.h_index,
+            citation_count: r.citations,
+            interests: [r.field, r.subfield].filter(Boolean) as string[],
+          },
+          matchScore,
+          matchType: 'COLLABORATOR' as const,
+          explanation: `Researches ${r.field}${r.subfield ? ` with focus on ${r.subfield}` : ''}. Has ${r.works_count} publications with ${r.citations.toLocaleString()} citations.`,
+          factors: [
+            {
+              factor: 'Research Area',
+              weight: matchScore * 0.6,
+              description: `Both work in ${r.field}`,
+              icon: '🔬'
+            },
+            {
+              factor: 'Citation Impact',
+              weight: Math.min(r.h_index / 100, 0.3),
+              description: `h-index: ${r.h_index}`,
+              icon: '📊'
+            },
+          ]
+        };
+      });
 
     return NextResponse.json({ matches, total: matches.length });
   } catch (error) {

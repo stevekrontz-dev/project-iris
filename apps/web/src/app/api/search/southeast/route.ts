@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 
-const SEARCH_API = process.env.IRIS_API_URL || 'http://localhost:8000';
+const SEARCH_API = process.env.NEXT_PUBLIC_API_URL || 'https://project-iris-production.up.railway.app';
 
 export async function GET(request: NextRequest) {
   const query = request.nextUrl.searchParams.get('q');
