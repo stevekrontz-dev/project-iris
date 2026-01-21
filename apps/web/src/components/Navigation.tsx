@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { useAuth } from './AuthProvider';
 
 // KSU Brand Colors
 const KSU_GOLD = '#FDBB30';
@@ -28,6 +29,7 @@ interface NavigationProps {
 export function Navigation({ variant = 'dark' }: NavigationProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const pathname = usePathname();
+  const { logout } = useAuth();
 
   const isActive = (href: string) => pathname === href;
 
@@ -73,10 +75,13 @@ export function Navigation({ variant = 'dark' }: NavigationProps) {
             ))}
           </nav>
 
-          {/* Auth Button - Desktop */}
+          {/* Logout Button - Desktop */}
           <div className="hidden md:flex items-center space-x-4">
-            <button className="bg-[#FDBB30] text-[#0B1315] px-4 py-2 rounded font-medium text-sm hover:bg-[#e5a826] transition-colors">
-              Sign In with KSU
+            <button
+              onClick={logout}
+              className="text-gray-400 hover:text-white px-3 py-2 text-sm transition-colors"
+            >
+              Logout
             </button>
           </div>
 
@@ -134,8 +139,11 @@ export function Navigation({ variant = 'dark' }: NavigationProps) {
               ))}
             </nav>
             <div className="mt-4 px-4">
-              <button className="w-full bg-[#FDBB30] text-[#0B1315] px-4 py-3 rounded-lg font-medium text-sm hover:bg-[#e5a826] transition-colors">
-                Sign In with KSU
+              <button
+                onClick={logout}
+                className="w-full text-gray-400 hover:text-white px-4 py-3 rounded-lg font-medium text-sm border border-gray-700 hover:border-gray-600 transition-colors"
+              >
+                Logout
               </button>
             </div>
           </div>
