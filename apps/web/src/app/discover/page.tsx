@@ -3,6 +3,7 @@
 import { useState, useEffect, useCallback, useMemo } from 'react';
 import { IRISThinking } from '@/components/iris/IRISThinking';
 import { IRISMatchExplainer } from '@/components/iris/IRISMatchExplainer';
+import { Navigation } from '@/components/Navigation';
 
 interface Publication {
   title: string;
@@ -145,31 +146,7 @@ export default function DiscoverPage() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Header */}
-      <header className="bg-[#0B1315] border-b border-gray-800">
-        <div className="max-w-6xl mx-auto px-6 lg:px-8">
-          <div className="py-5 flex items-center justify-between">
-            <div className="flex items-center space-x-4">
-              <a href="/" className="flex items-center space-x-4">
-                <div className="w-10 h-10 bg-[#FDBB30] rounded flex items-center justify-center">
-                  <span className="text-[#0B1315] font-bold text-sm">KSU</span>
-                </div>
-                <div>
-                  <h1 className="text-white text-lg font-semibold tracking-tight">IRIS</h1>
-                  <p className="text-xs text-gray-400">Discover Collaborators</p>
-                </div>
-              </a>
-            </div>
-            <nav className="flex items-center space-x-6 text-sm">
-              <a href="/" className="text-gray-400 hover:text-white transition-colors">Home</a>
-              <a href="/discover" className="text-white transition-colors">Discover</a>
-              <button className="bg-[#FDBB30] text-[#0B1315] px-4 py-2 rounded font-medium text-sm hover:bg-[#e5a826] transition-colors">
-                Sign In
-              </button>
-            </nav>
-          </div>
-        </div>
-      </header>
+      <Navigation variant="dark" />
 
       <main className="max-w-6xl mx-auto px-6 lg:px-8 py-8">
         {/* Page Title */}
